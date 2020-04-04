@@ -1,0 +1,13 @@
+EXAMPLE DATA TO POPULATE MONGODB WITH LETTER:
+
+db.reviewers.insertOne({ id: 3118, submissionTime: "2020-03-28 18:11:57", email: "anais-vr@hotmail.com", type: "Un monsieur âgé isolé", heading: "Bonjour Monsieur,", content: "J’espère que vous allez bien.", signature: "Anaïs", imageUrl: "https://1lettre1sourire.org/wp-content/uploads/gravity_forms/2-9d8fc8e286f69fec044ad9ec6703f864/2020/03/0A837A40-8802-4136-B888-B1CCFA977B6D.jpeg", firstName: "Anaïs"})
+
+id:3118
+submissionTime:2020-03-28 18:11:57
+email:anais-vr@hotmail.com
+type:Un monsieur âgé isolé
+heading:Bonjour Monsieur,
+content:J’espère que vous allez bien.
+signature:Anaïs
+imageUrl:https://1lettre1sourire.org/wp-content/uploads/gravity_forms/2-9d8fc8e286f69fec044ad9ec6703f864/2020/03/0A837A40-8802-4136-B888-B1CCFA977B6D.jpeg
+firstName:Anaïs

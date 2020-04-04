@@ -13,7 +13,11 @@ router.post('/', function(req, res, next) {
           return next(err);
         } else {
           req.session.userId = user._id;
-          return res.send({ username: user.username, admin: user.isAdmin });
+          if(user.isAdmin === false) {
+            return res.redirect('/review');
+          } else {
+            return res.send('will redirect to admin');
+          }
         }
       });
     } else {

@@ -7,6 +7,8 @@ var loginReq = require('../middleware/loginReq');
 var Letter = require('../models/letter');
 var User = require('../models/user');
 
+var docBuilder = require('../afterware/docbuilder');
+
 router.get('/', loginReq, function(req, res) {
    res.send("Review page");
 });
@@ -27,15 +29,16 @@ router.post('/approve', loginReq, function(req, res, next) {
    console.log(req.body);
    if(req.body.id && req.body.approve !== undefined && req.body.flag !== undefined) {
       var approved = Letter.getApprovedValue(req.body.approve === 'true');
-      Letter.updateOne({
+      Letter.findOneAndUpdate({
          id: parseInt(req.body.id), 
          approvalStatus: 'In Review'
       }, {
          approvalStatus: approved,
          flagged: req.body.flag === 'true'
-      }, function(err, result) {
-         if(result.nModified > 0) {
+      }, function(err, letter) {
+         if(letter && !err) {
             res.send(200);
+            docBuilder(letter);
          } else {
             res.send('Could not change approval status of doc. Either because it is not in review or it does not exist.');
          }

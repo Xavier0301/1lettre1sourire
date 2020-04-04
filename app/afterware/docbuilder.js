@@ -1,14 +1,16 @@
 // As soon as a letter is approved, we build it.
 
+// import { Document, Paragraph, Media, Packer } from "docx";
 const docx = require('docx');
+
 const https = require('https');
 const fs = require('fs');
-const sharp = require('sharp');
+// const sharp = require('sharp');
 const path = require('path');
 
 function handleLetterFormatting(letter) {
-    const imageSize = downloadImage(letter.imageUrl, letter.composedId);
-    buildDoc(letter, imageSize);
+    // const imageSize = downloadImage(letter.imageUrl, letter.composedId);
+    buildDoc(letter, undefined);
 }
 
 function downloadImage(url, fileName) {
@@ -44,29 +46,32 @@ function buildDoc(letter, imageSize) {
         ]
     }});
 
-    const logoImage = Media.addImage(doc, fs.readFileSync(path.resolve("orgLogo.png")));
+    const logoImage = docx.Media.addImage(doc, fs.readFileSync(path.resolve("orgLogo.png")));
 
     var sectionChildren = [
-        new Paragraph(logoImage, 100, 100).center(),
-        new Paragraph().style('content').createTextRun(letter.greeting).font('Aido'),
-        new Paragraph().style('content').createTextRun(letter.content).font('Aido'),
-        new Paragraph().style('content').createTextRun(letter.signature).font('Aido')
+        new docx.Paragraph(logoImage, 100, 100).center(),
+        new docx.Paragraph().style('content').createTextRun(letter.greeting).font('Aido'),
+        new docx.Paragraph().style('content').createTextRun(letter.content).font('Aido'),
+        new docx.Paragraph().style('content').createTextRun(letter.signature).font('Aido')
     ]
     if(imageSize !== undefined) {
-        const attachedImage = Media.addImage(doc, fs.readFileSync(path.resolve(letter.composedId)));
-        const imagePar = Paragraph(attachedImage, imageSize.width, imageSize.height).center()
+        const attachedImage = docx.Media.addImage(doc, fs.readFileSync(path.resolve(letter.composedId)));
+        const imagePar = docx.Paragraph(attachedImage, imageSize.width, imageSize.height).center()
         sectionChildren.push(imagePar);
     }
 
     doc.addSection({
         footers: {
-            default: new Footer({
-                children: [new Paragraph(letter.composedId)],
+            default: new docx.Footer({
+                children: [new docx.Paragraph(letter.composedId)],
             })
         },
         children: sectionChildren
     });
-
+    
+    docx.Packer.toBuffer(doc).then((buffer) => {
+        fs.writeFileSync(`${letter.composedId}.docx`, buffer);
+    });
 };
 
 function convertToPdf(fileName) {

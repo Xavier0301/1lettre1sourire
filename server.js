@@ -33,6 +33,8 @@ app.use('/api', apiRoute);
 app.use('/', publicRoute);
 app.use('/register', registerRoute);
 app.use('/login', loginRoute);
+// app.use('/review', reviewRoute);
+// app.use('/admin', adminRoute);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

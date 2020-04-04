@@ -1,11 +1,14 @@
 // modules =================================================
 const express = require('express');
 const app = express();
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var session = require('express-session');
 
-var apiRouter = require('./app/routes/letters_api');
-var publicRouter = require('./app/routes/public')
+var apiRoute = require('./app/routes/letters_api');
+var publicRoute = require('./app/routes/public');
+var registerRoute = require('./app/routes/register');
+var loginRoute = require('./app/routes/login.js');
 
 // set our port
 const port = 3000;
@@ -18,13 +21,18 @@ mongoose.connect(db.url); //Mongoose connection created
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
 
-app.use('/api', apiRouter);
-app.use('/', publicRouter);
+//use sessions for tracking logins
+app.use(session({
+    secret: 'brobroskiski',
+    resave: true,
+    saveUninitialized: false
+  }));
 
-// frontend routes =========================================================
-app.get('/', (req, res) => res.send('Yo bru'));
+app.use('/api', apiRoute);
+app.use('/', publicRoute);
+app.use('/register', registerRoute);
+app.use('/login', loginRoute);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

@@ -18,13 +18,38 @@ router.get('/letters/list', function(req, res) {
 });
 
 router.post('/letters/add', function (req, res) {
-    var letter = new Letter(); // create a new instance of the letter model
-    letter.content = req.body.content; // set the letter content (comes from the request)
-    letter.save(function(err) {
-       if (err)
-          res.send(err);
-          res.json({ message: 'letter added' });
-    });
+   var letter = getLetterFromBody(req.body);
+
+   if(letter === undefined) {
+      res.send({ message: 'could not add letter'});
+   } else {
+      letter.save(function(err) {
+         if (err)
+            res.send(err);
+         else 
+            res.json({ message: 'letter added' });
+      });
+   }
  });
+
+function getLetterFromBody(body) {
+   if(body === undefined) {
+      return undefined;
+   }
+
+   var letter = new Letter();
+
+   letter.id = parseInt(body.id);
+   letter.submissionTime = body.submissionTime;
+   letter.email = body.email;
+   letter.type = body.type;
+   letter.heading = body.heading;
+   letter.content = body.content;
+   letter.signature = body.signature;
+   letter.imageUrl = body.imageUrl;
+   letter.firstName = body.firstName;
+
+   return letter;
+}
 
  module.exports = router;

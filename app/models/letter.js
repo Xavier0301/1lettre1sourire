@@ -1,7 +1,13 @@
 var mongoose = require('mongoose');
 
+var typeValues = {
+    male: 'H',
+    female: 'F'
+}
+
 var approvedValues = {
     queued: 'Queued',
+    inReview: 'In Review',
     accepted: 'Accepted',
     rejected: 'Rejected'
 };
@@ -22,6 +28,7 @@ var LetterSchema = new mongoose.Schema({
     },
     type: {
         type: String,
+        enum: [typeValues.male, typeValues.female],
         required: true
     },
     heading: {
@@ -46,7 +53,7 @@ var LetterSchema = new mongoose.Schema({
     },
     approvalStatus: {
         type: String,
-        enum: [approvedValues.queued, approvedValues.accepted, approvedValues.rejected],
+        enum: [approvedValues.queued, approvedValues.inReview, approvedValues.accepted, approvedValues.rejected],
         default: approvedValues.queued,
         required: true
     },
@@ -60,5 +67,9 @@ var LetterSchema = new mongoose.Schema({
 LetterSchema.statics.getApprovedValue = function(isApproved) {
     return isApproved ? approvedValues.accepted : approvedValues.rejected;
 }
+
+LetterSchema.virtual('composedId').get(function() {
+    return `${this.type}${this.id}`;
+});
 
 module.exports = mongoose.model('Letter', LetterSchema);

@@ -10,6 +10,7 @@ var publicRoute = require('./app/routes/public');
 var registerRoute = require('./app/routes/register');
 var loginRoute = require('./app/routes/login.js');
 var reviewRoute = require('./app/routes/review.js');
+var adminRoute = require('./app/routes/admin.js')
 
 // set our port
 const port = 3000;
@@ -37,7 +38,7 @@ app.use('/', publicRoute);
 app.use('/register', registerRoute);
 app.use('/login', loginRoute);
 app.use('/review', reviewRoute);
-// app.use('/admin', adminRoute);
+app.use('/admin', adminRoute);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,4 +1,3 @@
-
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
@@ -13,24 +12,35 @@ router.get('/', loginReq, function(req, res) {
 });
 
 router.get('/fetch', loginReq, function(req, res) {
-   Letter.findOne().exec(function(error, letter) {
-   if(error) {
-      res.send({exists: false});
-   } else {
-      res.send({id: letter.id, type: letter.type, greeting: letter.heading, content: letter.content, signature: letter.signature, imageUrl: letter.imageUrl, exists: true});
-   }
+   // FIND ONE THAT IS HAS APPROVAL STATUS: 'QUEUED'
+   // Letter.findOne({approvalStatus: 'QUEUED'})
+   Letter.findOneAndUpdate({approvalStatus: 'Queued'}, {approvalStatus: 'In Review'}).exec(function(error, letter) {
+      if(error || !letter) {
+         res.send({exists: false});
+      } else {
+         res.send({id: letter.id, type: letter.type, greeting: letter.heading, content: letter.content, signature: letter.signature, imageUrl: letter.imageUrl, exists: true});
+      }
    });
 });
 
-router.get('/approve', loginReq, function(req, res, next) {
-   if(req.body.id && req.body.approve && req.body.flag) {
-      var approved = Letter.getApprovedValue(req.body.approve);
-      Letter.update({id: req.body.id}, {
-         approvalStatus: approve,
-         flagged: req.body.flag
-      }, function(err, affected, resp) {
-         console.log(resp);
+router.post('/approve', loginReq, function(req, res, next) {
+   console.log(req.body);
+   if(req.body.id && req.body.approve !== undefined && req.body.flag !== undefined) {
+      var approved = Letter.getApprovedValue(req.body.approve === 'true');
+      Letter.updateOne({
+         id: parseInt(req.body.id), 
+         approvalStatus: 'In Review'
+      }, {
+         approvalStatus: approved,
+         flagged: req.body.flag === 'true'
+      }, function(err, result) {
+         if(result.nModified > 0) {
+            res.send(200);
+         } else {
+            res.send('Could not change approval status of doc. Either because it is not in review or it does not exist.');
+         }
       });
+      
    } else {
       var err = new Error('id, approve and flag are required for approving');
       return next(err);

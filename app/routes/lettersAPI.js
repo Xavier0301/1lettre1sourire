@@ -42,7 +42,7 @@ function getLetterFromBody(body) {
    letter.id = parseInt(body.id);
    letter.submissionTime = body.submissionTime;
    letter.email = body.email;
-   letter.type = body.type;
+   letter.type = body.type === "Un monsieur âgé isolé" ? 'H' : 'F';
    letter.heading = body.heading;
    letter.content = body.content;
    letter.signature = body.signature;

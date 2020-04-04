@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 
 const https = require('https');
+const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
@@ -17,15 +18,17 @@ var adminRoute = require('./app/routes/admin.js')
 
 const app = express();
 
-const options = {
+const credentials = {
     key: fs.readFileSync('./keys/key.pem', 'utf8'),
     cert: fs.readFileSync('./keys/cert.pem', 'utf8')
 };
    
-const server = https.createServer(options, app);
+const httpServer = http.createServer(app);
+const httpsServer = https.createServer(credentials, app);
 
 // set our port
-const port = 3000;
+const httpPort = 3000;
+const httpsPort = 3080;
 // configuration ===========================================
 
 // config files
@@ -67,6 +70,7 @@ app.use(function (err, req, res, next) {
 });
 
 // startup our app at https://localhost:3000
-server.listen(port, () => console.log(`Listening on port ${port}!`));
+httpServer.listen(httpPort, () => console.log(`Listening on port ${httpPort}!`));
+httpsServer.listen(httpsPort, () => console.log(`Listening on port ${httpsPort}!`));
 
 module.exports = app;

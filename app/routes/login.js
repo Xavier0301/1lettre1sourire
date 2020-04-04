@@ -15,7 +15,7 @@ router.post('/', function(req, res, next) {
           if(user.isAdmin === false) {
             return res.redirect('/review');
           } else {
-            return res.send('will redirect to admin');
+            return res.redirect('/admin');
           }
         }
       });

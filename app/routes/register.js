@@ -6,11 +6,11 @@ var adminReq = require('../middleware/adminReq');
 
 var User = require('../models/user');
 
-router.post('/'/*, loginReq, adminReq*/, function(req, res) {
+router.post('/'/*, loginReq, adminReq*/, function(req, res, next) {
     if (req.body.password !== req.body.passwordConf) {
       var err = new Error('Passwords do not match.');
       err.status = 400;
-      res.send("passwords dont match");
+      res.send("passwords don't match");
       return next(err);
     }
 

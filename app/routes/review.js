@@ -42,7 +42,9 @@ router.post('/approve', loginReq, function(req, res, next) {
       }, function(err, letter) {
          if(letter && !err) {
             res.send(200);
-            docBuilder(letter);
+            if(approved) {
+               docBuilder(letter);
+            }
          } else {
             res.send('Could not change approval status of doc. Either because it is not in review or it does not exist.');
          }

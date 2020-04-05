@@ -8,9 +8,7 @@ function loginFct() {
             resp = response.json();
         });
     
-    if (resp.status !== 401) {
-            window.location.href = "reviewer.html";
-    } else {
+    if (response.status == 401) {//resp or response ?
             var m = document.getElementById("login-error-message");
             m.innerHTML = "Erreur, mauvais mot de passe ou username.";
     }

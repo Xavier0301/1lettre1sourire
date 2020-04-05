@@ -1,4 +1,3 @@
-var http = new XMLHttpRequest;
 var url = '/review/fetch';
 var data;
 var content = []; //[id,type,greeting,content,signature,imageUrl,exists]

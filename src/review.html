@@ -4,23 +4,39 @@
 <link rel="stylesheet" type="text/css" href="../public/review/css/review.css" media="screen"/>
   <head>
     <meta charset="utf-8"/>
-    <script src= ../public/review/js/scriptFetch.js></script>
+    <script>
+    function myFunction() {
+      var url = 'http://localhost:3000/review/fetch';
+      var data;
+      var content = []; //[id,type,greeting,content,signature,imageUrl,exists]
+
+      fetch(url)
+        .then(function(response) {
+          data = response.json();
+        })
+
+      for (var i = 0; i < data.results.length; i++)
+      {
+        content.push(data.results[i].value);
+      }
+    }
+    </script>
   </head>
-<body id = "container">
-<div id = "contentDisplay">
-  <span class = "imageDisplay">
-    <img src = "../public/review/image/chungus.jpg">
-  </span>
+<body id = "container" onload="../public/review/js/scriptFetch.js">
+  <div id = "contentDisplay">
+    <span class = "imageDisplay">
+      <img src = "../public/review/image/chungus.jpg">
+    </span>
 
-  <span class = "textDisplay">
-    <p id = "letter">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam diam leo, venenatis maximus nisl finibus sit amet. Pellentesque congue quis sapien non hendrerit. In volutpat diam tellus, quis fringilla orci porttitor in. Vestibulum a ullamcorper magna. Vestibulum imperdiet lorem ac enim auctor ullamcorper. In eget aliquam nulla, at laoreet augue. Morbi sed lorem ligula. Phasellus vestibulum feugiat justo, sit amet lobortis augue luctus et. Vestibulum pellentesque eleifend consectetur. Suspendisse tempus mi vitae rhoncus posuere.Duis lacinia quam et iaculis tristique. Integer euismod turpis aliquam libero cursus porta. Nulla facilisi. Vestibulum molestie justo a tincidunt consectetur. Aliquam eget ullamcorper massa. Fusce venenatis sollicitudin semper. Suspendisse cursus, ipsum aliquet molestie congue, mauris lectus faucibus ipsum, eu egestas sem massa in libero.</p>
-  </span>
-</div>
+    <span class = "textDisplay">
+      <p id = "letter">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquam diam leo, venenatis maximus nisl finibus sit amet. Pellentesque congue quis sapien non hendrerit. In volutpat diam tellus, quis fringilla orci porttitor in. Vestibulum a ullamcorper magna. Vestibulum imperdiet lorem ac enim auctor ullamcorper. In eget aliquam nulla, at laoreet augue. Morbi sed lorem ligula. Phasellus vestibulum feugiat justo, sit amet lobortis augue luctus et. Vestibulum pellentesque eleifend consectetur. Suspendisse tempus mi vitae rhoncus posuere.Duis lacinia quam et iaculis tristique. Integer euismod turpis aliquam libero cursus porta. Nulla facilisi. Vestibulum molestie justo a tincidunt consectetur. Aliquam eget ullamcorper massa. Fusce venenatis sollicitudin semper. Suspendisse cursus, ipsum aliquet molestie congue, mauris lectus faucibus ipsum, eu egestas sem massa in libero.</p>
+    </span>
+  </div>
 
-<div id = "buttonDisplay">
-  <button id="noButton" onclick = "Ressource/js/scriptNegative.js;Ressource/js/scriptFetch.js" >Refuser</button>
-  <button id = "yesButton" onclick = "Ressource/js/scriptPositive.js;Ressource/js/scriptFetch.js">Accepter</button>
-  <button id = "greatButton" onclick = "Ressource/js/scriptPositivePlus.js;Ressource/js/scriptFetch.js">Excellent</button>
-</div>
+  <div id = "buttonDisplay">
+    <button id="noButton" onclick = "myFunction()" >Refuser</button>
+    <button id = "yesButton" onclick = "Ressource/js/scriptPositive.js;Ressource/js/scriptFetch.js">Accepter</button>
+    <button id = "greatButton" onclick = "Ressource/js/scriptPositivePlus.js;Ressource/js/scriptFetch.js">Excellent</button>
+  </div>
 </body>
 </html>

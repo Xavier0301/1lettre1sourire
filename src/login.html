@@ -4,6 +4,7 @@
 <head>
     <title>login</title>
     <link rel="stylesheet" href="/login/css/login.css">
+    <script src="/login/js/login.js"></script>
 </head>
 
 <body>
@@ -13,8 +14,9 @@
         <form id="login-form" method="post" action ="/login">
             <input class="login-field" type="text" placeholder="Username" name="username" required>
             <input class="login-field" type="password" placeholder="Password" name="password" required>
-            <button type="login">login</button>
+            <button type="login" onclick="loginFct()">login</button>
         </form>
+        <p id="login-error-message"></p>
     </div>
 
 

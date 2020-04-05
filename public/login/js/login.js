@@ -1,17 +1,17 @@
 /*login script*/
-// DOCTYPE javascript>
-
-fetch(./app/middleware/loginReq.js)
-    .then(function(response){
-        if (response.status !== 401){
-            //good login go to reviewer window
-            window.location = "reviewer.html";
-            return;
-        } else {
+function loginFct() {
+    var url = 'http://localhost:3000/login/fetch';
+    var resp;
+    
+    fetch(url)
+        .then(function (response) {
+            resp = response.json();
+        });
+    
+    if (resp.status !== 401) {
+            window.location.href = "reviewer.html";
+    } else {
             var m = document.getElementById("login-error-message");
             m.innerHTML = "Erreur, mauvais mot de passe ou username.";
-        }
-}).catch(function(err){
-    //if the server returns some errors
-    console.log('Fetch error ', err);
-});
+    }
+}

@@ -1,15 +1,13 @@
-/*login script*/
-// function loginFct() {
-//     var url = 'http://localhost:3000/login/fetch';
-//     var resp;
+//  function funcLogin() {
+//      var url = 'http://localhost:3000/login';
+//      var xd = "xd";
 //
-//     fetch(url)
-//         .then(function (response) {
-//             resp = response.json();
-//         });
+//      fetch(url)
+//          .then(function (response) {
+//              console.log(response);
+//              console.log(xd);
+//              let resp = response.json();
+//          });
 //
-//     if (response.status == 401) {//resp or response ?
-//             var m = document.getElementById("login-error-message");
-//             m.innerHTML = "Erreur, mauvais mot de passe ou username.";
-//     }
-// }
+//
+// };

@@ -46,31 +46,109 @@ function buildDoc(letter, imageSize) {
         ]
     }});
 
-    const logoImage = docx.Media.addImage(doc, fs.readFileSync(path.resolve("orgLogo.png")));
+    const logoImage = docx.Media.addImage(doc, fs.readFileSync(path.resolve("org_logo.png")));
 
-    var sectionChildren = [
-        new docx.Paragraph(logoImage, 100, 100).center(),
-        new docx.Paragraph().style('content').createTextRun(letter.greeting).font('Aido'),
-        new docx.Paragraph().style('content').createTextRun(letter.content).font('Aido'),
-        new docx.Paragraph().style('content').createTextRun(letter.signature).font('Aido')
-    ]
+    console.log(letter.greeting);
+    console.log(letter);
+
+    // That's clearly not optimal, but docx was not working when creating children as a list before this
     if(imageSize !== undefined) {
         const attachedImage = docx.Media.addImage(doc, fs.readFileSync(path.resolve(letter.composedId)));
-        const imagePar = docx.Paragraph(attachedImage, imageSize.width, imageSize.height).center()
-        sectionChildren.push(imagePar);
+        doc.addSection({
+            children: [
+                new docx.Paragraph(logoImage, 100, 100),
+                new docx.Paragraph(""),
+                new docx.Paragraph({
+                    children: [new docx.TextRun({
+                        text: letter.heading,
+                        font: {
+                            name: 'Aido'
+                        }
+                    })]
+                }),
+                new docx.Paragraph({
+                    children: [new docx.TextRun({
+                        text: letter.content,
+                        font: {
+                            name: 'Aido'
+                        }
+                    })]
+                }),
+                new docx.Paragraph({
+                    children: [new docx.TextRun({
+                        text: letter.signature,
+                        font: {
+                            name: 'Aido'
+                        }
+                    })]
+                }),
+                new docx.Paragraph(attachedImage, imageSize.width, imageSize.height)],
+            footers: {
+                default: new docx.Footer({
+                    children: [new docx.Paragraph({
+                        children: [
+                            new docx.TextRun({
+                                text: letter.composedId,
+                                font: {
+                                    name: 'Calibri'
+                                }
+                            })
+                        ]
+                    })]
+                })
+            }
+        });
+    } else {
+        doc.addSection({
+            children: [
+                new docx.Paragraph(logoImage, 100, 100),
+                new docx.Paragraph({
+                    children: [new docx.TextRun({
+                        text: letter.heading,
+                        font: {
+                            name: 'Aido'
+                        }
+                    })]
+                }),
+                new docx.Paragraph({
+                    children: [new docx.TextRun({
+                        text: letter.content,
+                        font: {
+                            name: 'Aido'
+                        }
+                    })]
+                }),
+                new docx.Paragraph({
+                    children: [new docx.TextRun({
+                        text: letter.signature,
+                        font: {
+                            name: 'Aido'
+                        }
+                    })]
+                })],
+            footers: {
+                default: new docx.Footer({
+                    children: [new docx.Paragraph({
+                        children: [
+                            new docx.TextRun({
+                                text: letter.composedId,
+                                font: {
+                                    name: 'Calibri'
+                                }
+                            })
+                        ]
+                    })]
+                })
+            }
+        });
     }
-
-    doc.addSection({
-        footers: {
-            default: new docx.Footer({
-                children: [new docx.Paragraph(letter.composedId)],
-            })
-        },
-        children: sectionChildren
-    });
     
     docx.Packer.toBuffer(doc).then((buffer) => {
-        fs.writeFileSync(`${letter.composedId}.docx`, buffer);
+        try {
+            fs.writeFileSync(path.resolve(`docs/${letter.composedId}.docx`), buffer);
+        } catch(err) {
+            console.log(err);
+        }
     });
 };
 

@@ -10,7 +10,7 @@ var User = require('../models/user');
 var docBuilder = require('../afterware/docbuilder');
 
 router.get('/', loginReq, function(req, res) {
-   res.send("Review page");
+   res.sendFile('index.html', { root: './src/reviewPage' });
 });
 
 router.get('/fetch', loginReq, function(req, res) {

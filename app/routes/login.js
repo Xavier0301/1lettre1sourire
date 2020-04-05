@@ -20,7 +20,7 @@ router.post('/', function(req, res, next) {
         }
       });
     } else {
-      var err = new Error('Username and password are required.');
+      var err = new Error('Username or password are required.');
       err.status = 401;
       return next(err);
     }

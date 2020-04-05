@@ -11,9 +11,10 @@ const path = require('path');
 const libre = require('libreoffice-convert');
 
 function handleLetterFormatting(letter) {
-    // const imageSize = downloadImage(letter.imageUrl, letter.composedId);
-    buildDoc(letter, undefined, function() {
-        convertToPdf(letter.composedId);
+    downloadImage(letter.imageUrl, letter.composedId, function(imageSize) {
+        buildDoc(letter, undefined, function() {
+            convertToPdf(letter.composedId);
+        });
     });
 }
 
@@ -22,17 +23,17 @@ function downloadImage(url, fileName, callback) {
     const request = https.get(url, function(response) {
         if (response.statusCode === 200) {
             response.pipe(file);
-            sharp(fileName).resize(300,300).max().toFile(fileName, function(err) { 
+            sharp(fileName).resize(400,400).max().toFile(fileName, function(err) { 
                 if(err) {
-                    return undefined;
+                    callback(undefined);
                 } else {
-                    return { width: 300, height: 300};
+                    callback({ width: 400, height: 400});
                 }
             })
         } else {
             file.close();
             fs.unlink(fileName, () => {}); // Delete temp file
-            return undefined;
+            callback(undefined);
         }
     });
 }

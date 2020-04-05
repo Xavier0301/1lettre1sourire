@@ -1,6 +1,6 @@
 /*login script*/
 function loginFct() {
-    var url = 'http://localhost:3000/login/fetch';
+    var url = 'http://localhost:3000/login/';
     var resp;
     
     fetch(url)
@@ -8,8 +8,8 @@ function loginFct() {
             resp = response.json();
         });
     
-    if (response.status == 401) {//resp or response ?
-            var m = document.getElementById("login-error-message");
-            m.innerHTML = "Erreur, mauvais mot de passe ou username.";
+    if (response.status === 401) {//resp or response ?
+        var m = document.getElementById("login-error-message");
+        m.innerHTML = "Erreur, mauvais mot de passe ou username.";
     }
 }

@@ -15,6 +15,7 @@ var registerRoute = require('./app/routes/register');
 var loginRoute = require('./app/routes/login.js');
 var reviewRoute = require('./app/routes/review.js');
 var adminRoute = require('./app/routes/admin.js')
+var batchesRoute = require('./app/routes/batches.js');
 
 const app = express();
 
@@ -54,6 +55,7 @@ app.use('/register', registerRoute);
 app.use('/login', loginRoute);
 app.use('/review', reviewRoute);
 app.use('/admin', adminRoute);
+app.use('/batches', batchesRoute);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

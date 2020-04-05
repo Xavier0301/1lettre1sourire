@@ -39,7 +39,7 @@ mongoose.connect(db.url); //Mongoose connection created
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.use(express.static(__dirname + 'src'));
+app.use(express.static('public'));
 
 //use sessions for tracking logins
 app.use(session({

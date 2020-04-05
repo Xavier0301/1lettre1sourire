@@ -102,6 +102,7 @@ function buildDoc(letter, imageSize) {
         doc.addSection({
             children: [
                 new docx.Paragraph(logoImage, 100, 100),
+                new docx.Paragraph(""),
                 new docx.Paragraph({
                     children: [new docx.TextRun({
                         text: letter.heading,

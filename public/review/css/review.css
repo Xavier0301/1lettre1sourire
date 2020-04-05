@@ -1,7 +1,6 @@
 button {
-  background-color: #ddd;
   border: none;
-  color: black;
+  color: white;
   padding: 20px 40px;
   text-align: center;
   text-decoration: none;
@@ -10,6 +9,30 @@ button {
   cursor: pointer;
   border-radius: 16px;
   margin: 10px;
+}
+
+#noButton {
+  background-color: #ff794d;
+}
+
+#noButton:hover {
+  background-color: #cc3300;
+}
+
+#yesButton {
+  background-color: #79d2a6;
+}
+
+#yesButton:hover {
+  background-color: #2d8659;
+}
+
+#greatButton {
+  background-color: #e6ac00;
+}
+
+#greatButton:hover {
+  background-color: #997300;
 }
 
 #contentDisplay {
@@ -25,9 +48,8 @@ button {
 }
 
 button:hover {
-  background-color: #bbb;
   border: none;
-  color: black;
+  color: white;
   padding: 20px 40px;
   text-align: center;
   text-decoration: none;
@@ -43,16 +65,22 @@ button:hover {
   width: 1000px;
   height: 650px;
   text-align: justify;
-  border: 1px solid black;
+  border: 1px solid white;
   border-radius: 5px;
   padding: 15px;
   overflow: auto;
   display : inline-block;
+  background-color: #ffffff;
 }
 
 img {
-  border: 1px solid black;
+  border: 1px solid white;
   border-radius: 5px;
   padding: 15px;
+  background-color: #ffffff;
 
+}
+
+#container {
+  background-color: #b3e6ff;
 }

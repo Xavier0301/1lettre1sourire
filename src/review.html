@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 
 <html>
-<link rel="stylesheet" type="text/css" href="/review/css/review.css" media="screen"/>
+<link rel="stylesheet" type="text/css" href="../public/review/css/review.css" media="screen"/>
   <head>
     <meta charset="utf-8"/>
     <script src= /review/js/scriptFetch.js></script>
   </head>
+<body id = "container">
 <div id = "contentDisplay">
   <span class = "imageDisplay">
     <img src = "/review/image/chungus.jpg">
@@ -17,7 +18,9 @@
 </div>
 
 <div id = "buttonDisplay">
-  <button type = submit onclick = "Ressource/js/scriptNegative.js;Ressource/js/scriptFetch.js" >Refuser</button>
-  <button type = submit onclick = "Ressource/js/scriptPositive.js;Ressource/js/scriptFetch.js">Accepter</button>
-  <button type = submit onclick = "Ressource/js/scriptPositivePlus.js;Ressource/js/scriptFetch.js">Excellent</button>
+  <button id="noButton" onclick = "Ressource/js/scriptNegative.js;Ressource/js/scriptFetch.js" >Refuser</button>
+  <button id = "yesButton" onclick = "Ressource/js/scriptPositive.js;Ressource/js/scriptFetch.js">Accepter</button>
+  <button id = "greatButton" onclick = "Ressource/js/scriptPositivePlus.js;Ressource/js/scriptFetch.js">Excellent</button>
 </div>
+</body>
+</html>

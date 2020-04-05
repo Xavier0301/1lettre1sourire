@@ -1,16 +1,7 @@
 var http = new XMLHttpRequest;
 var url = '/review/fetch';
 var data;
-var content = [];
-var id;
-var type;
-var greeting;
-var content;
-var signature;
-var imageUrl;
-var exists;
-
-
+var content = []; //[id,type,greeting,content,signature,imageUrl,exists]
 
 fetch(url)
   .then(function(response) {

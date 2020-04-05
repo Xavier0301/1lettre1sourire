@@ -3,16 +3,18 @@
 // import { Document, Paragraph, Media, Packer } from "docx";
 const docx = require('docx');
 
-const https = require('https');
+const https = require('https');    
 const fs = require('fs');
-// const sharp = require('sharp');
+const sharp = require('sharp');
 const path = require('path');
+
+const sizeOf = require('image-size');
 
 const libre = require('libreoffice-convert');
 
 function handleLetterFormatting(letter) {
-    downloadImage(letter.imageUrl, letter.composedId, function(imageSize) {
-        buildDoc(letter, undefined, function() {
+    downloadImage(letter.imageUrl, letter.composedId, function(hasImage) {
+        buildDoc(letter, hasImage, function() {
             convertToPdf(letter.composedId);
         });
     });
@@ -20,55 +22,73 @@ function handleLetterFormatting(letter) {
 
 function downloadImage(url, fileName, callback) {
     const file = fs.createWriteStream(fileName);
-    const request = https.get(url, function(response) {
+    console.log('bout to dl image');
+    https.get(url, function(response) {
+        console.log('got resp from serv');
         if (response.statusCode === 200) {
-            response.pipe(file);
-            sharp(fileName).resize(400,400).max().toFile(fileName, function(err) { 
-                if(err) {
-                    callback(undefined);
-                } else {
-                    callback({ width: 400, height: 400});
-                }
+            console.log('call good (200)');
+            var stream = response.pipe(file);
+            stream.on('finish', function() {
+                sharp(fileName).resize(600, 350, {
+                    fit: sharp.fit.inside
+                }).toFormat('jpg').toFile(fileName + '.jpg', function(err) { 
+                    fs.unlink(fileName, () => {});
+                    if(err) {
+                        console.log(err);
+                        callback(false);
+                    } else {
+                        console.log('sharp good');
+                        callback(true);
+                    }
+                })
             })
         } else {
+            console.log('err req');
             file.close();
             fs.unlink(fileName, () => {}); // Delete temp file
-            callback(undefined);
+            callback(false);
         }
     });
 }
 
-function buildDoc(letter, imageSize, callback) {
-    const doc = new docx.Document({styles: {
+function buildDoc(letter, hasImage, callback) {
+    const doc = new docx.Document(/*{styles: {
         paragraphStyles: [
             {
                 id: "content",
                 name: "Content",
                 basedOn: "Normal",
                 next: "Normal",
-                size: 14,
+                run: {
+                    size: 28
+                }
             }
         ]
-    }});
+    }}*/);
 
-    const logoImage = docx.Media.addImage(doc, fs.readFileSync(path.resolve("org_logo.png")), 100, 100);
-
-    console.log(letter.greeting);
-    console.log(letter);
+    const logoImage = docx.Media.addImage(doc, fs.readFileSync(path.resolve("org_logo.png")), 80, 80);
+    const attachedImagePath = path.resolve(letter.composedId + '.jpg');
 
     // That's clearly not optimal, but docx was not working when creating children as a list before this
-    if(imageSize !== undefined) {
-        const attachedImage = docx.Media.addImage(doc, fs.readFileSync(path.resolve(letter.composedId)));
+    if(hasImage) {
+        const attachedImageFile = fs.readFileSync(attachedImagePath);
+        const dimensions = sizeOf(attachedImagePath);
+        const attachedImage = docx.Media.addImage(doc, attachedImageFile, dimensions.width, dimensions.height);
+        console.log('inside this bt');
         doc.addSection({
             children: [
-                new docx.Paragraph(logoImage, 100, 100),
+                new docx.Paragraph({
+                    children: [logoImage],
+                    alignment: docx.AlignmentType.CENTER
+                }),
                 new docx.Paragraph(""),
                 new docx.Paragraph({
                     children: [new docx.TextRun({
                         text: letter.heading,
                         font: {
                             name: 'Eido'
-                        }
+                        }, 
+                        size: 28
                     })]
                 }),
                 new docx.Paragraph(""),
@@ -77,7 +97,8 @@ function buildDoc(letter, imageSize, callback) {
                         text: letter.content,
                         font: {
                             name: 'Eido'
-                        }
+                        }, 
+                        size: 28
                     })]
                 }),
                 new docx.Paragraph(""),
@@ -86,11 +107,15 @@ function buildDoc(letter, imageSize, callback) {
                         text: letter.signature,
                         font: {
                             name: 'Eido'
-                        }
+                        }, 
+                        size: 28
                     })]
                 }),
-                new docx.Paragraph(),
-                new docx.Paragraph(attachedImage, imageSize.width, imageSize.height)],
+                new docx.Paragraph(""),
+                new docx.Paragraph({
+                    children: [attachedImage],
+                    alignment: docx.AlignmentType.CENTER
+                })],
             footers: {
                 default: new docx.Footer({
                     children: [new docx.Paragraph({
@@ -119,7 +144,8 @@ function buildDoc(letter, imageSize, callback) {
                         text: letter.heading,
                         font: {
                             name: 'Eido'
-                        }
+                        }, 
+                        size: 28
                     })]
                 }),
                 new docx.Paragraph(""),
@@ -128,7 +154,8 @@ function buildDoc(letter, imageSize, callback) {
                         text: letter.content,
                         font: {
                             name: 'Eido'
-                        }
+                        }, 
+                        size: 28
                     })]
                 }),
                 new docx.Paragraph(""),
@@ -137,7 +164,8 @@ function buildDoc(letter, imageSize, callback) {
                         text: letter.signature,
                         font: {
                             name: 'Eido'
-                        }
+                        }, 
+                        size: 28
                     })]
                 })],
             footers: {
@@ -163,6 +191,7 @@ function buildDoc(letter, imageSize, callback) {
         } catch(err) {
             console.log(err);
         }
+        fs.unlink(attachedImagePath, () => {});
         callback();
     });
 };
@@ -174,6 +203,7 @@ function convertToPdf(fileName) {
     const input = fs.readFileSync(inputPath);
 
     libre.convert(input, '.pdf', undefined, function(err,result) { 
+        fs.unlink(inputPath, () => {});
         if(err){
             console.log(err);
         } else {

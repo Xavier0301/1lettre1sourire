@@ -70,7 +70,10 @@ app.use(function (err, req, res, next) {
 });
 
 // startup our app at https://localhost:3000
-httpServer.listen(httpPort, () => console.log(`Listening on port ${httpPort}!`));
+httpServer.listen(httpPort, () => {
+    console.log(`Listening on port ${httpPort}!`);
+    console.log(process.version);
+});
 httpsServer.listen(httpsPort, () => console.log(`Listening on port ${httpsPort}!`));
 
 module.exports = app;

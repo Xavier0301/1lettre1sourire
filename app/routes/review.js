@@ -18,7 +18,11 @@ router.get('/fetch', loginReq, function(req, res) {
    // Letter.findOne({approvalStatus: 'QUEUED'})
    Letter.findOneAndUpdate({approvalStatus: 'Queued'}, {approvalStatus: 'In Review'}).exec(function(error, letter) {
       if(error || !letter) {
+         console.log(error);
          res.send({exists: false});
+         Letter.find().exec(function(error, letters) {
+            console.log(letters);
+         })
       } else {
          res.send({id: letter.id, type: letter.type, greeting: letter.heading, content: letter.content, signature: letter.signature, imageUrl: letter.imageUrl, exists: true});
       }

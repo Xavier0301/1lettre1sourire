@@ -7,15 +7,19 @@ const https = require('https');
 const fs = require('fs');
 const sharp = require('sharp');
 const path = require('path');
-
 const sizeOf = require('image-size');
-
 const libre = require('libreoffice-convert');
+
+const batcher = require('./batcher');
 
 function handleLetterFormatting(letter) {
     downloadImage(letter.imageUrl, letter.composedId, function(hasImage) {
         buildDoc(letter, hasImage, function() {
-            convertToPdf(letter.composedId);
+            convertToPdf(letter.composedId, function(path) {
+                if(path) {
+                    batcher(path, letter);
+                }
+            });
         });
     });
 }
@@ -196,7 +200,7 @@ function buildDoc(letter, hasImage, callback) {
     });
 };
 
-function convertToPdf(fileName) {
+function convertToPdf(fileName, callback) {
     const inputPath = path.resolve(`docs/${fileName}.docx`);
     const outputPath = path.resolve(`docs/${fileName}.pdf`);
 
@@ -206,8 +210,10 @@ function convertToPdf(fileName) {
         fs.unlink(inputPath, () => {});
         if(err){
             console.log(err);
+            callback(undefined);
         } else {
             fs.writeFileSync(outputPath, result);
+            callback(outputPath);
         }
     });
 }

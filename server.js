@@ -40,8 +40,6 @@ mongoose.connect(db.url); //Mongoose connection created
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.use(express.static('public'));
-
 //use sessions for tracking logins
 app.use(session({
     secret: 'brobroskiski',
@@ -49,13 +47,15 @@ app.use(session({
     saveUninitialized: false
   }));
 
-app.use('/api', apiRoute);
 app.use('/', publicRoute);
+app.use('/api', apiRoute);
 app.use('/register', registerRoute);
 app.use('/login', loginRoute);
 app.use('/review', reviewRoute);
 app.use('/admin', adminRoute);
 app.use('/batches', batchesRoute);
+
+app.use(express.static(__dirname + '/public'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

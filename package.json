@@ -14,6 +14,7 @@
     "docx": "^5.0.2",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "libreoffice-convert": "^1.0.5",
     "mongoose": "^5.9.7",
     "nodemon": "^2.0.2",
     "sharp": "^0.25.2"

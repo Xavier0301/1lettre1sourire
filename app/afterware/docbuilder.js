@@ -8,12 +8,16 @@ const fs = require('fs');
 // const sharp = require('sharp');
 const path = require('path');
 
+const libre = require('libreoffice-convert');
+
 function handleLetterFormatting(letter) {
     // const imageSize = downloadImage(letter.imageUrl, letter.composedId);
-    buildDoc(letter, undefined);
+    buildDoc(letter, undefined, function() {
+        convertToPdf(letter.composedId);
+    });
 }
 
-function downloadImage(url, fileName) {
+function downloadImage(url, fileName, callback) {
     const file = fs.createWriteStream(fileName);
     const request = https.get(url, function(response) {
         if (response.statusCode === 200) {
@@ -33,7 +37,7 @@ function downloadImage(url, fileName) {
     });
 }
 
-function buildDoc(letter, imageSize) {
+function buildDoc(letter, imageSize, callback) {
     const doc = new docx.Document({styles: {
         paragraphStyles: [
             {
@@ -46,7 +50,7 @@ function buildDoc(letter, imageSize) {
         ]
     }});
 
-    const logoImage = docx.Media.addImage(doc, fs.readFileSync(path.resolve("org_logo.png")));
+    const logoImage = docx.Media.addImage(doc, fs.readFileSync(path.resolve("org_logo.png")), 100, 100);
 
     console.log(letter.greeting);
     console.log(letter);
@@ -62,26 +66,29 @@ function buildDoc(letter, imageSize) {
                     children: [new docx.TextRun({
                         text: letter.heading,
                         font: {
-                            name: 'Aido'
+                            name: 'Eido'
                         }
                     })]
                 }),
+                new docx.Paragraph(""),
                 new docx.Paragraph({
                     children: [new docx.TextRun({
                         text: letter.content,
                         font: {
-                            name: 'Aido'
+                            name: 'Eido'
                         }
                     })]
                 }),
+                new docx.Paragraph(""),
                 new docx.Paragraph({
                     children: [new docx.TextRun({
                         text: letter.signature,
                         font: {
-                            name: 'Aido'
+                            name: 'Eido'
                         }
                     })]
                 }),
+                new docx.Paragraph(),
                 new docx.Paragraph(attachedImage, imageSize.width, imageSize.height)],
             footers: {
                 default: new docx.Footer({
@@ -101,29 +108,34 @@ function buildDoc(letter, imageSize) {
     } else {
         doc.addSection({
             children: [
-                new docx.Paragraph(logoImage, 100, 100),
+                new docx.Paragraph({
+                    children: [logoImage],
+                    alignment: docx.AlignmentType.CENTER
+                }),
                 new docx.Paragraph(""),
                 new docx.Paragraph({
                     children: [new docx.TextRun({
                         text: letter.heading,
                         font: {
-                            name: 'Aido'
+                            name: 'Eido'
                         }
                     })]
                 }),
+                new docx.Paragraph(""),
                 new docx.Paragraph({
                     children: [new docx.TextRun({
                         text: letter.content,
                         font: {
-                            name: 'Aido'
+                            name: 'Eido'
                         }
                     })]
                 }),
+                new docx.Paragraph(""),
                 new docx.Paragraph({
                     children: [new docx.TextRun({
                         text: letter.signature,
                         font: {
-                            name: 'Aido'
+                            name: 'Eido'
                         }
                     })]
                 })],
@@ -150,11 +162,23 @@ function buildDoc(letter, imageSize) {
         } catch(err) {
             console.log(err);
         }
+        callback();
     });
 };
 
 function convertToPdf(fileName) {
+    const inputPath = path.resolve(`docs/${fileName}.docx`);
+    const outputPath = path.resolve(`docs/${fileName}.pdf`);
 
+    const input = fs.readFileSync(inputPath);
+
+    libre.convert(input, '.pdf', undefined, function(err,result) { 
+        if(err){
+            console.log(err);
+        } else {
+            fs.writeFileSync(outputPath, result);
+        }
+    });
 }
 
 module.exports = handleLetterFormatting;

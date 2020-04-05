@@ -1,6 +1,11 @@
 EXAMPLE DATA TO POPULATE MONGODB WITH LETTER:
 
-db.reviewers.insertOne({ id: 3118, submissionTime: "2020-03-28 18:11:57", email: "anais-vr@hotmail.com", type: "Un monsieur âgé isolé", heading: "Bonjour Monsieur,", content: "J’espère que vous allez bien.", signature: "Anaïs", imageUrl: "https://1lettre1sourire.org/wp-content/uploads/gravity_forms/2-9d8fc8e286f69fec044ad9ec6703f864/2020/03/0A837A40-8802-4136-B888-B1CCFA977B6D.jpeg", firstName: "Anaïs"})
+db.letters.insertOne({ id: 3119, submissionTime: "2020-03-28 18:12:01", email: "jeanne.poutot@hotmail.fr", type: "F", heading: "Coucou chère Madame,", content: "Je m’appelle Jeanne, j’ai 24 ans, j’habite à Nancy.", signature: "Jeanne", imageUrl: "https://1lettre1sourire.org/wp-content/uploads/gravity_forms/2-9d8fc8e286f69fec044ad9ec6703f864/2020/03/B4CD275E-7B57-4695-B045-FA89E7592550.jpeg", firstName: "Jeanne", __v: 0})
+db.letters.insertOne({ id: 3121, submissionTime: "2020-03-28 18:12:30", email: "raphaelgues@icloud.com", type: "H", heading: "Cher Monsieur,", content: "Je suis Raph, La vie est belle, c'est chouette de sourire.", signature: "Raphael", imageUrl: "https://1lettre1sourire.org/wp-content/uploads/gravity_forms/2-9d8fc8e286f69fec044ad9ec6703f864/2020/03/IMG-8221.jpg", firstName: "Raphael", __v: 0})
+db.letters.insertOne({ id: 3120, submissionTime: "2020-03-28 18:12:27", email: "maxence.dacunha@gmail.com", type: "H", heading: "Cher Monsieur,", content: "Je m’appelle MAx, il fait beau à Paris.", signature: "Maxence", imageUrl: "https://1lettre1sourire.org/wp-content/uploads/gravity_forms/2-9d8fc8e286f69fec044ad9ec6703f864/2020/03/9CDC01A0-E9F9-4CE3-BBEF-6FC301B4B0F4.jpeg", firstName: "Maxence", __v: 0})
+db.letters.insertOne({ id: 3118, submissionTime: "2020-03-28 18:11:57", email: "anais-vr@hotmail.com", type: "H", heading: "Bonjour Monsieur,", content: "J’espère que vous allez bien.", signature: "Anaïs", imageUrl: "https://1lettre1sourire.org/wp-content/uploads/gravity_forms/2-9d8fc8e286f69fec044ad9ec6703f864/2020/03/0A837A40-8802-4136-B888-B1CCFA977B6D.jpeg", firstName: "Anaïs", __v: 0})
+
+EXAMPLE DATA TO POPULATE THROUGH THE API:
 
 id:3118
 submissionTime:2020-03-28 18:11:57
@@ -11,3 +16,27 @@ content:J’espère que vous allez bien.
 signature:Anaïs
 imageUrl:https://1lettre1sourire.org/wp-content/uploads/gravity_forms/2-9d8fc8e286f69fec044ad9ec6703f864/2020/03/0A837A40-8802-4136-B888-B1CCFA977B6D.jpeg
 firstName:Anaïs
+
+db.letters.insertOne({ id: 3119, submissionTime: "2020-03-28 18:12:01", email: "jeanne.poutot@hotmail.fr", type: "F", heading: "Coucou chère Madame,", content: "Je m’appelle Jeanne, j’ai 24 ans, j’habite à Nancy.", signature: "Jeanne", imageUrl: "https://1lettre1sourire.org/wp-content/uploads/gravity_forms/2-9d8fc8e286f69fec044ad9ec6703f864/2020/03/B4CD275E-7B57-4695-B045-FA89E7592550.jpeg", firstName: "Jeanne", __v: 0})
+
+id:3119
+submissionTime:2020-03-28 18:12:01
+email:jeanne.poutot@hotmail.fr
+type:Une dame âgée isolée
+heading:Coucou chère Madame,
+content:Je m’appelle Jeanne, j’ai 24 ans, j’habite à Nancy.
+signature:Jeanne
+imageUrl:https://1lettre1sourire.org/wp-content/uploads/gravity_forms/2-9d8fc8e286f69fec044ad9ec6703f864/2020/03/B4CD275E-7B57-4695-B045-FA89E7592550.jpeg
+firstName:Jeanne
+
+db.letters.insertOne({ id: 3121, submissionTime: "2020-03-28 18:12:30", email: "raphaelgues@icloud.com", type: "H", heading: "Cher Monsieur,", content: "Je suis Raph, La vie est belle, c'est chouette de sourire.", signature: "Raphael", imageUrl: "https://1lettre1sourire.org/wp-content/uploads/gravity_forms/2-9d8fc8e286f69fec044ad9ec6703f864/2020/03/IMG-8221.jpg", firstName: "Raphael", __v: 0})
+
+id:3121
+submissionTime:2020-03-28 18:12:30
+email:raphaelgues@icloud.com
+type:Un monsieur âgé isolé
+heading:Cher Monsieur,
+content:Je suis Raph, La vie est belle, c'est chouette de sourire.
+signature:Raphael
+imageUrl:https://1lettre1sourire.org/wp-content/uploads/gravity_forms/2-9d8fc8e286f69fec044ad9ec6703f864/2020/03/IMG-8221.jpg
+firstName:Raphael

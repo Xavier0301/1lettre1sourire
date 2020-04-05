@@ -1,11 +1,15 @@
 /*login script*/
-// DOCTYPE javascript>
-
-function validateLogin() {
-    if (true) {
-        window.location = "index.html";//@TODO remplasser index.html par la page de review
-        return false;
-    } else {
-        alert ("Mauvais nom d'utilisateur ou mot de passe, essaie à nouveau");
+function loginFct() {
+    var url = 'http://localhost:3000/login/fetch';
+    var resp;
+    
+    fetch(url)
+        .then(function (response) {
+            resp = response.json();
+        });
+    
+    if (response.status == 401) {//resp or response ?
+            var m = document.getElementById("login-error-message");
+            m.innerHTML = "Erreur, mauvais mot de passe ou username.";
     }
 }

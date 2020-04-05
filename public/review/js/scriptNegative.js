@@ -5,4 +5,4 @@ var url = "/review/approve";
 http.open('POST', url, true);
 
 http.setRequestHeader("Conent-Type",'application/json;charset=UTF-8');
-http.send(JSON.stringify({"id": data[2], "flag": false, "approve": false}));
+http.send(JSON.stringify({"id": content[2], "flag": false, "approve": false}));

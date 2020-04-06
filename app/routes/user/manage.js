@@ -44,19 +44,11 @@ router.post('/remove', loginReq, adminReq, function(req, res, next) {
 });
 
 router.post('/register'/*, loginReq, adminReq*/, function(req, res, next) {
-    if (req.body.password !== req.body.passwordConf) {
-      var err = new Error('Passwords do not match.');
-      err.status = 400;
-      return next(err);
-    }
-
-    if (req.body.username &&
-      req.body.password &&
-      req.body.passwordConf) {
+    if (req.body.username && req.body.password && req.body.admin !== undefined) {
       var userData = {
         username: req.body.username,
         password: req.body.password,
-        isAdmin: false
+        isAdmin: req.body.admin === 'true'
       }
       //use schema.create to insert data into the db
       User.create(userData, function (err, user) {

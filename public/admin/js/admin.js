@@ -4,7 +4,7 @@ function addUser() {
     let data = {
         username: document.getElementById("add user username").value,
         password: document.getElementById("add user password").value,
-        passwordConf: document.getElementById("add user password").value
+        admin: false
     }
  
     var headers = new Headers();

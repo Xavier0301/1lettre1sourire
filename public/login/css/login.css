@@ -18,7 +18,7 @@ button{
  margin: auto;
  display: block;
  font-size: 15px;
- background-color: #336699;
+ background-color: #f7c833;
  color: white;
 }
 
@@ -31,7 +31,7 @@ button:hover{
  margin: 0 auto;
  display: block;
  font-size: 15px;
- background-color: #204060;
+ background-color: #997300;
  color: white;
 }
 
@@ -81,12 +81,19 @@ button:active {
  width:100px; 
  padding: 20px;
  display: block;
+ margin-top: 40px;
  margin-left: auto;
  margin-right: auto;
 }
+
 .header {
+ top: 0;
+ left: 0;
+ position: fixed;
+ width: 100%;
  background-color: #293241;
  height: 20px;
  color: white;
- padding: 10;
+ padding: 10px;
+ padding-left: 20px;
 }

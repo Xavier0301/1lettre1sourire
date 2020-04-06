@@ -4,27 +4,29 @@
  <head>
   <title>login</title>
   <link rel="stylesheet" href="/login/css/login.css">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
   <script src="/login/js/login.js"></script>
+  <meta charset="utf-8"/>
  </head>
 
  <body>
-  <div class="header">Login 1 lettre 1 sourire</div>
+  <div class="header">Login 1lettre 1sourire</div>
   <img id="org-logo" src="/login/images/org_logo.png" alt="logo 1 lettre 1 sourire">
 
   <div id="login-window">
-   <p id="login-title">1 Lettre 1 Sourire</p>
+   <p id="login-title">1Lettre 1Sourire</p>
    <p>Connectez-vous pour accéder aux lettres.</p>
    <input class="login-field" type="text" placeholder="Identifiant" id="username" required>
    <input class="login-field" type="password" placeholder="Mot de passe" id="password" required>
    <button id = "logButton" type="login" onclick = "funcLogin()">Se connecter</button>
    <script>
-     var input = document.getElementById("password");
-     input.addEventListener("keyup", function(event){
-       if(event.keyCode === 13){
-         event.preventDefault();
-         document.getElementById("logButton").click();
-       }
-     });
+    var input = document.getElementById("password");
+    input.addEventListener("keyup", function(event){
+     if(event.keyCode === 13){
+      event.preventDefault();
+      document.getElementById("logButton").click();
+     }
+    });
    </script>
    <p id="login-error-message"></p>
   </div>

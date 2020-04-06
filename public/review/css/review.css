@@ -4,10 +4,12 @@ body {
 
 button {
  color: white;
- padding: 20px 40px;
+ padding: 15px 20px;
  text-align: center;
  text-decoration: none;
- font-size: 24px;
+ font-size: 16px;
+ font-weight: bold;
+ letter-spacing: 1px;
  display: inline-block;
  cursor: pointer;
  border-radius: 16px;
@@ -33,7 +35,7 @@ button {
 }
 
 #greatButton {
- background-color: #e6ac00;
+ background-color: #f7c833;
 }
 
 #greatButton:hover {
@@ -45,16 +47,9 @@ button {
  align-items: center;
  justify-content: space-around;
 }
-
 #buttonDisplay {
- padding: 0 auto;
- background-color: red;
- margin-bottom: 10px;
- position: fixed;
- bottom: 0;
  display: flex;
  justify-content: center;
- text-align: center;
 }
 
 button:hover {
@@ -70,27 +65,44 @@ button:hover {
 }
 
 #letter {
- font-family: verdana;
- font-size: 150%;
+ font-family: 'Montserrat', sans-serif;
+ font-size: 12;
+ text-align: left;
+ line-height: 30px;
+
  width: 400;
- height: 600;
- text-align: justify;
- border: 1px solid white;
- border-radius: 5px;
+ height: 1000;
+ border-radius: 0.5em;
  padding: 15px;
+ margin:30px;
+ margin-top:50px;
+
  overflow: auto;
  display : inline-block;
  background-color: #ffffff;
 }
 
 img {
- border: 1px solid white;
- border-radius: 5px;
+ border: 1px  #b1bbce;
+ border-radius: 0.5em;
  padding: 15px;
- background-color: #ffffff;
-
+ margin: 10px;
+ margin-top:50px;
+ 
+ background-color: #ffff;
 }
 
 #container {
- background-color: #b3e6ff;
+ background-color: #f2f2f2;
+}
+.header {
+ top: 0;
+ left: 0;
+ position: fixed;
+ width: 100%;
+ background-color: #293241;
+ height: 20px;
+ color: white;
+ padding: 10px;
+ padding-left: 20px;
 }

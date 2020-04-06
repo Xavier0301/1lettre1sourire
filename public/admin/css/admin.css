@@ -23,14 +23,14 @@ table {
 }
 
 th, td {
-  border-bottom: 1px solid #ddd;
+ border-bottom: 1px solid #ddd;
 }
 /* splits the screen*/
 .split {
  height: 100%;
  width: 50%;
  position: fixed;
- padding-top: 20px;
+ padding-top: 40px;
  background-color: #eff1f5;
 
 }
@@ -78,14 +78,17 @@ th, td {
 }
 
 .header {
-background-color: #293241;
+ top: 0;
+ left: 0;
+ position: sticky;
+ background-color: #293241;
  height: 20px;
  color: white;
  padding: 10;
 }
 
 #users-table {
-  margin: 0 auto;
+ margin: 0 auto;
  border-spacing: 10px;
 }
 #batchs {

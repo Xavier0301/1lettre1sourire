@@ -1,7 +1,7 @@
 <html>
  <head>
   <title>admin</title>
-  <link rel="stylesheet" href="/public/admin/css/admin.css">
+  <link rel="stylesheet" href="/admin/css/admin.css">
   <script src="/admin/js/admin.js"></script>
  </head>
 
@@ -13,8 +13,8 @@
    <div class="admin-window">
     <input class="text-field" type="text" placeholder="Identifiant" name="username" id="add user username">
     <input class="text-field" type="password" placeholder="Mot de passe" name="password" id="add user password">
-    <input id="admin-checkBox" type="checkbox" name="admin">
-    <label id="checkBoxLabel" for="admin-checkBox">Identifiant administrateur</label>
+    
+    <label id="checkBoxLabel" for="admin-checkBox"><input id="admin-checkBox" type="checkbox" name="admin">Identifiant administrateur</label>
     <button type="" onclick="addUser()">Ajouter relecteur</button>
     <br><br>
     <input class="text-field" type="text" placeholder="Identifiant" name="username" id="remove user username">

@@ -1,50 +1,33 @@
  function funcLogin() {
-   var url = 'http://localhost:3000/login';
-
-
-//    fetch(url)
-//     .then(function(response) {
-//       if (response.status !== 401) {
-//         console.log("in if");
-//         throw new Error("Not 200 response")
-//     } else {
-//       console.log("in else");
-//       console.log(response);
-//     }
-// }).catch(function(err) {
-//     console.log(err);
-//     console.log("in catch");
-// });
-
-    // fetch(url)
-    //   .then(function(resp){
-    //     if(resp.status !== 401){
-    //       return funcLogin();
-    //     }else{
-    //       console.log(xd);
-    //     }
-    //   });
-
+   var url = '/login';
 
     let data = {
       password: document.getElementById("password").value,
       username: document.getElementById("username").value
+
     }
+
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
 
     let fetchData = {
       method: 'POST',
       body: JSON.stringify(data),
-      headers: new Headers()
+      headers: myHeaders,
+      redirect: 'follow'
     }
 
     fetch(url, fetchData)
       .then(function(response){
         console.log(fetchData);
         console.log(response);
-        if(response.status !== 200){
-          console.log("error not 200")
+        if(response.status == 200){
+          console.log("welcome");
+          window.location.replace(response.url);
         } else {
-          console.log("welcome")
+          console.log("error not 200")
+          window.location.replace("/");
+          alert("Verfiez votre mot de passe et votre identifiant.");
         }
       });
 

@@ -11,10 +11,12 @@ const path = require('path');
 
 var apiRoute = require('./app/routes/letter');
 var publicRoute = require('./app/routes/public');
-var registerRoute = require('./app/routes/register');
-var loginRoute = require('./app/routes/login.js');
+var registerRoute = require('./app/routes/user/register');
+var loginRoute = require('./app/routes/user/login.js');
 var reviewRoute = require('./app/routes/review.js');
 var adminRoute = require('./app/routes/admin.js')
+var batchesRoute = require('./app/routes/batches.js');
+var userRoute = require('./app/routes/user/manage');
 
 const app = express();
 
@@ -39,8 +41,6 @@ mongoose.connect(db.url); //Mongoose connection created
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.use(express.static('public'));
-
 //use sessions for tracking logins
 app.use(session({
     secret: 'brobroskiski',
@@ -48,12 +48,16 @@ app.use(session({
     saveUninitialized: false
   }));
 
-app.use('/api', apiRoute);
 app.use('/', publicRoute);
+app.use('/api', apiRoute);
 app.use('/register', registerRoute);
 app.use('/login', loginRoute);
 app.use('/review', reviewRoute);
 app.use('/admin', adminRoute);
+app.use('/batches', batchesRoute);
+app.use('/user', userRoute);
+
+app.use(express.static(__dirname + '/public'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

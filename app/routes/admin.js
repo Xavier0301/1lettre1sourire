@@ -12,7 +12,11 @@ router.get('/', loginReq, adminReq, function(req, res) {
     res.send("Admin page");
 });
 
-router.post('/batchDownload', loginReq, adminReq, function(req, res) {
+router.post('/batches/list', loginReq, adminReq, function(req, res) {
+
+});
+
+router.post('/batches/download', loginReq, adminReq, function(req, res) {
     
 });
 

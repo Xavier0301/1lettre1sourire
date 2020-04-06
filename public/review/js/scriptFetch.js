@@ -1,13 +1,20 @@
-var url = '/review/fetch';
-var data;
-var content = []; //[id,type,greeting,content,signature,imageUrl,exists]
 
-fetch(url)
-  .then(function(response) {
-    data = response.json();
-  })
+//var content; //[id,type,greeting,content,signature,imageUrl,exists]
 
-for (var i = 0; i < data.results.length; i++)
-{
-  content.push(data.results[i].value);
-}
+function funcFetch() {
+  var url = 'http://localhost:3000/review/fetch';
+
+  fetch(url)
+    .then((response) => response.json())
+    .then(function(data) {
+      let contentLetter = data.content;
+      let contentImage = data.imageUrl;
+      let greetingLetter = data.greeting;
+      let signatureLetter = data.signature;
+      console.log(contentLetter);
+      console.log(contentImage);
+      console.log(data);
+      displayLetter(contentLetter,greetingLetter,signatureLetter);
+      displayImage(contentImage);
+    });
+  };

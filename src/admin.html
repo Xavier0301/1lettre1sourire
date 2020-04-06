@@ -10,16 +10,18 @@
 
     <div class="split right centered">
       <h1 class="admin-header">Reviewers</h1>
-      <div id="add reviwer">
+    <div class="admin-window">
+      <div id="add reviewer">
         <input class="text-field" type="text" placeholder="Username" name="username">
         <input class="text-field" type="text" placeholder="Password" name="password">
         <button type="" onclick="addNewReviewer()">Add reviewer</button>
       </div>
       <div id="remove reviewer">
         <input class="text-field" type="text" placeholder="Username" name="username">
-        <input class="text-field" type="text" placeholder="Password" name="password">
         <button type="" onclick="removeReviewer()">Remove reviewer</button>
       </div>
+        </div>
+        <div class="admin-window">
       <table id="batchs" overflow="auto">
         <caption>Reviewers</caption>
         <tr>
@@ -28,7 +30,7 @@
           <th scope="col">Admin</th>
         </tr>
       </table>
-
+        </div>
     </div>
 
 

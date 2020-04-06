@@ -16,7 +16,7 @@ var reviewRoute = require('./app/routes/review.js');
 var adminRoute = require('./app/routes/admin.js')
 var batchesRoute = require('./app/routes/batches.js');
 var userRoute = require('./app/routes/user/manage');
-
+var statsRoute = require('./app/routes/stats');
 
 const app = express();
 
@@ -54,6 +54,7 @@ app.use('/review', reviewRoute);
 app.use('/admin', adminRoute);
 app.use('/batches', batchesRoute);
 app.use('/user', userRoute);
+app.use('/stats', statsRoute);
 
 // app.use(express.static(__dirname + '/public'));
 
@@ -70,7 +71,6 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
 
     if(err.status === 401) {
-        console.log('???');
         res.redirect('/');
     } else {
         res.json({'errors': {

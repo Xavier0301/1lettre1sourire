@@ -1,8 +1,3 @@
-function reloadBatchList() {
-    listBatches();
-    // return false;
-}
-
 function listBatches() {
     var url = '/batches/list';
 

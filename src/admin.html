@@ -4,9 +4,11 @@
   <link rel="stylesheet" href="/admin/css/admin.css">
   <script src="/admin/js/adminUsers.js"></script>
   <script src="/admin/js/adminBatches.js"></script>
+  <script src="/admin/js/adminStats.js"></script>
   <script>
     listUsers();
     listBatches();
+    getStats();
   </script>
   <script>
     function enterTrigger(inputId, buttonId) {
@@ -60,10 +62,14 @@
    <div class="admin-window">
     <p class="table-tittle" style="color: #3D5A80;">Statistiques</p>
     <hr color="#3D5A80">
-    <p>Nombre de lettres en attente de relecture:</p>
-    <p id="review-stack-size">0</p>
-    <p>Nombre de lettres relues:</p>
-    <p id="nb-batched">0</p>
+    <p>En attente:</p>
+    <p id="queued-count">0</p>
+    <p>En review:</p>
+    <p id="in-review-count">0</p>
+    <p>Acceptées:</p>
+    <p id="accepted-count">0</p>
+    <p>Rejetées:</p>
+    <p id="rejected-count">0</p>
    </div>
    <div class="admin-window" style="overflow: auto;">
     <p class="table-tittle">Batch de lettres</p>

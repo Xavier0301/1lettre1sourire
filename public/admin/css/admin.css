@@ -1,27 +1,36 @@
 
 body{
-    background-color:skyblue;
-    font-family:'Ubuntu', sans-serif;
+  background-color:white;
+  font-family:'Ubuntu', sans-serif;
 }
 
 /* splits the screen*/
 .split {
-    height: auto;
-    width: 50%;
-    position: fixed;
-    padding-top: 20px;
+  height: auto;
+  width: 48%;
+  position: fixed;
+  padding-top: 20px;
+  background-color: silver;
+
 }
 
 .right {
-    right: 0;
-    background-color: ivory;
+  right: 0;
+  margin-right: 20px;
 }
 
 .left {
-    left: 0;
-    background-color: oldlace;
+  left: 0;
+  margin-left: 20px;
+
+  background-color: lightsteelblue;
 }
 
 .centered {
-    text-align: center;
+  text-align: center;
+}
+
+.admin-header {
+  background-color: darkblue;
+  margin: 10px 20px; 
 }

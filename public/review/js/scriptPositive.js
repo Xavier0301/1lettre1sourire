@@ -1,10 +1,26 @@
 // Sends the id and 2 booleans as a POST request
 
 function postPositive() {
-  var http = new XMLHttpRequest();
-  var url = "http://localhost:3000/review/approve";
-  http.open('POST', url, true);
+  var url = '/review/approve';
+  var myHeaders = new Headers();
+  myHeaders.append('Content-Type', 'application/json');
 
-  http.setRequestHeader("Conent-Type",'application/json;charset=UTF-8');
-  http.send(JSON.stringify({"id": content[2], "flag": "false", "approve": "true"}));
+  let data = {
+    id: idToPost,
+    flag: "false",
+    approve: "true"
+  }
+
+  let fetchData = {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: myHeaders,
+  }
+
+  console.log(fetchData)
+
+  fetch(url, fetchData)
+    .then(function(resp) {
+      console.log(resp);
+    })
 }

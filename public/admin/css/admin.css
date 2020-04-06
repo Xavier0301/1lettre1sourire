@@ -40,7 +40,11 @@ body{
  padding: 20px;
  border-radius: 1em;
 }
+.text-field {
+ border-radius: 5em;
+ padding: 5px;
 
+}
 button{
  border-radius: 5em;
  padding-left: 20px;
@@ -49,5 +53,8 @@ button{
  padding-top: 5px;
  font-size: 14px;
  margin: 10px;
- margin-bottom: 30px;
+}
+
+#checkBoxLabel {
+ font-size: 14px;
 }

@@ -18,7 +18,7 @@ button{
  margin: auto;
  display: block;
  font-size: 15px;
- background-color: #f7c833;
+ background-color: #3D5A80;
  color: white;
 }
 
@@ -31,7 +31,7 @@ button:hover{
  margin: 0 auto;
  display: block;
  font-size: 15px;
- background-color: #997300;
+ background-color: #204060;
  color: white;
 }
 

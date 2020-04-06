@@ -1,10 +1,11 @@
 function addUser() {
     var url = '/user/register';
  
+    console.log(document.getElementById("admin-checkBox").checked);
     let data = {
         username: document.getElementById("add user username").value,
         password: document.getElementById("add user password").value,
-        admin: false
+        admin: document.getElementById("admin-checkBox").checked
     }
  
     var headers = new Headers();
@@ -19,11 +20,12 @@ function addUser() {
     fetch(url, fetchOptions)
         .then(function(response){
             if(response.status === 200) {
-                alert("Utilisateur ajouté");
+                listUsers();
+                // alert("Utilisateur ajouté");
             } else {
                 alert("Erreur durant l'ajout d'un utilisateur");
             }
-        });
+        }); 
 }
  
 function removeUser() {
@@ -45,7 +47,8 @@ function removeUser() {
     fetch(url, fetchOptions)
         .then(function(response){
             if(response.status === 200) {
-                alert("Utilisateur supprimé");
+                listUsers();
+                // alert("Utilisateur supprimé");
             } else {
                 alert("Erreur durant la suppression d'un utilisateur");
             }
@@ -55,19 +58,39 @@ function removeUser() {
 function listUsers() {
     var url = '/user/list';
 
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
     let fetchOptions = {
         method: 'GET',
-        headers: new Headers()
+        headers: headers
     }
 
     fetch(url, fetchOptions)
-        .then(function(response) {
-            if(response.status === 200) {
-                console.log(response);
-            } else {
-                alert("Erreur durant le chargement de la list d'utilisateurs");
-            }
+        .then((response) => {
+            console.log(response);
+            return response.json()
+        })
+        .then(function(users) {
+            populateUserTable(users);
         });
+}
+
+function populateUserTable(users){
+    var table = document.getElementById('users-table');
+    table.innerHTML = `<caption>Utilisateurs</caption>
+    <tbody><tr>
+     <th scope="col">Identifiant</th>
+     <th scope="col">Admin</th>
+    </tr>
+   </tbody>`;    
+    users.forEach(function(user) {
+        var tr = document.createElement('tr');
+        const adminLitteral = user.isAdmin ? "Oui" : "Non";
+        tr.innerHTML = '<td>' + user.username + '</td>' +
+            '<td>' + adminLitteral + '</td>'
+        table.appendChild(tr);
+    });
 }
 
 

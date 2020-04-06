@@ -96,13 +96,13 @@ export default {
     this.axios.defaults.withCredentials = true;
     this.axios.interceptors.response.use(
        (response) => { 
-         if (401 === response.status) {
+         if (401 === response.status || 302 === response.status) {
            this.showLogin();
          }
          return response;
        }, 
        (error)    => {
-         if (error.response != undefined && 401 === error.response.status) {
+         if (error.response != undefined &&(401 === error.response.status || 302 === error.response.status)) {
            this.showLogin();
          }
          return Promise.reject(error);

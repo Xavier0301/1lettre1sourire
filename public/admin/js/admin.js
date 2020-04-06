@@ -10,23 +10,23 @@ function addUser() {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
  
-    let fetchData = {
+    let fetchOptions = {
         method: 'POST',
         body: JSON.stringify(data),
         headers: headers
     }
  
-    fetch(url, fetchData)
+    fetch(url, fetchOptions)
         .then(function(response){
-        if(response.status == 200){
-            alert("Utilisateur ajouté");
-        } else {
-            alert("Erreur durant l'ajout d'un utilisateur");
-          }
+            if(response.status === 200) {
+                alert("Utilisateur ajouté");
+            } else {
+                alert("Erreur durant l'ajout d'un utilisateur");
+            }
         });
- }
+}
  
- function removeUser() {
+function removeUser() {
     var url = '/user/remove';
  
     let data = {
@@ -36,21 +36,40 @@ function addUser() {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
  
-    let fetchData = {
+    let fetchOptions = {
         method: 'POST',
         body: JSON.stringify(data),
         headers: headers
     }
  
-    fetch(url, fetchData)
+    fetch(url, fetchOptions)
         .then(function(response){
-        if(response.status == 200){
-            alert("Utilisateur supprimé");
-        } else {
-            alert("Erreur durant la suppression d'un utilisateur");
-          }
+            if(response.status === 200) {
+                alert("Utilisateur supprimé");
+            } else {
+                alert("Erreur durant la suppression d'un utilisateur");
+            }
         });
- }
+}
+
+function listUsers() {
+    var url = '/user/list';
+
+    let fetchOptions = {
+        method: 'GET',
+        headers: new Headers()
+    }
+
+    fetch(url, fetchOptions)
+        .then(function(response) {
+            if(response.status === 200) {
+                console.log(response);
+            } else {
+                alert("Erreur durant le chargement de la list d'utilisateurs");
+            }
+        });
+}
+
 
 // var jsonBatch = '{"index":["F45", "H8", "H6"], "nbDoc":["6", "85", "100"], "type":["F", "H", "H"], "dwnld":["true", "false", "true"]}';
 

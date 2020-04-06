@@ -32,7 +32,9 @@ UserSchema.statics.authenticate = function (username, password, callback) {
             if (result === true) {
                 return callback(null, user);
             } else {
-                return callback();
+                const err = new Error('Not the right password.');
+                err.status = 401;
+                return callback(err);
             }
         })
     });

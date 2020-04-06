@@ -1,29 +1,35 @@
 <html>
  <head>
   <title>admin</title>
-  <link rel="stylesheet" href="/public/admin/css/admin.css">
+  <link rel="stylesheet" href="/admin/css/admin.css">
   <script src="/admin/js/admin.js"></script>
   <script> listUsers() </script>
  </head>
 
  <body>
-  <div class="header">Bienvenue dans le dashboard du back office d'1 lettre 1 sourire</div>
+  <div class="header">Dashboard 1 lettre 1 sourire</div>
 
   <div class="split right centered">
    <h1 class="admin-header">UTILISATEURS</h1>
    <div class="admin-window">
+    <p class="table-tittle" style="color: #3D5A80;">Gestion utilisateur</p>
+    <hr color="#3D5A80">
+
     <input class="text-field" type="text" placeholder="Identifiant" name="username" id="add user username">
     <input class="text-field" type="password" placeholder="Mot de passe" name="password" id="add user password">
     <br>
     <label id="checkBoxLabel" for="admin-checkBox">admin<input id="admin-checkBox" type="checkbox" name="admin"></label>
     <button type="" onclick="addUser()">Ajouter</button>
     <br><br>
+
     <input class="text-field" type="text" placeholder="Identifiant" name="username" id="remove user username">
     <button type="" onclick="removeUser()">Supprimer</button>
    </div>
+   
    <div class="admin-window">
+    <p class="table-tittle">Utilisateurs</p>
+    <hr color="#3D5A80">
     <table id="users-table" overflow="auto">
-     <caption>Utilisateurs</caption>
      <tr>
       <th scope="col">Identifiant</th>
       <th scope="col">Admin</th>
@@ -37,7 +43,7 @@
   <div class="split left centered">
    <h1 class="admin-header">LETTRES</h1>
    <div class="admin-window">
-     <p class="table-tittle" style="color: #3D5A80;">Statistiques</p>
+    <p class="table-tittle" style="color: #3D5A80;">Statistiques</p>
     <hr color="#3D5A80">
     <p>Nombre de lettre en attente de relecture:</p>
     <p id="review-stack-size">0</p>
@@ -45,7 +51,7 @@
     <p id="nb-batched">0</p>
    </div>
    <div class="admin-window" style="overflow: auto;">
-    <p class="table-tittle" style="color: #3D5A80;">Batch de lettres</p>
+    <p class="table-tittle">Batch de lettres</p>
     <hr color="#3D5A80">
     <table id="batchs">
      <tr>

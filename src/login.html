@@ -1,22 +1,24 @@
 <html>
 
 
-<head>
-    <title>login</title>
-    <link rel="stylesheet" href="/login/css/login.css">
-    <script src="/login/js/login.js"></script>
-</head>
+ <head>
+  <title>login</title>
+  <link rel="stylesheet" href="/login/css/login.css">
+  <script src="/login/js/login.js"></script>
+ </head>
 
-<body>
-    <div id="login-window">
-        <p id="login-title">1Lettre1Sourire</p>
-        <p>Connectez-vous pour traiter des lettres.</p>
-            <input class="login-field" type="text" placeholder="Identifiant" id="username" required>
-            <input class="login-field" type="password" placeholder="Mot de passe" id="password" required>
-            <button type="login" onclick = "funcLogin()">Se connecter</button>
-        <p id="login-error-message"></p>
-    </div>
+ <body>
+  <div class="header">Login 1 lettre 1 sourire</div>
+  <img id="org-logo" src="/org_logo.png" alt="logo 1 lettre 1 sourire">
+  
+  <div id="login-window">
+   <p id="login-title">1 Lettre 1 Sourire</p>
+   <p>Connectez-vous pour accéder aux lettres.</p>
+   <input class="login-field" type="text" placeholder="Identifiant" id="username" required>
+   <input class="login-field" type="password" placeholder="Mot de passe" id="password" required>
+   <button type="login" onclick = "funcLogin()">Se connecter</button>
+   <p id="login-error-message"></p>
+  </div>
 
-    <p></p>
-</body>
+ </body>
 </html>

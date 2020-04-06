@@ -3,10 +3,28 @@ body{
  background-color:white;
  font-family:'Montserrat', sans-serif;
 }
+
 p {
  text-align: left;
 }
 
+button{
+ border-radius: 5em;
+ padding-left: 20px;
+ padding-right: 20px;
+ padding-bottom: 5px;
+ padding-top: 5px;
+ font-size: 14px;
+ margin: 10px;
+}
+
+table {
+ border-spacing: 10px 0;
+}
+
+th, td {
+  border-bottom: 1px solid #ddd;
+}
 /* splits the screen*/
 .split {
  height: 100%;
@@ -58,30 +76,21 @@ p {
  color: #3D5A80;
  font-weight: bold; 
 }
-table {
 
-}
-th, td {
-  border-bottom: 1px solid #ddd;
-}
 .header {
 background-color: #293241;
  height: 20px;
  color: white;
  padding: 10;
 }
+
+#users-table {
+  margin: 0 auto;
+ border-spacing: 10px;
+}
 #batchs {
  margin: 0 auto;
  text-align: left;
-}
-button{
- border-radius: 5em;
- padding-left: 20px;
- padding-right: 20px;
- padding-bottom: 5px;
- padding-top: 5px;
- font-size: 14px;
- margin: 10px;
 }
 
 #checkBoxLabel {

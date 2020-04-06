@@ -12,11 +12,14 @@
   <div class="split right centered">
    <h1 class="admin-header">Reviewers</h1>
    <div class="admin-window">
-    <input class="text-field" type="text" placeholder="Username" name="username" id="add user username">
-    <input class="text-field" type="password" placeholder="Password" name="password" id="add user password">
-    <button type="" onclick="addUser()">Add user</button>
-    <input class="text-field" type="text" placeholder="Username" name="username" id="remove user username">
-    <button type="" onclick="removeUser()">Remove user</button>
+    <input class="text-field" type="text" placeholder="Identifiant" name="username" id="add user username">
+    <input class="text-field" type="password" placeholder="Mot de passe" name="password" id="add user password">
+    <br>
+    <label id="checkBoxLabel" for="admin-checkBox">Identifiant administrateur<input id="admin-checkBox" type="checkbox" name="admin"></label>
+    <button type="" onclick="addUser()">Ajouter relecteur</button>
+    <br><br>
+    <input class="text-field" type="text" placeholder="Identifiant" name="username" id="remove user username">
+    <button type="" onclick="removeUser()">Retirer relecteur</button>
    </div>
    <div class="admin-window">
     <table id="batchs" overflow="auto">

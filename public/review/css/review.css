@@ -1,86 +1,96 @@
+body {
+ font-family:'Montserrat', sans-serif;
+}
+
 button {
-  border: none;
-  color: white;
-  padding: 20px 40px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 24px;
-  display: inline-block;
-  cursor: pointer;
-  border-radius: 16px;
-  margin: 10px;
+ color: white;
+ padding: 20px 40px;
+ text-align: center;
+ text-decoration: none;
+ font-size: 24px;
+ display: inline-block;
+ cursor: pointer;
+ border-radius: 16px;
+ border: none;
+ margin: 10px;
+ font-family:'Montserrat', sans-serif;
 }
 
 #noButton {
-  background-color: #ff794d;
+ background-color: #ff794d;
 }
 
 #noButton:hover {
-  background-color: #cc3300;
+ background-color: #cc3300;
 }
 
 #yesButton {
-  background-color: #79d2a6;
+ background-color: #79d2a6;
 }
 
 #yesButton:hover {
-  background-color: #2d8659;
+ background-color: #2d8659;
 }
 
 #greatButton {
-  background-color: #e6ac00;
+ background-color: #e6ac00;
 }
 
 #greatButton:hover {
-  background-color: #997300;
+ background-color: #997300;
 }
 
 #contentDisplay {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+ display: flex;
+ align-items: center;
+ justify-content: space-around;
 }
 
 #buttonDisplay {
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: center;
+ padding: 0 auto;
+ background-color: red;
+ margin-bottom: 10px;
+ position: fixed;
+ bottom: 0;
+ display: flex;
+ justify-content: center;
+ text-align: center;
 }
 
 button:hover {
-  border: none;
-  color: white;
-  padding: 20px 40px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-  border-radius: 16px;
-  margin: 10px;
+ border: none;
+ color: white;
+ padding: 20px 40px;
+ text-align: center;
+ text-decoration: none;
+ display: inline-block;
+ cursor: pointer;
+ border-radius: 16px;
+ margin: 10px;
 }
 
 #letter {
-  font-family: verdana;
-  font-size: 150%;
-  width: 1000px;
-  height: 650px;
-  text-align: justify;
-  border: 1px solid white;
-  border-radius: 5px;
-  padding: 15px;
-  overflow: auto;
-  display : inline-block;
-  background-color: #ffffff;
+ font-family: verdana;
+ font-size: 150%;
+ width: 400;
+ height: 600;
+ text-align: justify;
+ border: 1px solid white;
+ border-radius: 5px;
+ padding: 15px;
+ overflow: auto;
+ display : inline-block;
+ background-color: #ffffff;
 }
 
 img {
-  border: 1px solid white;
-  border-radius: 5px;
-  padding: 15px;
-  background-color: #ffffff;
+ border: 1px solid white;
+ border-radius: 5px;
+ padding: 15px;
+ background-color: #ffffff;
 
 }
 
 #container {
-  background-color: #b3e6ff;
+ background-color: #b3e6ff;
 }

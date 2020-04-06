@@ -46,7 +46,8 @@ app.use(require('method-override')());
 app.use(express.static(__dirname + '/public'));
 
 app.use('/review/another_frontend', express.static(__dirname + '/review_frontend/dists/'));
-app.use(session({ secret: 'brobroskiski', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
+app.use('/admin/frontend', express.static(__dirname + '/admin_frontend/dists/'));
+
 
 app.use('/', publicRoute);
 app.use('/api', apiRoute);

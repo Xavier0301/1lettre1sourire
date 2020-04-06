@@ -35,7 +35,18 @@
       </button>
     </div>
 
-  
+    <div class="row alert alert-info" id="user_list">
+        <h1>Liste des utilisateurs</h1>
+          <div class="row" v-for="user in users" v-bind:key="user.username">
+            <div class="col-xs-4"><p>{{user.username}}</p></div>
+            <div class="col-xs-4"><strong v-if="user.isAdmin">ADMIN</strong></div>
+            <button id="approve" class="btn btn-lg btn-danger col-xs-4" v-on:click="removeUser(user.username)" :disabled="block_button">
+            Remove
+            </button>
+            <hr>
+        </div>
+    </div>
+
     <div id="login_overlay" v-bind:class="login_hide">
       <div id="login_form" class="row alert alert-info col-xs-12 
       col-xs-offset-0 col-sm-6 col-sm-offset-3">
@@ -76,6 +87,8 @@ export default {
       username: "", 
       password: "",
 
+      users: {}, 
+
       login_hide: "",
 
       login_error: "",
@@ -89,7 +102,8 @@ export default {
   mounted: function() {
     this.letter = this.loading_letter;
 
-    this.axios.defaults.baseURL = "http://localhost:3000";
+    //this.axios.defaults.baseURL = "http://localhost:3000";
+    this.axios.defaults.headers.common['X-Requested-With'] = "XMLHttpRequest";
     this.axios.defaults.withCredentials = true;
     this.axios.interceptors.response.use(
        (response) => { 
@@ -104,6 +118,7 @@ export default {
          }
          return Promise.reject(error);
        });
+      this.listUser();
   },
 
   methods: {
@@ -113,9 +128,34 @@ export default {
        this.flash_type = "info";
        this.block_button = true;
        
-       this.axios.post('/register', {username: this.register_username, password: this.register_password, passwordConf: this.register_password, isAdmin: this.register_is_admin})
+       this.axios.post('/user/register', {username: this.register_username, password: this.register_password, admin: this.register_is_admin})
          .then((response) => {
               this.flash_message = "enregistrement réussi";
+              this.flash_type = "success";
+              this.block_button = false;
+              this.listUser();
+
+         })
+         .catch((error) => {
+            console.log(error);
+            this.flash_message = error;
+            if (error.response) {
+               this.flash_message = this.flash_message + " ( " + error.response.data + " )"
+            }
+            this.flash_type = "danger";
+            this.block_button = false;
+         })
+       },
+       
+    listUser: function() {
+       this.flash_message = "chargement en cours .... ";
+       this.flash_type = "info";
+       this.block_button = true;
+       
+       this.axios.get('/user/list')
+         .then((response) => {
+              this.users=response.data;
+              this.flash_message = "OK";
               this.flash_type = "success";
               this.block_button = false;
 
@@ -130,6 +170,30 @@ export default {
             this.block_button = false;
          })
        },
+    removeUser: function(id) {
+       this.flash_message = "suppression en cours .... ";
+       this.flash_type = "info";
+       this.block_button = true;
+       
+       this.axios.post('/user/remove', {username: id})
+         .then((response) => {
+              this.flash_message = "suppression réussi";
+              this.flash_type = "success";
+              this.block_button = false;
+              this.listUser();
+
+         })
+         .catch((error) => {
+            console.log(error);
+            this.flash_message = error;
+            if (error.response) {
+               this.flash_message = this.flash_message + " ( " + error.response.data + " )"
+            }
+            this.flash_type = "danger";
+            this.block_button = false;
+         })
+       },
+
       login: function() {
           this.block_button = true;
           this.axios.post('/login', {username: this.username, password: this.password})

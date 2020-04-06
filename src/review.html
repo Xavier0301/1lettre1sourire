@@ -10,6 +10,11 @@
     <script src = "/review/js/scriptPositive.js"></script>
     <script src = "/review/js/scriptPositivePlus.js"></script>
     <script>funcFetch()</script>
+    <script>
+      function delayedFetch(){
+        setTimeout(funcFetch, 2000);
+      }
+    </script>
   </head>
 <body id = "container">
 <div id = "contentDisplay">
@@ -27,9 +32,9 @@
   </div>
 
   <div id = "buttonDisplay">
-    <button id="noButton" onclick = "postNegative()" >Refuser</button>
-    <button id = "yesButton" onclick = "postPositive();funcFetch();">Accepter</button>
-    <button id = "greatButton" onclick = "postPositivePlus();funcFetch();">Excellent</button>
+    <button id="noButton" onclick = "postNegative();delayedFetch()" >Refuser</button>
+    <button id = "yesButton" onclick = "postPositive();delayedFetch();">Accepter</button>
+    <button id = "greatButton" onclick = "postPositivePlus();delayedFetch();">Excellent</button>
   </div>
 </body>
 </html>

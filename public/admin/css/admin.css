@@ -1,0 +1,27 @@
+
+body{
+    background-color:skyblue;
+    font-family:'Ubuntu', sans-serif;
+}
+
+/* splits the screen*/
+.split {
+    height: auto;
+    width: 50%;
+    position: fixed;
+    padding-top: 20px;
+}
+
+.right {
+    right: 0;
+    background-color: ivory;
+}
+
+.left {
+    left: 0;
+    background-color: oldlace;
+}
+
+.centered {
+    text-align: center;
+}

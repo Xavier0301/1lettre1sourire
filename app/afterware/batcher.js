@@ -11,6 +11,7 @@ function handleNew(pdfPath, letter) {
     Batch.currentBatchIndex(letter.type, function(currentBatchIndex) {
         console.log(currentBatchIndex);
         if(currentBatchIndex == 0) {
+            console.log('current batch index is 0 for type ' + letter.type);
             createNewBatch(pdfPath, letter, 1);
         } else {
             Batch.numberOfLettersInBatch(currentBatchIndex, letter.type, function(batchSize) {
@@ -41,7 +42,9 @@ function createNewBatch(pdfPath, letter, batchIndex) {
     batch.downloaded = false;
 
     batch.save(function(err, result) {
-
+        if(err) {
+            console.log(err);
+        }
     })
 }
 
@@ -58,7 +61,7 @@ function addInExistingBatch(pdfPath, letter, batchIndex) {
         
     });
 
-    Batch.updateOne({ index: batchIndex }, { $inc: { letterCount : 1 } }, function(err, raw) {
+    Batch.updateOne({ index: batchIndex , type: letter.type }, { $inc: { letterCount : 1 } }, function(err, raw) {
 
     });
 }

@@ -11,11 +11,12 @@ const path = require('path');
 
 var apiRoute = require('./app/routes/letter');
 var publicRoute = require('./app/routes/public');
-var registerRoute = require('./app/routes/register');
-var loginRoute = require('./app/routes/login.js');
+var registerRoute = require('./app/routes/user/register');
+var loginRoute = require('./app/routes/user/login.js');
 var reviewRoute = require('./app/routes/review.js');
 var adminRoute = require('./app/routes/admin.js')
 var batchesRoute = require('./app/routes/batches.js');
+var userRoute = require('./app/routes/user/manage');
 
 const app = express();
 
@@ -54,6 +55,7 @@ app.use('/login', loginRoute);
 app.use('/review', reviewRoute);
 app.use('/admin', adminRoute);
 app.use('/batches', batchesRoute);
+app.use('/user', userRoute);
 
 app.use(express.static(__dirname + '/public'));
 

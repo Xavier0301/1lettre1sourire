@@ -43,4 +43,35 @@ router.post('/remove', loginReq, adminReq, function(req, res, next) {
     }
 });
 
+router.post('/register'/*, loginReq, adminReq*/, function(req, res, next) {
+    if (req.body.password !== req.body.passwordConf) {
+      var err = new Error('Passwords do not match.');
+      err.status = 400;
+      return next(err);
+    }
+
+    if (req.body.username &&
+      req.body.password &&
+      req.body.passwordConf) {
+      var userData = {
+        username: req.body.username,
+        password: req.body.password,
+        isAdmin: false
+      }
+      //use schema.create to insert data into the db
+      User.create(userData, function (err, user) {
+        if (err) {
+          return next(err);
+        } else {
+          req.session.userId = user._id;
+          return res.end('User created');
+        }
+      });
+    } else {
+      var err = new Error('All fields have to be filled out');
+      err.status = 400;
+      return next(err);
+    }
+});
+
 module.exports = router;

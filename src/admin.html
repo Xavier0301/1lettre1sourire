@@ -1,4 +1,5 @@
 <html>
+  <link rel="stylesheet" type="text/css" href="/admin/css/admin.css" media="screen">
   <head>
     <title>admin</title>
     <link rel="stylesheet" href="/admin/css/admin.css">
@@ -10,15 +11,14 @@
 
     <div class="split right centered">
       <h1>Reviewers</h1>
-      <div id="add reviwer">
-        <input class="text-field" type="text" placeholder="Username" name="username">
-        <input class="text-field" type="text" placeholder="Password" name="password">
-        <button type="" onclick="addNewReviewer()">Add reviewer</button>
+      <div>
+        <input class="text-field" type="text" placeholder="Username" name="username" id="add user username">
+        <input class="text-field" type="password" placeholder="Password" name="password" id="add user password">
+        <button type="" onclick="addUser()">Add user</button>
       </div>
-      <div id="remove reviewer">
-        <input class="text-field" type="text" placeholder="Username" name="username">
-        <input class="text-field" type="text" placeholder="Password" name="password">
-        <button type="" onclick="removeReviewer()">Remove reviewer</button>
+      <div>
+        <input class="text-field" type="text" placeholder="Username" name="username" id="remove user username">
+        <button type="" onclick="removeUser()">Remove user</button>
       </div>
       <table id="batchs" overflow="auto">
         <caption>Reviewers</caption>

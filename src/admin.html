@@ -1,260 +1,84 @@
 <html>
-  <head>
-    <title>admin</title>
-    <link rel="stylesheet" href="/admin/css/admin.css">
-    <script src="/admin/js/admin.js"></script>
-  </head>
+ <head>
+  <title>admin</title>
+  <link rel="stylesheet" href="/admin/css/admin.css">
+  <script src="/admin/js/admin.js"></script>
+ </head>
 
-  <body>
-    <div class="header"></div>
+ <body>
+  <div class="header"></div>
 
-    <div class="split right centered">
-      <h1>Reviewers</h1>
-      <div id="add reviwer">
-        <input class="text-field" type="text" placeholder="Username" name="username">
-        <input class="text-field" type="text" placeholder="Password" name="password">
-        <button type="" onclick="addNewReviewer()">Add reviewer</button>
-      </div>
-      <div id="remove reviewer">
-        <input class="text-field" type="text" placeholder="Username" name="username">
-        <input class="text-field" type="text" placeholder="Password" name="password">
-        <button type="" onclick="removeReviewer()">Remove reviewer</button>
-      </div>
-      <table id="batchs" overflow="auto">
-        <caption>Reviewers</caption>
-        <tr>
-          <th scope="col">Username</th>
-          <th scope="col">Password</th>
-          <th scope="col">Admin</th>
-        </tr>
-      </table>
-
-    </div>
+  <div class="split right centered">
+   <h1 class="admin-header">Reviewers</h1>
+   <div class="admin-window">
+    <input class="text-field" type="text" placeholder="Username" name="username" id="add user username">
+    <input class="text-field" type="password" placeholder="Password" name="password" id="add user password">
+    <button type="" onclick="addUser()">Add user</button>
+    <input class="text-field" type="text" placeholder="Username" name="username" id="remove user username">
+    <button type="" onclick="removeUser()">Remove user</button>
+   </div>
+   <div class="admin-window">
+    <table id="batchs" overflow="auto">
+     <caption>Reviewers</caption>
+     <tr>
+      <th scope="col">Username</th>
+      <th scope="col">Password</th>
+      <th scope="col">Admin</th>
+     </tr>
+    </table>
+   </div>
+  </div>
 
 
-    <div class="split left">
-      <h1>Letters</h1>
-      <div id="table-container" style="overflow:auto; height=500px;">
-      <table id="batchs">
-        <caption>Batch de lettres</caption>
-        <tr>
-          <th scope="col">Index</th>
-          <th scope="col">Type</th>
-          <th scope="col">Nombre de lettre</th>
-          <th scope="col">Deja téléchargé</th>
-          <th scope="col">Telechargement</th><!def un button telechargement dans la case, ou alors avoir une autre case dans laquelle on peut cliquer pour lancer le telechargement>
-        </tr>
-        <tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr>
-        <tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr><tr>
-          <th scope="row">F544</th>
-          <td>45</td>
-          <td>222</td>
-          <td>oui</td>
-        </tr>
-      </table>
-      </div>
-    </div>
 
-  </body>
+  <div class="split left">
+   <h1 class="admin-header">Letters</h1>
+   <div class="admin-window">
+    <p>Nombre de lettre en attente de relecture:</p>
+    <p id="review-stack-size">0</p>
+    <p>Nombre de lettre relu:</p>
+    <p id="nb-batched">0</p>
+   </div>
+   <div class="admin-window" style="overflow: auto;">
+    <table id="batchs">
+     <caption>Batch de lettres</caption>
+     <tr>
+      <th scope="col">Index</th>
+      <th scope="col">Type</th>
+      <th scope="col">Nombre de lettre</th>
+      <th scope="col">Deja téléchargé</th>
+      <th scope="col">Telechargement</th><!def un button telechargement dans la case, ou alors avoir une autre case dans laquelle on peut cliquer pour lancer le telechargement>
+     </tr>
+     <tr>
+     <th scope="row">F544</th>
+     <td>45</td>
+     <td>222</td>
+     <td>oui</td>
+     </tr><tr>
+     <th scope="row">F544</th>
+     <td>45</td>
+     <td>222</td>
+     <td>oui</td>
+     </tr><tr>
+     <th scope="row">F544</th>
+     <td>45</td>
+     <td>222</td>
+     <td>oui</td>
+     </tr><tr>
+     <th scope="row">F544</th>
+     <td>45</td>
+     <td>222</td>
+     <td>oui</td>
+     </tr><tr>
+     <th scope="row">F544</th>
+     <td>45</td>
+     <td>222</td>
+     <td>oui</td>
+     </tr>
+    </table>
+   </div>
+  </div>
+
+ </body>
 
 </html>

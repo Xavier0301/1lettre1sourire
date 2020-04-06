@@ -52,6 +52,7 @@ router.post('/approve', loginReq, function(req, res, next) {
       
    } else {
       var err = new Error('id, approve and flag are required for approving');
+      err.status = 400;
       return next(err);
    }
 });

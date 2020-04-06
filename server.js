@@ -11,7 +11,6 @@ const path = require('path');
 
 var apiRoute = require('./app/routes/letter');
 var publicRoute = require('./app/routes/public');
-var registerRoute = require('./app/routes/user/register');
 var loginRoute = require('./app/routes/user/login.js');
 var reviewRoute = require('./app/routes/review.js');
 var adminRoute = require('./app/routes/admin.js')
@@ -50,7 +49,6 @@ app.use(session({
 
 app.use('/', publicRoute);
 app.use('/api', apiRoute);
-app.use('/register', registerRoute);
 app.use('/login', loginRoute);
 app.use('/review', reviewRoute);
 app.use('/admin', adminRoute);
@@ -68,9 +66,18 @@ app.use(function (req, res, next) {
   
 // error handler
 // define as the last app.use callback
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.send(err.message);
+    if(err.status === 401) {
+        res.redirect('/');
+    } else {
+        res.send(err.message);
+    }
+});
+
+app.use(function(err, redir, req, res, next) {
+    res.status(err.status || 500);
+    res.redirect(redir);
 });
 
 // startup our app at https://localhost:3000

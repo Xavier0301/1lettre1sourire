@@ -1,6 +1,7 @@
 # node modules
 /node_modules
 /keys/trusted
+/docs
 
 # OS generated files #
 ######################

@@ -1,6 +1,7 @@
 body{
-background-color:ghostwhite;
-font-family:'Ubuntu', sans-serif;
+ background-color: #eff1f5;
+ font-family:'Montserrat';
+ color: #293241;
 }
 
 p{
@@ -9,69 +10,83 @@ p{
 }
 
 button{
-    border-radius: 5em;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    margin: 0 auto;
-    display: block;
-    font-size: 15px;
-    background-color: #336699;
-    color: white;
+ border-radius: 5em;
+ padding-left: 20px;
+ padding-right: 20px;
+ padding-bottom: 10px;
+ padding-top: 10px;
+ margin: auto;
+ display: block;
+ font-size: 15px;
+ background-color: #336699;
+ color: white;
 }
 
 button:hover{
-  border-radius: 5em;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  margin: 0 auto;
-  display: block;
-  font-size: 15px;
-  background-color: #204060;
-  color: white;
+ border-radius: 5em;
+ padding-left: 20px;
+ padding-right: 20px;
+ padding-bottom: 10px;
+ padding-top: 10px;
+ margin: 0 auto;
+ display: block;
+ font-size: 15px;
+ background-color: #204060;
+ color: white;
 }
 
 button:active {
-  border-radius: 9em;
-  padding-left: 18px;
-  padding-right: 18px;
-  padding-bottom: 9px;
-  padding-top: 5px;
-  margin: 0 auto;
-  display: block;
-  font-size: 15px;
-  background-color: #204060;
-  color: white;
+ border-radius: 9em;
+ padding-left: 18px;
+ padding-right: 18px;
+ padding-bottom: 9px;
+ padding-top: 5px;
+ margin: 0 auto;
+ display: block;
+ font-size: 15px;
+ background-color: #204060;
+ color: white;
 }
 
 #login-window{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: white;
-    border-radius: 20px;
-    width: 400px;
-    height: 250px;
-    margin: auto;
-    margin-top: 100px;
+ padding-top: 10px;
+ padding-bottom: 10px;
+ background-color: white;
+ border-radius: 20px;
+ width: 400px;
+ height: 250px;
+ margin: auto;
 
+ border-style:solid;
 }
 #login-title{
-    font-weight: bold;
-    font-size: 20;
+ font-weight: bold;
+ font-size: 20;
 }
 
 .login-field{
-    width: 76%;
-    font-weight:500;
-    font-size: 14px;
-    background: whiteSmoke;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    margin-left: 46px;
-    text-align: center;
+ width: 76%;
+ font-weight:500;
+ font-size: 14px;
+ background: whiteSmoke;
+ padding: 10px 20px;
+ border: none;
+ border-radius: 20px;
+ margin-bottom: 20px;
+ margin-left: 46px;
+ text-align: center;
+}
+
+#org-logo {
+ width:100px; 
+ padding: 20px;
+ display: block;
+ margin-left: auto;
+ margin-right: auto;
+}
+.header {
+ background-color: #293241;
+ height: 20px;
+ color: white;
+ padding: 10;
 }

@@ -61,8 +61,8 @@ function addInExistingBatch(pdfPath, letter, batchIndex) {
         
     });
 
-    Batch.updateOne({ index: batchIndex , type: letter.type }, { $inc: { letterCount : 1 } }, function(err, raw) {
-
+    Batch.updateOne({ index: batchIndex , type: letter.type }, { $inc: { letterCount : 1 }, downloaded : false }, function(err, raw) {
+ 
     });
 }
 

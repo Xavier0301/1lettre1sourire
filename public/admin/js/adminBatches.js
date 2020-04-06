@@ -1,3 +1,8 @@
+function reloadBatchList() {
+    listBatches();
+    // return false;
+}
+
 function listBatches() {
     var url = '/batches/list';
 
@@ -33,21 +38,17 @@ function populateBatchesTable(batches){
     batches.forEach(function(batch) {
         var tr = document.createElement('tr');
         const downloadedLitteral = batch.downloaded ? "Oui" : "Non";
+        const attachedUrl = formatUrl('/batches/download', {index: batch.index, type: batch.type});
+        console.log(attachedUrl);
+        const fileName = batch.type + batch.index + '.pdf';
         tr.innerHTML = '<td>' + batch.index + '</td>' +
             '<td>' + batch.type + '</td>' +
             '<td>' + batch.letterCount + '</td>' +
             '<td>' + downloadedLitteral + '</td>' + 
-            `<button type="" onClick='invoke' name='' data-arg1='${batch.type}' data-arg2='${batch.index}'>Télécharger</button>`;
+            `<a href="${attachedUrl}" title="Télécharger" download onclick='listBatches()'>Télécharger</a>`;
 
         table.appendChild(tr);
     });
-}
-
-invoke = (event) => {
-    let arg1 = event.target.getAttribute('data-arg1');
-    let arg2 = event.target.getAttribute('data-arg2');
-
-    downloadBatch(arg1, arg2);
 }
 
 function downloadBatch(type, index) {

@@ -2,7 +2,7 @@
   <link rel="stylesheet" type="text/css" href="/admin/css/admin.css" media="screen">
   <head>
     <title>admin</title>
-    <link rel="stylesheet" href="/admin/css/admin.css">
+    <link rel="stylesheet" href="/public/admin/css/admin.css">
     <script src="/admin/js/admin.js"></script>
   </head>
 
@@ -10,7 +10,7 @@
     <div class="header"></div>
 
     <div class="split right centered">
-      <h1>Reviewers</h1>
+      <h1 class="admin-header">Reviewers</h1>
       <div>
         <input class="text-field" type="text" placeholder="Username" name="username" id="add user username">
         <input class="text-field" type="password" placeholder="Password" name="password" id="add user password">
@@ -20,6 +20,8 @@
         <input class="text-field" type="text" placeholder="Username" name="username" id="remove user username">
         <button type="" onclick="removeUser()">Remove user</button>
       </div>
+        </div>
+        <div class="admin-window">
       <table id="batchs" overflow="auto">
         <caption>Reviewers</caption>
         <tr>
@@ -28,12 +30,12 @@
           <th scope="col">Admin</th>
         </tr>
       </table>
-
+        </div>
     </div>
 
 
     <div class="split left">
-      <h1>Letters</h1>
+      <h1 class="admin-header">Letters</h1>
       <div id="table-container" style="overflow:auto; height=500px;">
       <table id="batchs">
         <caption>Batch de lettres</caption>

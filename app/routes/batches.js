@@ -41,6 +41,12 @@ router.get('/download', loginReq, adminReq, function(req, res, next) {
                     res.download(filePath, function(err) {
                         if(err) {
                             console.log(err);
+                        } else {
+                            Batch.findOneAndUpdate({ index: parseInt(req.query.index), type: req.query.type }, { downloaded: true }, function(err, doc, res) {
+                                if(err) {
+                                    console.log(err);
+                                }
+                            })
                         }
                     });
                 } else {

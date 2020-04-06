@@ -92,17 +92,19 @@ export default {
   mounted: function() {
     this.letter = this.loading_letter;
 
-    this.axios.defaults.baseURL = "http://localhost:3000";
+    //this.axios.defaults.baseURL = "http://localhost:3000";
     this.axios.defaults.withCredentials = true;
+    this.axios.defaults.headers.common['X-Requested-With'] = "XMLHttpRequest";
+
     this.axios.interceptors.response.use(
        (response) => { 
-         if (401 === response.status || 302 === response.status) {
+         if (401 === response.status) {
            this.showLogin();
          }
          return response;
        }, 
        (error)    => {
-         if (error.response != undefined &&(401 === error.response.status || 302 === error.response.status)) {
+         if (error.response != undefined && 401 === error.response.status) {
            this.showLogin();
          }
          return Promise.reject(error);

@@ -4,7 +4,6 @@
     let data = {
       password: document.getElementById("password").value,
       username: document.getElementById("username").value
-
     }
 
     var myHeaders = new Headers();

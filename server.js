@@ -69,15 +69,20 @@ app.use(function (req, res, next) {
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     if(err.status === 401) {
-        res.redirect('/');
+        console.log('???');
+        return res.redirect('/');
     } else {
-        res.send(err.message);
+        return res.end(err.message);
     }
 });
 
 app.use(function(err, redir, req, res, next) {
-    res.status(err.status || 500);
-    res.redirect(redir);
+    if(redir === true) {
+        return res.redirect('/');
+    } else {
+        res.status(err.status || 500);
+        return res.end(err.message);
+    }
 });
 
 // startup our app at https://localhost:3000

@@ -18,4 +18,4 @@ function funcFetch() {
       displayLetter(contentLetter,greetingLetter,signatureLetter);
       displayImage(contentImage);
     });
-  };
+};

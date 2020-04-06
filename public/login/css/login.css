@@ -10,11 +10,12 @@ p{
 
 button{
     border-radius: 5em;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
     padding-bottom: 10px;
     padding-top: 10px;
-    margin-left: 35%;
+    margin: 0 auto;
+    display: block;
     font-size: 15px;
     background-color: #336699;
     color: white;
@@ -22,11 +23,25 @@ button{
 
 button:hover{
   border-radius: 5em;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
   padding-bottom: 10px;
   padding-top: 10px;
-  margin-left: 35%;
+  margin: 0 auto;
+  display: block;
+  font-size: 15px;
+  background-color: #204060;
+  color: white;
+}
+
+button:active {
+  border-radius: 9em;
+  padding-left: 18px;
+  padding-right: 18px;
+  padding-bottom: 9px;
+  padding-top: 5px;
+  margin: 0 auto;
+  display: block;
   font-size: 15px;
   background-color: #204060;
   color: white;

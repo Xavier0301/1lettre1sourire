@@ -12,5 +12,6 @@ The prerequisites for the installation (we will add better guidance later):
  - install PDFtk  
  - install MongoDB and have it running on the same server 
  - npm install and npm start to run the server
+ - optionally install the Eido font at https://lpc.univ-amu.fr/fr/police-caracteres-eido
  
 The server is built such that the letters should be received via a POST endpoint (located at /api/letters/add)

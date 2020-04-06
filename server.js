@@ -45,9 +45,22 @@ app.use(bodyParser.json())
 app.use(require('method-override')());
 app.use(express.static(__dirname + '/public'));
 
-app.use('/review/another_frontend', express.static(__dirname + '/review_frontend/dists/'));
-app.use('/admin/frontend', express.static(__dirname + '/admin_frontend/dists/'));
+app.use('/review/another_frontend', express.static(__dirname + '/review_frontend/dist/'));
+app.use('/admin/frontend', express.static(__dirname + '/admin_frontend/dist/'));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:8080"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
+
+//use sessions for tracking logins
+app.use(session({
+    secret: 'brobroskiski',
+    resave: true,
+    saveUninitialized: false
+  }));
 
 app.use('/', publicRoute);
 app.use('/api', apiRoute);
@@ -72,7 +85,7 @@ app.use(function(err, req, res, next) {
 
     res.status(err.status || 500);
 
-    if(err.status === 401) {
+    if(err.status === 401 && req.header('X-Requested-With') != 'XMLHttpRequest') {
         res.redirect('/');
     } else {
         res.json({'errors': {

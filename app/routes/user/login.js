@@ -11,10 +11,15 @@ router.post('/', function(req, res, next) {
         return res.end('Wrong username or password.');
       } else {
         req.session.userId = user._id;
-        if(user.isAdmin === false) {
-          return res.redirect('/review');
+        if(req.header('X-Requested-With') == 'XMLHttpRequest')  {
+          res.status(200);
+          res.end('Login Success');
         } else {
-          return res.redirect('/admin');
+          if(user.isAdmin === false) {
+            return res.redirect('/review');
+          } else {
+            return res.redirect('/admin');
+          }
         }
       }
     });

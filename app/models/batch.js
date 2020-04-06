@@ -13,8 +13,7 @@ var BatchSchema = new mongoose.Schema({
     },
     index: {
         type: Number,
-        required: true,
-        unique: true
+        required: true
     },
     letterCount: {
         type: Number,
@@ -29,9 +28,9 @@ var BatchSchema = new mongoose.Schema({
 BatchSchema.statics.numberOfLettersInBatch = function(batchIndex, type, callback) {
     return this.findOne({ index: batchIndex, type: type }, function(error, batch) {
         if(batch) {
-            return callback(batch.lettersCount);
+            callback(batch.lettersCount);
         } else {
-            return callback(0);
+            callback(0);
         }
     });
 }
@@ -45,5 +44,13 @@ BatchSchema.statics.currentBatchIndex = function(type, callback) {
         }
     });
 }
+
+BatchSchema.virtual('composedId').get(function() {
+    return `${this.type}${this.index}`;
+});
+
+BatchSchema.virtual('associatedFileName').get(function() {
+    return `${this.type}${this.index}.pdf`;
+});
 
 module.exports = mongoose.model('Batch', BatchSchema);

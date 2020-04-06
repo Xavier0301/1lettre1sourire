@@ -1,51 +1,53 @@
 
 body{
-  background-color:white;
-  font-family:'Ubuntu', sans-serif;
+ background-color:white;
+ font-family:'Ubuntu', sans-serif;
 }
 
 /* splits the screen*/
 .split {
-  height: 100%;
-  width: 50%;
-  position: fixed;
-  padding-top: 20px;
-  background-color: ghostwhite;
+ height: 100%;
+ width: 50%;
+ position: fixed;
+ padding-top: 20px;
+ background-color: ghostwhite;
 
 }
 
 .right {
-  right: 0;
+ right: 0;
 }
 
 .left {
-  left: 0;
+ left: 0;
 }
 
 .centered {
-  text-align: center;
+ text-align: center;
 }
 
 .admin-header {
-  background-color: black;
-  color: white;
-  margin: 10px 20px; 
+ background-color: black;
+ color: white;
+ margin: 10px 20px; 
+ padding: 10;
+
 }
 
 .admin-window{
-    background-color: white;
-    margin: 20px;
-    padding: 20px;
-    border-radius: 1em;
+ background-color: white;
+ margin: 20px;
+ padding: 20px;
+ border-radius: 1em;
 }
 
 button{
-    border-radius: 5em;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 5px;
-    padding-top: 5px;
-    font-size: 14px;
-    margin: 10px;
-    margin-bottom: 30px;
+ border-radius: 5em;
+ padding-left: 20px;
+ padding-right: 20px;
+ padding-bottom: 5px;
+ padding-top: 5px;
+ font-size: 14px;
+ margin: 10px;
+ margin-bottom: 30px;
 }

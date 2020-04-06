@@ -1,5 +1,5 @@
 body{
-background-color:skyblue;
+background-color:ghostwhite;
 font-family:'Ubuntu', sans-serif;
 }
 
@@ -16,8 +16,22 @@ button{
     padding-top: 10px;
     margin-left: 35%;
     font-size: 15px;
-    background-color: orange;
+    background-color: #336699;
+    color: white;
 }
+
+button:hover{
+  border-radius: 5em;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-left: 35%;
+  font-size: 15px;
+  background-color: #204060;
+  color: white;
+}
+
 #login-window{
     padding-top: 10px;
     padding-bottom: 10px;
@@ -27,7 +41,7 @@ button{
     height: 250px;
     margin: auto;
     margin-top: 100px;
-    
+
 }
 #login-title{
     font-weight: bold;

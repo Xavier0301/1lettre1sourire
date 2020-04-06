@@ -64,6 +64,9 @@ var LetterSchema = new mongoose.Schema({
     },
     batchIndex: {
         type: Number
+    },
+    inReviewSinceDate: {
+        type: Date
     }
 });
 

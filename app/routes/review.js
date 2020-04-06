@@ -14,19 +14,26 @@ router.get('/', loginReq, function(req, res) {
 });
 
 router.get('/fetch', loginReq, function(req, res) {
+
+   const errSend = (caughtErr) => {
+      console.log(caughtErr);
+      return res.send({exists: false});
+   };
    // FIND ONE THAT IS HAS APPROVAL STATUS: 'QUEUED'
    // Letter.findOne({approvalStatus: 'QUEUED'})
-   Letter.findOneAndUpdate({approvalStatus: 'Queued'}, {approvalStatus: 'In Review'}).exec(function(error, letter) {
-      if(error || !letter) {
-         console.log(error);
-         res.send({exists: false});
-         Letter.find().exec(function(error, letters) {
-            console.log(letters);
-         })
+   resolveInReviewStates(function(err) {
+      if(err) {
+         errSend(err);
       } else {
-         res.send({id: letter.id, type: letter.type, greeting: letter.heading, content: letter.content, signature: letter.signature, imageUrl: letter.imageUrl, exists: true});
-      }
-   });
+         Letter.findOneAndUpdate({approvalStatus: 'Queued'}, {approvalStatus: 'In Review', inReviewSinceDate: Date.now()}).exec(function(error, letter) {
+            if(error || !letter) {
+               errSend(error);
+            } else {
+               res.send({id: letter.id, type: letter.type, greeting: letter.heading, content: letter.content, signature: letter.signature, imageUrl: letter.imageUrl, exists: true});
+            }
+         });
+      } 
+   })
 });
 
 router.post('/approve', loginReq, function(req, res, next) {
@@ -38,13 +45,23 @@ router.post('/approve', loginReq, function(req, res, next) {
          approvalStatus: 'In Review'
       }, {
          approvalStatus: approved,
-         flagged: req.body.flag === 'true'
+         flagged: req.body.flag === 'true',
+         $unset: {
+            inReviewSinceDate: ""
+         },
+         approvedByUser: req.session.userId
       }, function(err, letter) {
          if(letter && !err) {
-            res.send(200);
+            res.sendStatus(200);
             if(approved) {
                docBuilder(letter);
             }
+
+            // User.findOneAndUpdate({ _id: req.session.userId }, { $inc: { lettersCount: 1 } }, function(err, doc, res) {
+            //    if(err) {
+            //       console.log(err);
+            //    }
+            // });
          } else {
             res.send('Could not change approval status of doc. Either because it is not in review or it does not exist.');
          }
@@ -56,5 +73,29 @@ router.post('/approve', loginReq, function(req, res, next) {
       return next(err);
    }
 });
+
+function resolveInReviewStates(callback) {
+   const fiveMinAgo = new Date( Date.now() - 1000 * 60 * 5 );
+   Letter.find({ approvalStatus: 'In Review', inReviewSinceDate: { $lte: fiveMinAgo } }, function(err, results) {
+      if(err) {
+         callback(err); 
+      } else if(!results || results.length === 0) {
+         callback();
+      } else {
+         var resultCount = 0;
+         results.map((result) => {
+            Letter.updateOne({ _id: result._id }, { approvalStatus: 'Queued' }, function(err, raw) {
+               if(err) {
+                  return callback(err);
+               } 
+               resultCount++;
+               if(resultCount === results.length) {
+                  return callback();
+               }
+            });
+         });
+      }
+   });
+}
 
 module.exports = router;

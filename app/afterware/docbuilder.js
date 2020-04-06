@@ -26,11 +26,8 @@ function handleLetterFormatting(letter) {
 
 function downloadImage(url, fileName, callback) {
     const file = fs.createWriteStream(fileName);
-    console.log('bout to dl image');
     https.get(url, function(response) {
-        console.log('got resp from serv');
         if (response.statusCode === 200) {
-            console.log('call good (200)');
             var stream = response.pipe(file);
             stream.on('finish', function() {
                 sharp(fileName).resize(600, 350, {
@@ -41,13 +38,11 @@ function downloadImage(url, fileName, callback) {
                         console.log(err);
                         callback(false);
                     } else {
-                        console.log('sharp good');
                         callback(true);
                     }
                 })
             })
         } else {
-            console.log('err req');
             file.close();
             fs.unlink(fileName, () => {}); // Delete temp file
             callback(false);
@@ -56,19 +51,7 @@ function downloadImage(url, fileName, callback) {
 }
 
 function buildDoc(letter, hasImage, callback) {
-    const doc = new docx.Document(/*{styles: {
-        paragraphStyles: [
-            {
-                id: "content",
-                name: "Content",
-                basedOn: "Normal",
-                next: "Normal",
-                run: {
-                    size: 28
-                }
-            }
-        ]
-    }}*/);
+    const doc = new docx.Document();
 
     const logoImage = docx.Media.addImage(doc, fs.readFileSync(path.resolve("org_logo.png")), 80, 80);
     const attachedImagePath = path.resolve(letter.composedId + '.jpg');
@@ -78,7 +61,6 @@ function buildDoc(letter, hasImage, callback) {
         const attachedImageFile = fs.readFileSync(attachedImagePath);
         const dimensions = sizeOf(attachedImagePath);
         const attachedImage = docx.Media.addImage(doc, attachedImageFile, dimensions.width, dimensions.height);
-        console.log('inside this bt');
         doc.addSection({
             children: [
                 new docx.Paragraph({

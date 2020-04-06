@@ -14,7 +14,11 @@ var UserSchema = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         required: true
-    }
+    }/*,
+    lettersCount: {
+        type: Number,
+        required: true
+    }*/
 });
 
 

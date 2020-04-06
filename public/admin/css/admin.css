@@ -1,7 +1,10 @@
 
 body{
  background-color:white;
- font-family:'Ubuntu', sans-serif;
+ font-family:'Montserrat', sans-serif;
+}
+p {
+ text-align: left;
 }
 
 /* splits the screen*/
@@ -10,7 +13,7 @@ body{
  width: 50%;
  position: fixed;
  padding-top: 20px;
- background-color: ghostwhite;
+ background-color: #eff1f5;
 
 }
 
@@ -27,10 +30,12 @@ body{
 }
 
 .admin-header {
- background-color: black;
+ background-color:#293241; //#3D5A80;
  color: white;
- margin: 10px 20px; 
+ margin: 10px; 
+ margin-top: 0;
  padding: 10;
+ border-radius: 0.5em;
 
 }
 
@@ -38,12 +43,30 @@ body{
  background-color: white;
  margin: 20px;
  padding: 20px;
+ border-color: #b1bbce;
+ //border-style: solid;
+ border-width: medium;
  border-radius: 1em;
 }
 .text-field {
  border-radius: 5em;
  padding: 5px;
 
+}
+.table-tittle {
+ margin: 0;
+ color: coral;
+ font-weight: bold; 
+}
+.header {
+background-color: #293241;
+ height: 20px;
+ color: white;
+ padding: 10;
+}
+#batchs {
+ margin: 0 auto;
+ text-align: left;
 }
 button{
  border-radius: 5em;

@@ -1,32 +1,32 @@
 <html>
  <head>
   <title>admin</title>
-  <link rel="stylesheet" href="/admin/css/admin.css">
+  <link rel="stylesheet" href="/public/admin/css/admin.css">
   <script src="/admin/js/admin.js"></script>
   <script> listUsers() </script>
  </head>
 
  <body>
-  <div class="header"></div>
+  <div class="header">Bienvenue dans le dashboard du back office d'1 lettre 1 sourire</div>
 
   <div class="split right centered">
-   <h1 class="admin-header">Reviewers</h1>
+   <h1 class="admin-header">UTILISATEURS</h1>
    <div class="admin-window">
     <input class="text-field" type="text" placeholder="Identifiant" name="username" id="add user username">
     <input class="text-field" type="password" placeholder="Mot de passe" name="password" id="add user password">
     <br>
     <label id="checkBoxLabel" for="admin-checkBox">Identifiant administrateur<input id="admin-checkBox" type="checkbox" name="admin"></label>
-    <button type="" onclick="addUser()">Ajouter relecteur</button>
+    <button type="" onclick="addUser()">Ajouter l'utilisateur</button>
     <br><br>
     <input class="text-field" type="text" placeholder="Identifiant" name="username" id="remove user username">
-    <button type="" onclick="removeUser()">Retirer relecteur</button>
+    <button type="" onclick="removeUser()">Retirer l'utilisateur</button>
    </div>
    <div class="admin-window">
     <table id="batchs" overflow="auto">
-     <caption>Reviewers</caption>
+     <caption>Utilisateurs</caption>
      <tr>
-      <th scope="col">Username</th>
-      <th scope="col">Admin</th>
+      <th scope="col">Identifiant</th>
+      <th scope="col">Administrateur</th>
      </tr>
     </table>
    </div>
@@ -34,17 +34,20 @@
 
 
 
-  <div class="split left">
-   <h1 class="admin-header">Letters</h1>
+  <div class="split left centered">
+   <h1 class="admin-header">LETTRES</h1>
    <div class="admin-window">
+     <p class="table-tittle" style="color: #3D5A80;">Statistiques</p>
+    <hr color="#3D5A80">
     <p>Nombre de lettre en attente de relecture:</p>
     <p id="review-stack-size">0</p>
     <p>Nombre de lettre relu:</p>
     <p id="nb-batched">0</p>
    </div>
    <div class="admin-window" style="overflow: auto;">
+    <p class="table-tittle" style="color: #3D5A80;">Batch de lettres</p>
+    <hr color="#3D5A80">
     <table id="batchs">
-     <caption>Batch de lettres</caption>
      <tr>
       <th scope="col">Index</th>
       <th scope="col">Type</th>
@@ -53,10 +56,10 @@
       <th scope="col">Telechargement</th><!def un button telechargement dans la case, ou alors avoir une autre case dans laquelle on peut cliquer pour lancer le telechargement>
      </tr>
      <tr>
-     <th scope="row">F544</th>
-     <td>45</td>
-     <td>222</td>
-     <td>oui</td>
+      <th scope="row">F544</th>
+      <td>45</td>
+      <td>222</td>
+      <td>oui</td>
      </tr><tr>
      <th scope="row">F544</th>
      <td>45</td>

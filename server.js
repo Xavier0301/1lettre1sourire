@@ -17,6 +17,7 @@ var adminRoute = require('./app/routes/admin.js')
 var batchesRoute = require('./app/routes/batches.js');
 var userRoute = require('./app/routes/user/manage');
 
+
 const app = express();
 
 const credentials = {
@@ -37,15 +38,14 @@ var db = require('./config/db');
 console.log("connecting--",db);
 mongoose.connect(db.url); //Mongoose connection created
 
+app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-//use sessions for tracking logins
-app.use(session({
-    secret: 'brobroskiski',
-    resave: true,
-    saveUninitialized: false
-  }));
+app.use(require('method-override')());
+app.use(express.static(__dirname + '/public'));
+
+app.use(session({ secret: 'brobroskiski', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
 
 app.use('/', publicRoute);
 app.use('/api', apiRoute);
@@ -55,7 +55,7 @@ app.use('/admin', adminRoute);
 app.use('/batches', batchesRoute);
 app.use('/user', userRoute);
 
-app.use(express.static(__dirname + '/public'));
+// app.use(express.static(__dirname + '/public'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -63,25 +63,20 @@ app.use(function (req, res, next) {
     err.status = 404;
     next(err);
 });
-  
-// error handler
-// define as the last app.use callback
+
 app.use(function(err, req, res, next) {
+    console.log(err.stack);
+
     res.status(err.status || 500);
+
     if(err.status === 401) {
         console.log('???');
-        return res.redirect('/');
+        res.redirect('/');
     } else {
-        return res.end(err.message);
-    }
-});
-
-app.use(function(err, redir, req, res, next) {
-    if(redir === true) {
-        return res.redirect('/');
-    } else {
-        res.status(err.status || 500);
-        return res.end(err.message);
+        res.json({'errors': {
+            message: err.message,
+            error: err
+        }});
     }
 });
 

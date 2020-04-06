@@ -10,13 +10,22 @@
  <body>
   <div class="header">Login 1 lettre 1 sourire</div>
   <img id="org-logo" src="/org_logo.png" alt="logo 1 lettre 1 sourire">
-  
+
   <div id="login-window">
    <p id="login-title">1 Lettre 1 Sourire</p>
    <p>Connectez-vous pour accéder aux lettres.</p>
    <input class="login-field" type="text" placeholder="Identifiant" id="username" required>
    <input class="login-field" type="password" placeholder="Mot de passe" id="password" required>
-   <button type="login" onclick = "funcLogin()">Se connecter</button>
+   <button id = "logButton" type="login" onclick = "funcLogin()">Se connecter</button>
+   <script>
+     var input = document.getElementById("password");
+     input.addEventListener("keyup", function(event){
+       if(event.keyCode === 13){
+         event.preventDefault();
+         document.getElementById("logButton").click();
+       }
+     });
+   </script>
    <p id="login-error-message"></p>
   </div>
 

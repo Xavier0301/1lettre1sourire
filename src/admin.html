@@ -4,9 +4,20 @@
   <link rel="stylesheet" href="/admin/css/admin.css">
   <script src="/admin/js/adminUsers.js"></script>
   <script src="/admin/js/adminBatches.js"></script>
-  <script> 
+  <script>
     listUsers();
     listBatches();
+  </script>
+  <script>
+    function enterTrigger(inputId, buttonId) {
+      var input = document.getElementById(inputId);
+      input.addEventListener("keyup", function(event){
+        if(event.keyCode === 13){
+          event.preventDefault();
+          document.getElementById(buttonId).click();
+        }
+      });
+    }
   </script>
  </head>
 
@@ -23,13 +34,15 @@
     <input class="text-field" type="password" placeholder="Mot de passe" name="password" id="add user password">
     <br>
     <label id="checkBoxLabel" for="admin-checkBox">admin<input id="admin-checkBox" type="checkbox" name="admin"></label>
-    <button type="" onclick="addUser()">Ajouter</button>
+    <button id = "addButton" type="" onclick="addUser()">Ajouter</button>
+    <script>enterTrigger("add user password", "addButton")</script>
     <br><br>
 
     <input class="text-field" type="text" placeholder="Identifiant" name="username" id="remove user username">
-    <button type="" onclick="removeUser()">Supprimer</button>
+    <button id = "removeButton" type="" onclick="removeUser()">Supprimer</button>
+    <script>enterTrigger("remove user username", "removeButton")</script>
    </div>
-   
+
    <div class="admin-window">
     <p class="table-tittle">Utilisateurs</p>
     <hr color="#3D5A80">
@@ -49,7 +62,7 @@
     <hr color="#3D5A80">
     <p>Nombre de lettre en attente de relecture:</p>
     <p id="review-stack-size">0</p>
-    <p>Nombre de lettre relu:</p>
+    <p>Nombre de lettre relue:</p>
     <p id="nb-batched">0</p>
    </div>
    <div class="admin-window" style="overflow: auto;">

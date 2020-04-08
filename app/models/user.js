@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const logger = require('log4js').getLogger('runtime');
 
 const UserSchema = new mongoose.Schema({
     username: {
@@ -26,6 +27,7 @@ UserSchema.statics.authenticate = function (username, password, callback) {
     this.findOne({ username: username })
         .exec(function (err, user) {
         if (err) {
+            logger.error(err);
             return callback(err)
         } else if (!user) {
             var err = new Error('User not found.');

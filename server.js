@@ -3,6 +3,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const morgan = require('morgan');
+const rfs = require('rotating-file-stream')
+const log4js = require('log4js');
+// const agenda = require('./app/afterware/agenda');
 
 const https = require('https');
 const http = require('http');
@@ -20,24 +24,62 @@ const statsRoute = require('./app/routes/stats');
 
 const app = express();
 
-const credentials = {
-    key: fs.readFileSync('./keys/privkey.pem', 'utf8'),
-    cert: fs.readFileSync('./keys/fullchain.pem', 'utf8')
-};
-   
-const httpServer = http.createServer(app);
+console.log('hey');
+console.log(process.env.NODE_ENV);
+
+const env = process.env.NODE_ENV;
+function getCredentials() {
+    if(env === 'production') {
+        return {
+            key: fs.readFileSync('/etc/letsencrypt/live/review1l1s.org/privkey.pem', 'utf8'),
+            cert: fs.readFileSync('/etc/letsencrypt/live/review1l1s.org/fullchain.pem', 'utf8')
+        };
+    } else {
+        return {
+            key: fs.readFileSync('./keys/privkey.pem', 'utf8'),
+            cert: fs.readFileSync('./keys/fullchain.pem', 'utf8')
+        };
+    }
+}
+const credentials = getCredentials();
 const httpsServer = https.createServer(credentials, app);
+
+const httpServer = http.createServer(app);
 
 // set our port
 const httpPort = 3000;
 const httpsPort = 3080;
 // configuration ===========================================
 
+// logger
+
+log4js.configure({
+    appenders: { runtime: { type: 'file', filename: 'runtime.log' } },
+    categories: { default: { appenders: ['runtime'], level: 'error' } }
+});
+const logger = log4js.getLogger('runtime');
+
 // mongoose
 const dbConf = require('./config/db');
 mongoose.connect(dbConf.url, dbConf.options); 
 
-app.use(require('morgan')('dev'));
+// agenda
+
+// agenda.init();
+
+// create a rotating write stream
+if(env === 'production') {
+    var accessLogStream = rfs.createStream('access.log', {
+        interval: '1d', // rotate daily
+        path: path.join(__dirname, 'log')
+    })
+
+    var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+    app.use(morgan('combined', { stream: accessLogStream }))
+} else {
+    app.use(morgan('dev'));
+}
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
@@ -64,8 +106,6 @@ app.use(function (req, res, next) {
 });
 
 app.use(function(err, req, res, next) {
-    console.log(err.stack);
-
     res.status(err.status || 500);
 
     res.json({'errors': {
@@ -75,10 +115,9 @@ app.use(function(err, req, res, next) {
 });
 
 // startup our app at https://localhost:3000
-httpServer.listen(httpPort, () => {
-    console.log(`Listening on port ${httpPort}!`);
-    console.log(process.version);
-});
-httpsServer.listen(httpsPort, () => console.log(`Listening on port ${httpsPort}!`));
+httpsServer.listen(httpsPort, () => logger.info("https server started listening."));
+if(env !== 'production') {
+    httpServer.listen(httpPort, () => console.log("http server started listening"));
+}
 
 module.exports = app;

@@ -6,19 +6,22 @@ const apikeyReq = require('../middleware/apikeyReq');
 
 router.get('/list', apikeyReq, function(req, res) {
    Letter.model.find(function(err, letters) {
-      if (err)
+      if(err) {
          res.send(err);
-      res.json(letters); // return all letters in JSON format
+      } else { 
+         res.json(letters); 
+      }
    });
 });
 
 router.post('/add', apikeyReq, function (req, res, next) {
    var letter = getLetterFromBody(req.body);
    letter.save(function(err) {
-      if (err)
+      if(err) {
          res.send(err);
-      else 
+      } else {
          res.json({ message: 'letter added' });
+      }
    });
  });
 

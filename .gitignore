@@ -1,9 +1,11 @@
 # node modules
 /node_modules
+
 /keys
 /docs
 /config/api.js
 /config/db.js
+access.log
 
 # OS generated files #
 ######################

@@ -1,0 +1,473 @@
+[2020-04-08T08:16:22.367] [ERROR] runtime - https server started listening.
+[2020-04-08T08:46:08.646] [ERROR] runtime - https server started listening.
+[2020-04-08T08:46:25.206] [ERROR] runtime - https server started listening.
+[2020-04-08T08:46:27.406] [ERROR] runtime - https server started listening.
+[2020-04-08T08:46:30.030] [ERROR] runtime - https server started listening.
+[2020-04-08T08:46:39.761] [ERROR] runtime - https server started listening.
+[2020-04-08T08:46:50.355] [ERROR] runtime - https server started listening.
+[2020-04-08T08:46:51.555] [ERROR] runtime - https server started listening.
+[2020-04-08T08:46:59.555] [ERROR] runtime - https server started listening.
+[2020-04-08T08:47:02.238] [ERROR] runtime - https server started listening.
+[2020-04-08T08:49:54.171] [ERROR] runtime - null
+[2020-04-08T08:49:55.944] [FATAL] runtime - PDF MERGING ERROR!
+[2020-04-08T08:49:55.944] [ERROR] runtime - [Error: ENOENT: no such file or directory, open '/var/folders/l8/6nc268_11kvd3t_6yywjxwfr0000gn/T/libreofficeConvert202038-15036-13bve0g.h22o/source..pdf'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/folders/l8/6nc268_11kvd3t_6yywjxwfr0000gn/T/libreofficeConvert202038-15036-13bve0g.h22o/source..pdf'
+}
+[2020-04-08T08:49:58.109] [FATAL] runtime - PDF MERGING ERROR!
+[2020-04-08T08:49:58.109] [ERROR] runtime - [Error: ENOENT: no such file or directory, open '/var/folders/l8/6nc268_11kvd3t_6yywjxwfr0000gn/T/libreofficeConvert202038-15036-k29bws.r0mnc/source..pdf'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/folders/l8/6nc268_11kvd3t_6yywjxwfr0000gn/T/libreofficeConvert202038-15036-k29bws.r0mnc/source..pdf'
+}
+[2020-04-08T08:49:58.199] [FATAL] runtime - PDF MERGING ERROR!
+[2020-04-08T08:49:58.199] [ERROR] runtime - [Error: ENOENT: no such file or directory, open '/var/folders/l8/6nc268_11kvd3t_6yywjxwfr0000gn/T/libreofficeConvert202038-15036-3bs25b.yenw7/source..pdf'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/var/folders/l8/6nc268_11kvd3t_6yywjxwfr0000gn/T/libreofficeConvert202038-15036-3bs25b.yenw7/source..pdf'
+}
+[2020-04-08T08:53:35.729] [ERROR] runtime - https server started listening.
+[2020-04-08T08:53:41.712] [ERROR] runtime - https server started listening.
+[2020-04-08T08:54:04.677] [ERROR] runtime - https server started listening.
+[2020-04-08T08:54:05.514] [ERROR] runtime - https server started listening.
+[2020-04-08T08:54:08.287] [ERROR] runtime - https server started listening.
+[2020-04-08T08:54:11.552] [ERROR] runtime - https server started listening.
+[2020-04-08T08:54:27.983] [ERROR] runtime - https server started listening.
+[2020-04-08T08:54:31.962] [ERROR] runtime - https server started listening.
+[2020-04-08T08:54:36.609] [ERROR] runtime - https server started listening.
+[2020-04-08T08:58:30.020] [ERROR] runtime - https server started listening.
+[2020-04-08T08:59:59.032] [ERROR] runtime - https server started listening.
+[2020-04-08T08:59:59.968] [ERROR] runtime - https server started listening.
+[2020-04-08T09:00:12.392] [ERROR] runtime - https server started listening.
+[2020-04-08T09:00:14.255] [ERROR] runtime - https server started listening.
+[2020-04-08T09:00:16.208] [ERROR] runtime - https server started listening.
+[2020-04-08T09:00:17.697] [ERROR] runtime - https server started listening.
+[2020-04-08T09:00:54.295] [ERROR] runtime - https server started listening.
+[2020-04-08T09:00:55.982] [ERROR] runtime - https server started listening.
+[2020-04-08T09:01:04.217] [ERROR] runtime - https server started listening.
+[2020-04-08T09:01:11.930] [ERROR] runtime - https server started listening.
+[2020-04-08T09:01:18.474] [ERROR] runtime - https server started listening.
+[2020-04-08T09:01:23.891] [ERROR] runtime - https server started listening.
+[2020-04-08T09:01:26.955] [ERROR] runtime - https server started listening.
+[2020-04-08T09:01:36.736] [ERROR] runtime - https server started listening.
+[2020-04-08T09:01:44.589] [ERROR] runtime - https server started listening.
+[2020-04-08T09:05:05.116] [ERROR] runtime - https server started listening.
+[2020-04-08T09:05:27.658] [ERROR] runtime - https server started listening.
+[2020-04-08T09:05:37.320] [ERROR] runtime - https server started listening.
+[2020-04-08T09:05:38.568] [ERROR] runtime - https server started listening.
+[2020-04-08T09:05:44.372] [ERROR] runtime - https server started listening.
+[2020-04-08T09:06:37.369] [ERROR] runtime - https server started listening.
+[2020-04-08T09:06:52.114] [ERROR] runtime - https server started listening.
+[2020-04-08T09:06:55.513] [ERROR] runtime - https server started listening.
+[2020-04-08T09:06:58.164] [ERROR] runtime - https server started listening.
+[2020-04-08T09:07:11.563] [ERROR] runtime - https server started listening.
+[2020-04-08T09:07:14.263] [ERROR] runtime - https server started listening.
+[2020-04-08T09:07:20.313] [ERROR] runtime - https server started listening.
+[2020-04-08T09:07:21.724] [ERROR] runtime - https server started listening.
+[2020-04-08T09:07:26.763] [ERROR] runtime - https server started listening.
+[2020-04-08T09:07:31.539] [ERROR] runtime - https server started listening.
+[2020-04-08T09:07:48.912] [ERROR] runtime - https server started listening.
+[2020-04-08T09:07:52.416] [ERROR] runtime - https server started listening.
+[2020-04-08T09:07:57.462] [ERROR] runtime - https server started listening.
+[2020-04-08T09:07:58.124] [ERROR] runtime - https server started listening.
+[2020-04-08T09:08:14.962] [ERROR] runtime - https server started listening.
+[2020-04-08T09:08:27.313] [ERROR] runtime - https server started listening.
+[2020-04-08T09:08:47.967] [ERROR] runtime - https server started listening.
+[2020-04-08T09:08:50.159] [ERROR] runtime - https server started listening.
+[2020-04-08T09:09:02.034] [ERROR] runtime - https server started listening.
+[2020-04-08T09:10:02.927] [ERROR] runtime - https server started listening.
+[2020-04-08T09:14:04.045] [ERROR] runtime - https server started listening.
+[2020-04-08T09:14:08.541] [ERROR] runtime - https server started listening.
+[2020-04-08T09:14:13.609] [ERROR] runtime - https server started listening.
+[2020-04-08T09:14:23.934] [ERROR] runtime - https server started listening.
+[2020-04-08T09:14:26.435] [ERROR] runtime - https server started listening.
+[2020-04-08T09:14:30.769] [ERROR] runtime - https server started listening.
+[2020-04-08T09:14:42.894] [ERROR] runtime - https server started listening.
+[2020-04-08T09:14:49.147] [ERROR] runtime - https server started listening.
+[2020-04-08T09:14:51.798] [ERROR] runtime - https server started listening.
+[2020-04-08T09:14:53.860] [ERROR] runtime - https server started listening.
+[2020-04-08T09:15:06.716] [ERROR] runtime - https server started listening.
+[2020-04-08T09:15:39.714] [ERROR] runtime - https server started listening.
+[2020-04-08T09:16:21.817] [ERROR] runtime - https server started listening.
+[2020-04-08T09:17:02.780] [ERROR] runtime - https server started listening.
+[2020-04-08T09:17:38.866] [ERROR] runtime - null
+[2020-04-08T09:18:13.304] [ERROR] runtime - https server started listening.
+[2020-04-08T09:18:37.227] [ERROR] runtime - null
+[2020-04-08T09:19:01.773] [ERROR] runtime - null
+[2020-04-08T09:19:02.087] [ERROR] runtime - null
+[2020-04-08T09:19:46.120] [ERROR] runtime - https server started listening.
+[2020-04-08T09:19:56.514] [ERROR] runtime - https server started listening.
+[2020-04-08T09:20:08.646] [ERROR] runtime - https server started listening.
+[2020-04-08T09:20:22.021] [ERROR] runtime - https server started listening.
+[2020-04-08T09:20:25.085] [ERROR] runtime - https server started listening.
+[2020-04-08T09:20:42.108] [ERROR] runtime - null
+[2020-04-08T09:51:39.089] [ERROR] runtime - https server started listening.
+[2020-04-08T09:52:48.167] [ERROR] runtime - https server started listening.
+[2020-04-08T09:52:49.599] [ERROR] runtime - https server started listening.
+[2020-04-08T09:53:20.367] [ERROR] runtime - null
+[2020-04-08T09:53:37.968] [ERROR] runtime - https server started listening.
+[2020-04-08T09:53:41.144] [ERROR] runtime - https server started listening.
+[2020-04-08T09:54:13.715] [ERROR] runtime - https server started listening.
+[2020-04-08T09:54:14.581] [ERROR] runtime - https server started listening.
+[2020-04-08T09:58:35.773] [ERROR] runtime - https server started listening.
+[2020-04-08T10:00:54.086] [ERROR] runtime - https server started listening.
+[2020-04-08T10:00:55.012] [ERROR] runtime - https server started listening.
+[2020-04-08T10:00:58.548] [ERROR] runtime - https server started listening.
+[2020-04-08T10:01:00.214] [ERROR] runtime - https server started listening.
+[2020-04-08T10:01:01.097] [ERROR] runtime - https server started listening.
+[2020-04-08T10:01:02.807] [ERROR] runtime - https server started listening.
+[2020-04-08T10:01:34.117] [ERROR] runtime - https server started listening.
+[2020-04-08T10:01:43.771] [ERROR] runtime - https server started listening.
+[2020-04-08T10:01:45.384] [ERROR] runtime - https server started listening.
+[2020-04-08T10:02:04.664] [ERROR] runtime - https server started listening.
+[2020-04-08T10:03:15.604] [ERROR] runtime - https server started listening.
+[2020-04-08T10:03:52.000] [ERROR] runtime - https server started listening.
+[2020-04-08T10:04:00.630] [ERROR] runtime - https server started listening.
+[2020-04-08T10:05:12.326] [ERROR] runtime - https server started listening.
+[2020-04-08T10:05:25.957] [ERROR] runtime - https server started listening.
+[2020-04-08T10:05:59.477] [ERROR] runtime - null
+[2020-04-08T10:10:19.066] [ERROR] runtime - https server started listening.
+[2020-04-08T10:10:22.183] [ERROR] runtime - https server started listening.
+[2020-04-08T10:10:48.087] [ERROR] runtime - null
+[2020-04-08T10:11:06.480] [ERROR] runtime - https server started listening.
+[2020-04-08T10:12:38.822] [ERROR] runtime - https server started listening.
+[2020-04-08T10:13:21.538] [ERROR] runtime - https server started listening.
+[2020-04-08T10:13:36.574] [ERROR] runtime - https server started listening.
+[2020-04-08T10:13:39.409] [ERROR] runtime - https server started listening.
+[2020-04-08T10:13:43.655] [ERROR] runtime - https server started listening.
+[2020-04-08T10:13:47.465] [ERROR] runtime - https server started listening.
+[2020-04-08T10:14:02.969] [ERROR] runtime - https server started listening.
+[2020-04-08T10:14:08.894] [ERROR] runtime - https server started listening.
+[2020-04-08T10:14:19.036] [ERROR] runtime - https server started listening.
+[2020-04-08T10:14:21.161] [ERROR] runtime - https server started listening.
+[2020-04-08T10:14:27.486] [ERROR] runtime - https server started listening.
+[2020-04-08T10:15:09.293] [ERROR] runtime - https server started listening.
+[2020-04-08T10:15:55.534] [ERROR] runtime - https server started listening.
+[2020-04-08T10:15:59.129] [ERROR] runtime - https server started listening.
+[2020-04-08T10:16:00.864] [ERROR] runtime - https server started listening.
+[2020-04-08T10:16:07.400] [ERROR] runtime - https server started listening.
+[2020-04-08T10:16:15.746] [ERROR] runtime - https server started listening.
+[2020-04-08T10:16:21.362] [ERROR] runtime - https server started listening.
+[2020-04-08T10:16:22.255] [ERROR] runtime - https server started listening.
+[2020-04-08T10:16:39.846] [ERROR] runtime - https server started listening.
+[2020-04-08T10:16:58.310] [ERROR] runtime - https server started listening.
+[2020-04-08T10:17:03.478] [ERROR] runtime - https server started listening.
+[2020-04-08T10:17:09.549] [ERROR] runtime - https server started listening.
+[2020-04-08T10:17:11.575] [ERROR] runtime - https server started listening.
+[2020-04-08T10:17:12.667] [ERROR] runtime - https server started listening.
+[2020-04-08T10:17:26.249] [ERROR] runtime - https server started listening.
+[2020-04-08T10:17:32.319] [ERROR] runtime - https server started listening.
+[2020-04-08T10:17:33.550] [ERROR] runtime - https server started listening.
+[2020-04-08T10:17:51.083] [ERROR] runtime - https server started listening.
+[2020-04-08T10:17:54.333] [ERROR] runtime - https server started listening.
+[2020-04-08T10:18:02.820] [ERROR] runtime - https server started listening.
+[2020-04-08T10:18:48.459] [ERROR] runtime - https server started listening.
+[2020-04-08T10:18:50.478] [ERROR] runtime - https server started listening.
+[2020-04-08T10:18:57.440] [ERROR] runtime - https server started listening.
+[2020-04-08T10:19:04.001] [ERROR] runtime - https server started listening.
+[2020-04-08T10:19:05.980] [ERROR] runtime - https server started listening.
+[2020-04-08T10:19:10.539] [ERROR] runtime - https server started listening.
+[2020-04-08T10:21:01.340] [ERROR] runtime - https server started listening.
+[2020-04-08T10:22:14.726] [ERROR] runtime - https server started listening.
+[2020-04-08T10:22:45.356] [ERROR] runtime - https server started listening.
+[2020-04-08T10:23:21.237] [ERROR] runtime - https server started listening.
+[2020-04-08T10:23:53.119] [ERROR] runtime - https server started listening.
+[2020-04-08T10:23:53.802] [ERROR] runtime - https server started listening.
+[2020-04-08T10:24:02.392] [ERROR] runtime - https server started listening.
+[2020-04-08T10:24:37.463] [ERROR] runtime - https server started listening.
+[2020-04-08T10:31:49.612] [ERROR] runtime - https server started listening.
+[2020-04-08T10:31:55.298] [ERROR] runtime - https server started listening.
+[2020-04-08T10:31:57.343] [ERROR] runtime - https server started listening.
+[2020-04-08T10:32:01.701] [ERROR] runtime - https server started listening.
+[2020-04-08T10:32:02.673] [ERROR] runtime - https server started listening.
+[2020-04-08T10:32:08.082] [ERROR] runtime - https server started listening.
+[2020-04-08T10:32:11.630] [ERROR] runtime - https server started listening.
+[2020-04-08T10:32:18.729] [ERROR] runtime - https server started listening.
+[2020-04-08T10:33:36.200] [ERROR] runtime - https server started listening.
+[2020-04-08T10:34:06.850] [ERROR] runtime - https server started listening.
+[2020-04-08T10:34:15.405] [ERROR] runtime - https server started listening.
+[2020-04-08T10:34:47.940] [ERROR] runtime - https server started listening.
+[2020-04-08T10:36:51.911] [ERROR] runtime - https server started listening.
+[2020-04-08T10:37:00.302] [ERROR] runtime - https server started listening.
+[2020-04-08T10:37:45.611] [ERROR] runtime - https server started listening.
+[2020-04-08T10:38:12.196] [ERROR] runtime - https server started listening.
+[2020-04-08T10:38:13.346] [ERROR] runtime - https server started listening.
+[2020-04-08T10:38:46.982] [ERROR] runtime - https server started listening.
+[2020-04-08T10:38:57.703] [ERROR] runtime - https server started listening.
+[2020-04-08T10:40:47.188] [ERROR] runtime - https server started listening.
+[2020-04-08T10:41:03.236] [ERROR] runtime - https server started listening.
+[2020-04-08T10:41:07.528] [ERROR] runtime - https server started listening.
+[2020-04-08T10:42:51.141] [ERROR] runtime - https server started listening.
+[2020-04-08T10:50:39.346] [ERROR] runtime - https server started listening.
+[2020-04-08T11:00:47.844] [ERROR] runtime - https server started listening.
+[2020-04-08T11:00:53.530] [ERROR] runtime - https server started listening.
+[2020-04-08T11:00:56.124] [ERROR] runtime - Error [ValidationError]: Batch validation failed: type: Path `type` is required.
+    at ValidationError.inspect (/Users/xavier/Desktop/Lauzhack/1l1s-bs/node_modules/mongoose/lib/error/validation.js:61:24)
+    at formatValue (internal/util/inspect.js:709:31)
+    at inspect (internal/util/inspect.js:280:10)
+    at formatWithOptionsInternal (internal/util/inspect.js:1886:40)
+    at Object.format (internal/util/inspect.js:1762:10)
+    at basicLayout (/Users/xavier/Desktop/Lauzhack/1l1s-bs/node_modules/log4js/lib/layouts.js:62:57)
+    at app (/Users/xavier/Desktop/Lauzhack/1l1s-bs/node_modules/log4js/lib/appenders/file.js:56:23)
+    at /Users/xavier/Desktop/Lauzhack/1l1s-bs/node_modules/log4js/lib/log4js.js:42:5
+    at Array.forEach (<anonymous>)
+    at sendLogEventToAppender (/Users/xavier/Desktop/Lauzhack/1l1s-bs/node_modules/log4js/lib/log4js.js:41:21)
+    at /Users/xavier/Desktop/Lauzhack/1l1s-bs/node_modules/log4js/lib/clustering.js:23:26
+    at Array.forEach (<anonymous>)
+    at sendToListeners (/Users/xavier/Desktop/Lauzhack/1l1s-bs/node_modules/log4js/lib/clustering.js:23:13)
+    at Object.send (/Users/xavier/Desktop/Lauzhack/1l1s-bs/node_modules/log4js/lib/clustering.js:89:7)
+    at Logger._log (/Users/xavier/Desktop/Lauzhack/1l1s-bs/node_modules/log4js/lib/logger.js:90:16)
+    at Logger.log (/Users/xavier/Desktop/Lauzhack/1l1s-bs/node_modules/log4js/lib/logger.js:73:12) {
+  errors: {
+    type: MongooseError [ValidatorError]: Path `type` is required.
+        at new ValidatorError (/Users/xavier/Desktop/Lauzhack/1l1s-bs/node_modules/mongoose/lib/error/validator.js:29:11)
+        at validate (/Users/xavier/Desktop/Lauzhack/1l1s-bs/node_modules/mongoose/lib/schematype.js:1096:13)
+        at /Users/xavier/Desktop/Lauzhack/1l1s-bs/node_modules/mongoose/lib/schematype.js:1150:11
+        at Array.forEach (<anonymous>)
+        at SchemaString.SchemaType.doValidate (/Users/xavier/Desktop/Lauzhack/1l1s-bs/node_modules/mongoose/lib/schematype.js:1105:14)
+        at /Users/xavier/Desktop/Lauzhack/1l1s-bs/node_modules/mongoose/lib/document.js:2366:9
+        at processTicksAndRejections (internal/process/task_queues.js:79:11) {
+      message: 'Path `type` is required.',
+      name: 'ValidatorError',
+      properties: [Object],
+      kind: 'required',
+      path: 'type',
+      value: undefined,
+      reason: undefined,
+      [Symbol(mongoose:validatorError)]: true
+    }
+  },
+  _message: 'Batch validation failed',
+  name: 'ValidationError'
+}
+[2020-04-08T11:01:25.718] [ERROR] runtime - https server started listening.
+[2020-04-08T11:03:14.199] [ERROR] runtime - https server started listening.
+[2020-04-08T11:03:27.978] [ERROR] runtime - https server started listening.
+[2020-04-08T11:03:44.648] [ERROR] runtime - https server started listening.
+[2020-04-08T11:04:39.887] [ERROR] runtime - https server started listening.
+[2020-04-08T11:04:40.997] [ERROR] runtime - https server started listening.
+[2020-04-08T11:04:45.665] [ERROR] runtime - https server started listening.
+[2020-04-08T11:06:11.049] [ERROR] runtime - https server started listening.
+[2020-04-08T11:06:15.486] [ERROR] runtime - https server started listening.
+[2020-04-08T11:08:05.458] [ERROR] runtime - https server started listening.
+[2020-04-08T11:08:09.041] [ERROR] runtime - https server started listening.
+[2020-04-08T11:08:25.664] [ERROR] runtime - https server started listening.
+[2020-04-08T11:08:39.180] [ERROR] runtime - https server started listening.
+[2020-04-08T11:17:41.935] [ERROR] runtime - https server started listening.
+[2020-04-08T11:17:43.382] [ERROR] runtime - https server started listening.
+[2020-04-08T11:17:50.982] [ERROR] runtime - https server started listening.
+[2020-04-08T11:18:23.006] [ERROR] runtime - https server started listening.
+[2020-04-08T11:18:29.621] [ERROR] runtime - https server started listening.
+[2020-04-08T11:18:34.602] [ERROR] runtime - https server started listening.
+[2020-04-08T11:19:20.782] [ERROR] runtime - null
+[2020-04-08T11:19:21.373] [ERROR] runtime - null
+[2020-04-08T11:19:45.427] [ERROR] runtime - https server started listening.
+[2020-04-08T11:19:47.190] [ERROR] runtime - https server started listening.
+[2020-04-08T11:19:50.105] [ERROR] runtime - https server started listening.
+[2020-04-08T11:20:30.332] [ERROR] runtime - https server started listening.
+[2020-04-08T11:21:12.447] [ERROR] runtime - https server started listening.
+[2020-04-08T11:23:25.609] [ERROR] runtime - https server started listening.
+[2020-04-08T11:23:32.489] [ERROR] runtime - https server started listening.
+[2020-04-08T11:23:33.664] [ERROR] runtime - https server started listening.
+[2020-04-08T11:23:37.825] [ERROR] runtime - https server started listening.
+[2020-04-08T11:23:41.454] [ERROR] runtime - https server started listening.
+[2020-04-08T11:24:08.464] [ERROR] runtime - https server started listening.
+[2020-04-08T11:24:13.748] [ERROR] runtime - https server started listening.
+[2020-04-08T11:24:18.099] [ERROR] runtime - https server started listening.
+[2020-04-08T11:24:32.277] [ERROR] runtime - https server started listening.
+[2020-04-08T11:24:34.274] [ERROR] runtime - https server started listening.
+[2020-04-08T11:24:50.949] [ERROR] runtime - https server started listening.
+[2020-04-08T11:25:00.502] [ERROR] runtime - https server started listening.
+[2020-04-08T11:28:14.182] [ERROR] runtime - https server started listening.
+[2020-04-08T11:28:20.601] [ERROR] runtime - https server started listening.
+[2020-04-08T11:28:33.719] [ERROR] runtime - https server started listening.
+[2020-04-08T11:28:38.351] [ERROR] runtime - https server started listening.
+[2020-04-08T11:34:18.867] [ERROR] runtime - https server started listening.
+[2020-04-08T11:35:29.584] [ERROR] runtime - https server started listening.
+[2020-04-08T11:36:14.255] [ERROR] runtime - https server started listening.
+[2020-04-08T11:36:48.291] [ERROR] runtime - https server started listening.
+[2020-04-08T11:36:53.297] [ERROR] runtime - https server started listening.
+[2020-04-08T11:36:58.946] [ERROR] runtime - https server started listening.
+[2020-04-08T11:37:00.069] [ERROR] runtime - https server started listening.
+[2020-04-08T11:40:16.300] [ERROR] runtime - https server started listening.
+[2020-04-08T11:40:52.700] [ERROR] runtime - null
+[2020-04-08T11:41:30.442] [ERROR] runtime - https server started listening.
+[2020-04-08T11:41:32.339] [ERROR] runtime - https server started listening.
+[2020-04-08T11:44:57.140] [ERROR] runtime - https server started listening.
+[2020-04-08T11:45:48.409] [ERROR] runtime - https server started listening.
+[2020-04-08T11:46:04.121] [ERROR] runtime - https server started listening.
+[2020-04-08T11:46:19.594] [ERROR] runtime - https server started listening.
+[2020-04-08T11:46:27.719] [ERROR] runtime - https server started listening.
+[2020-04-08T11:46:28.379] [ERROR] runtime - https server started listening.
+[2020-04-08T11:46:32.651] [ERROR] runtime - https server started listening.
+[2020-04-08T11:46:34.724] [ERROR] runtime - https server started listening.
+[2020-04-08T11:46:35.465] [ERROR] runtime - https server started listening.
+[2020-04-08T11:47:39.622] [ERROR] runtime - https server started listening.
+[2020-04-08T11:48:15.875] [ERROR] runtime - https server started listening.
+[2020-04-08T11:48:17.574] [ERROR] runtime - https server started listening.
+[2020-04-08T11:48:27.711] [ERROR] runtime - https server started listening.
+[2020-04-08T11:48:37.462] [ERROR] runtime - https server started listening.
+[2020-04-08T11:48:44.698] [ERROR] runtime - https server started listening.
+[2020-04-08T11:48:55.938] [ERROR] runtime - https server started listening.
+[2020-04-08T11:48:58.159] [ERROR] runtime - https server started listening.
+[2020-04-08T11:49:07.391] [ERROR] runtime - https server started listening.
+[2020-04-08T11:49:13.530] [ERROR] runtime - https server started listening.
+[2020-04-08T11:49:59.268] [ERROR] runtime - https server started listening.
+[2020-04-08T11:50:00.153] [ERROR] runtime - https server started listening.
+[2020-04-08T11:50:22.258] [ERROR] runtime - null
+[2020-04-08T11:51:33.640] [ERROR] runtime - https server started listening.
+[2020-04-08T11:51:38.815] [ERROR] runtime - https server started listening.
+[2020-04-08T11:51:51.619] [ERROR] runtime - https server started listening.
+[2020-04-08T11:52:23.963] [ERROR] runtime - null
+[2020-04-08T11:52:24.082] [ERROR] runtime - null
+[2020-04-08T11:54:09.540] [ERROR] runtime - https server started listening.
+[2020-04-08T11:54:15.706] [ERROR] runtime - https server started listening.
+[2020-04-08T11:55:33.885] [ERROR] runtime - https server started listening.
+[2020-04-08T11:55:37.902] [ERROR] runtime - https server started listening.
+[2020-04-08T11:56:26.695] [ERROR] runtime - https server started listening.
+[2020-04-08T11:56:30.142] [ERROR] runtime - https server started listening.
+[2020-04-08T11:56:35.643] [ERROR] runtime - https server started listening.
+[2020-04-08T11:56:36.340] [ERROR] runtime - https server started listening.
+[2020-04-08T11:56:39.909] [ERROR] runtime - https server started listening.
+[2020-04-08T11:56:45.757] [ERROR] runtime - https server started listening.
+[2020-04-08T11:56:47.410] [ERROR] runtime - https server started listening.
+[2020-04-08T11:56:48.608] [ERROR] runtime - https server started listening.
+[2020-04-08T11:56:49.240] [ERROR] runtime - https server started listening.
+[2020-04-08T11:56:59.899] [ERROR] runtime - null
+[2020-04-08T11:59:32.752] [ERROR] runtime - https server started listening.
+[2020-04-08T11:59:34.294] [ERROR] runtime - https server started listening.
+[2020-04-08T11:59:35.546] [ERROR] runtime - https server started listening.
+[2020-04-08T12:00:44.692] [ERROR] runtime - https server started listening.
+[2020-04-08T12:00:57.015] [ERROR] runtime - https server started listening.
+[2020-04-08T12:04:14.125] [ERROR] runtime - https server started listening.
+[2020-04-08T12:04:17.829] [ERROR] runtime - https server started listening.
+[2020-04-08T12:04:19.892] [ERROR] runtime - https server started listening.
+[2020-04-08T12:04:21.090] [ERROR] runtime - https server started listening.
+[2020-04-08T12:04:45.101] [ERROR] runtime - https server started listening.
+[2020-04-08T12:04:54.788] [ERROR] runtime - https server started listening.
+[2020-04-08T12:04:58.765] [ERROR] runtime - https server started listening.
+[2020-04-08T12:05:51.843] [ERROR] runtime - https server started listening.
+[2020-04-08T12:05:53.479] [ERROR] runtime - https server started listening.
+[2020-04-08T12:07:16.000] [ERROR] runtime - https server started listening.
+[2020-04-08T12:07:24.133] [ERROR] runtime - https server started listening.
+[2020-04-08T12:08:19.514] [ERROR] runtime - https server started listening.
+[2020-04-08T12:08:33.603] [ERROR] runtime - https server started listening.
+[2020-04-08T12:08:35.992] [ERROR] runtime - https server started listening.
+[2020-04-08T12:08:39.570] [ERROR] runtime - https server started listening.
+[2020-04-08T12:08:42.900] [ERROR] runtime - https server started listening.
+[2020-04-08T12:08:48.134] [ERROR] runtime - https server started listening.
+[2020-04-08T12:09:01.085] [ERROR] runtime - https server started listening.
+[2020-04-08T12:09:01.968] [ERROR] runtime - https server started listening.
+[2020-04-08T12:09:15.195] [ERROR] runtime - https server started listening.
+[2020-04-08T12:09:17.965] [ERROR] runtime - https server started listening.
+[2020-04-08T12:09:29.689] [ERROR] runtime - https server started listening.
+[2020-04-08T12:09:40.922] [ERROR] runtime - https server started listening.
+[2020-04-08T12:20:23.145] [ERROR] runtime - https server started listening.
+[2020-04-08T12:20:26.497] [ERROR] runtime - https server started listening.
+[2020-04-08T12:20:30.337] [ERROR] runtime - https server started listening.
+[2020-04-08T12:20:52.333] [ERROR] runtime - https server started listening.
+[2020-04-08T12:20:55.044] [ERROR] runtime - https server started listening.
+[2020-04-08T12:21:22.160] [ERROR] runtime - https server started listening.
+[2020-04-08T12:21:30.799] [ERROR] runtime - https server started listening.
+[2020-04-08T12:21:35.843] [ERROR] runtime - https server started listening.
+[2020-04-08T12:21:41.573] [ERROR] runtime - https server started listening.
+[2020-04-08T12:21:45.597] [ERROR] runtime - https server started listening.
+[2020-04-08T12:21:50.980] [ERROR] runtime - https server started listening.
+[2020-04-08T12:21:53.923] [ERROR] runtime - https server started listening.
+[2020-04-08T12:22:04.082] [ERROR] runtime - https server started listening.
+[2020-04-08T12:22:05.928] [ERROR] runtime - https server started listening.
+[2020-04-08T12:22:18.477] [ERROR] runtime - https server started listening.
+[2020-04-08T12:22:27.951] [ERROR] runtime - https server started listening.
+[2020-04-08T12:22:31.299] [ERROR] runtime - https server started listening.
+[2020-04-08T12:22:37.162] [ERROR] runtime - https server started listening.
+[2020-04-08T12:22:40.645] [ERROR] runtime - https server started listening.
+[2020-04-08T12:22:44.116] [ERROR] runtime - https server started listening.
+[2020-04-08T12:23:05.973] [ERROR] runtime - https server started listening.
+[2020-04-08T12:23:14.330] [ERROR] runtime - https server started listening.
+[2020-04-08T12:23:15.460] [ERROR] runtime - https server started listening.
+[2020-04-08T12:23:17.350] [ERROR] runtime - https server started listening.
+[2020-04-08T12:23:19.546] [ERROR] runtime - https server started listening.
+[2020-04-08T12:23:20.760] [ERROR] runtime - https server started listening.
+[2020-04-08T12:23:45.379] [ERROR] runtime - https server started listening.
+[2020-04-08T12:23:48.057] [ERROR] runtime - https server started listening.
+[2020-04-08T12:23:56.189] [ERROR] runtime - https server started listening.
+[2020-04-08T12:23:59.714] [ERROR] runtime - https server started listening.
+[2020-04-08T12:24:32.009] [ERROR] runtime - https server started listening.
+[2020-04-08T12:24:43.261] [ERROR] runtime - https server started listening.
+[2020-04-08T12:24:53.646] [ERROR] runtime - https server started listening.
+[2020-04-08T12:24:59.825] [ERROR] runtime - https server started listening.
+[2020-04-08T12:25:20.859] [ERROR] runtime - https server started listening.
+[2020-04-08T12:25:41.135] [ERROR] runtime - https server started listening.
+[2020-04-08T12:25:43.152] [ERROR] runtime - https server started listening.
+[2020-04-08T12:25:48.665] [ERROR] runtime - https server started listening.
+[2020-04-08T12:26:00.288] [ERROR] runtime - https server started listening.
+[2020-04-08T12:26:02.411] [ERROR] runtime - https server started listening.
+[2020-04-08T12:26:06.394] [ERROR] runtime - https server started listening.
+[2020-04-08T12:26:08.326] [ERROR] runtime - https server started listening.
+[2020-04-08T12:26:15.227] [ERROR] runtime - https server started listening.
+[2020-04-08T12:26:22.908] [ERROR] runtime - https server started listening.
+[2020-04-08T12:26:24.685] [ERROR] runtime - https server started listening.
+[2020-04-08T12:26:27.287] [ERROR] runtime - https server started listening.
+[2020-04-08T12:27:03.055] [ERROR] runtime - https server started listening.
+[2020-04-08T12:27:05.935] [ERROR] runtime - https server started listening.
+[2020-04-08T12:27:10.176] [ERROR] runtime - https server started listening.
+[2020-04-08T12:27:11.321] [ERROR] runtime - https server started listening.
+[2020-04-08T12:27:15.358] [ERROR] runtime - https server started listening.
+[2020-04-08T12:27:16.667] [ERROR] runtime - https server started listening.
+[2020-04-08T12:27:18.590] [ERROR] runtime - https server started listening.
+[2020-04-08T12:27:22.034] [ERROR] runtime - https server started listening.
+[2020-04-08T12:27:37.948] [ERROR] runtime - https server started listening.
+[2020-04-08T12:27:46.634] [ERROR] runtime - https server started listening.
+[2020-04-08T12:27:57.345] [ERROR] runtime - https server started listening.
+[2020-04-08T12:29:41.782] [ERROR] runtime - https server started listening.
+[2020-04-08T12:29:48.953] [ERROR] runtime - https server started listening.
+[2020-04-08T12:29:50.671] [ERROR] runtime - https server started listening.
+[2020-04-08T12:29:54.262] [ERROR] runtime - https server started listening.
+[2020-04-08T12:30:04.136] [ERROR] runtime - https server started listening.
+[2020-04-08T12:30:06.400] [ERROR] runtime - https server started listening.
+[2020-04-08T12:30:09.196] [ERROR] runtime - https server started listening.
+[2020-04-08T12:30:16.159] [ERROR] runtime - https server started listening.
+[2020-04-08T12:30:19.522] [ERROR] runtime - https server started listening.
+[2020-04-08T12:30:23.514] [ERROR] runtime - https server started listening.
+[2020-04-08T12:30:29.692] [ERROR] runtime - https server started listening.
+[2020-04-08T12:30:33.147] [ERROR] runtime - https server started listening.
+[2020-04-08T12:30:34.588] [ERROR] runtime - https server started listening.
+[2020-04-08T12:30:51.155] [ERROR] runtime - https server started listening.
+[2020-04-08T12:30:52.538] [ERROR] runtime - https server started listening.
+[2020-04-08T12:30:58.279] [ERROR] runtime - https server started listening.
+[2020-04-08T12:31:00.726] [ERROR] runtime - https server started listening.
+[2020-04-08T12:31:16.298] [ERROR] runtime - https server started listening.
+[2020-04-08T12:31:16.964] [ERROR] runtime - https server started listening.
+[2020-04-08T12:31:23.868] [ERROR] runtime - https server started listening.
+[2020-04-08T12:31:27.046] [ERROR] runtime - https server started listening.
+[2020-04-08T12:31:32.303] [ERROR] runtime - https server started listening.
+[2020-04-08T12:32:29.171] [ERROR] runtime - https server started listening.
+[2020-04-08T12:32:38.575] [ERROR] runtime - https server started listening.
+[2020-04-08T12:32:53.096] [ERROR] runtime - https server started listening.
+[2020-04-08T12:32:55.541] [ERROR] runtime - https server started listening.
+[2020-04-08T12:32:59.761] [ERROR] runtime - https server started listening.
+[2020-04-08T12:33:06.692] [ERROR] runtime - https server started listening.
+[2020-04-08T12:33:09.724] [ERROR] runtime - https server started listening.
+[2020-04-08T12:33:19.130] [ERROR] runtime - https server started listening.
+[2020-04-08T12:47:36.663] [ERROR] runtime - null
+[2020-04-08T12:49:13.355] [ERROR] runtime - null
+[2020-04-08T12:50:33.503] [ERROR] runtime - null
+[2020-04-08T12:51:55.973] [ERROR] runtime - null
+[2020-04-08T12:54:03.662] [ERROR] runtime - null
+[2020-04-08T12:54:45.187] [ERROR] runtime - null
+[2020-04-08T12:54:45.849] [ERROR] runtime - null
+[2020-04-08T12:54:46.577] [ERROR] runtime - null
+[2020-04-08T12:55:07.672] [ERROR] runtime - null
+[2020-04-08T12:55:10.678] [ERROR] runtime - null
+[2020-04-08T12:55:17.577] [ERROR] runtime - null
+[2020-04-08T12:55:21.268] [ERROR] runtime - null
+[2020-04-08T12:55:24.540] [ERROR] runtime - null
+[2020-04-08T12:56:11.127] [ERROR] runtime - null
+[2020-04-08T12:56:13.870] [ERROR] runtime - null
+[2020-04-08T12:56:19.929] [ERROR] runtime - null
+[2020-04-08T12:56:24.192] [ERROR] runtime - null
+[2020-04-08T12:56:28.498] [ERROR] runtime - null

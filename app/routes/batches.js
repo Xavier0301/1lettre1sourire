@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const logger = require('log4js').getLogger('runtime');
 
 const path = require('path');
 
@@ -11,7 +12,6 @@ const Batch = require('../models/batch');
 router.get('/list', loginReq, adminReq, function(req, res, next) {
     Batch.find().lean().exec(function(err, results) {
         if(err) {
-            console.log(err);
             var error = new Error('Could not get batches list.');
             error.status = 500;
             return next(error);
@@ -33,13 +33,13 @@ router.get('/download', loginReq, adminReq, function(req, res, next) {
     if(req.query.index && req.query.type) {
         Batch.findOne({ index: parseInt(req.query.index), type: req.query.type }, function(err, batch) {
             if(err) {
-                console.log(err);
+                logger.error(err);
             } else {
                 if(batch) {
                     const filePath = path.resolve(`docs/${batch.associatedFileName}`);
                     res.download(filePath, function(err) {
                         if(err) {
-                            console.log(err);
+                            logger.error(err);
                         } else {
                             Batch.findOneAndUpdate({ index: parseInt(req.query.index), type: req.query.type }, { downloaded: true }, function(err, doc, res) {
                                 if(err) {

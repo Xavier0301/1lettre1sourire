@@ -1,6 +1,4 @@
 // As soon as a letter is approved, we build it.
-
-// import { Document, Paragraph, Media, Packer } from "docx";
 const docx = require('docx');
 
 const https = require('https');    
@@ -9,15 +7,19 @@ const sharp = require('sharp');
 const path = require('path');
 const sizeOf = require('image-size');
 const libre = require('libreoffice-convert');
+const logger = require('log4js').getLogger('runtime');
 
 const batcher = require('./batcher');
 
-function handleLetterFormatting(letter) {
+function handleLetterFormatting(letter, done) {
+    // const letter = job.data.letter;
     downloadImage(letter.imageUrl, letter.composedId, function(hasImage) {
         buildDoc(letter, hasImage, function() {
             convertToPdf(letter.composedId, function(path) {
                 if(path) {
-                    batcher(path, letter);
+                    return batcher(path, letter, done);
+                } else {
+                    done();
                 }
             });
         });
@@ -25,29 +27,34 @@ function handleLetterFormatting(letter) {
 }
 
 function downloadImage(url, fileName, callback) {
-    const file = fs.createWriteStream(fileName);
-    https.get(url, function(response) {
-        if (response.statusCode === 200) {
-            var stream = response.pipe(file);
-            stream.on('finish', function() {
-                sharp(fileName).resize(600, 350, {
-                    fit: sharp.fit.inside
-                }).toFormat('jpg').toFile(fileName + '.jpg', function(err) { 
-                    fs.unlink(fileName, () => {});
-                    if(err) {
-                        console.log(err);
-                        callback(false);
-                    } else {
-                        callback(true);
-                    }
+    if(url) {
+        const file = fs.createWriteStream(fileName);
+        https.get(url, function(response) {
+            if (response.statusCode === 200) {
+                var stream = response.pipe(file);
+                stream.on('finish', function() {
+                    sharp(fileName).resize(600, 350, {
+                        fit: sharp.fit.inside
+                    }).toFormat('jpg').toFile(fileName + '.jpg', function(err) { 
+                        fs.unlink(fileName, () => {});
+                        if(err) {
+                            logger.error(err);
+                            callback(false);
+                        } else {
+                            callback(true);
+                        }
+                    })
                 })
-            })
-        } else {
-            file.close();
-            fs.unlink(fileName, () => {}); // Delete temp file
-            callback(false);
-        }
-    });
+            } else {
+                logger.info("Could not download image at url: " + url);
+                file.close();
+                fs.unlink(fileName, () => {}); // Delete temp file
+                callback(false);
+            }
+        });
+    } else {
+        callback(false);
+    }
 }
 
 function buildDoc(letter, hasImage, callback) {
@@ -175,7 +182,7 @@ function buildDoc(letter, hasImage, callback) {
         try {
             fs.writeFileSync(path.resolve(`docs/${letter.composedId}.docx`), buffer);
         } catch(err) {
-            console.log(err);
+            logger.error(err);
         }
         fs.unlink(attachedImagePath, () => {});
         callback();
@@ -183,6 +190,7 @@ function buildDoc(letter, hasImage, callback) {
 };
 
 function convertToPdf(fileName, callback) {
+    console.log('pdf');
     const inputPath = path.resolve(`docs/${fileName}.docx`);
     const outputPath = path.resolve(`docs/${fileName}.pdf`);
 
@@ -191,7 +199,8 @@ function convertToPdf(fileName, callback) {
     libre.convert(input, '.pdf', undefined, function(err,result) { 
         fs.unlink(inputPath, () => {});
         if(err){
-            console.log(err);
+            logger.fatal("PDF MERGING ERROR!");
+            logger.error(err);
             callback(undefined);
         } else {
             fs.writeFileSync(outputPath, result);

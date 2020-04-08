@@ -3,6 +3,8 @@ const router = express.Router();
 
 const User = require('../../models/user');
 
+const bcrypt = require('bcryptjs');
+
 router.post('/', function(req, res, next) {
   if (req.body.username && req.body.password) {
     User.authenticate(req.body.username, req.body.password, function (error, user) {

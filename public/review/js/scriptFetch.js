@@ -21,7 +21,7 @@ function funcFetch() {
         displayLetter(contentLetter,greetingLetter,signatureLetter);
         displayImage(contentImage);
       } else {
-        displayLetter("Toi et l'équipe avec réussi a relire toutes les lettres en attente!", "Wow,", "Merci pour ta relecture de " + localCounter + " lettres :)")
+        displayLetter("Toi et l'équipe avez réussi a relire toutes les lettres en attente!", "Wow,", "Merci pour ta contribution de " + localCounter + " lettres :)")
       }
     });
 };

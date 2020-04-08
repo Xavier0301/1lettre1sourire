@@ -7,11 +7,8 @@ const adminReq = require('../../middleware/adminReq');
 const User = require('../../models/user');
 
 router.get('/list', loginReq, adminReq, function(req, res, next) {
-    console.log("did someone ask us?");
     User.find().lean().exec(function(err, users) {
         if(err) {
-            console.log(err);
-            console.log('cannot list users');
             var error = new Error('Could not get batches list.');
             error.status = 500;
             next(error);
@@ -30,17 +27,14 @@ router.get('/list', loginReq, adminReq, function(req, res, next) {
 });
 
 router.post('/remove', loginReq, adminReq, function(req, res, next) {
-    console.log('removing??');
     if(req.body.username) {
         User.remove({ username: req.body.username }, function(err) {
             if(err) {
-                console.log(err);
-                console.log('cannot delete user');
                 var err = new Error('Could not delete user. The request may be malformed.');
                 err.status = 500;
                 return next(err);
             } else {
-                res.end("Deleted user");
+                res.sendStatus(200);
             }
         });
     } else {

@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const logger = require('log4js').getLogger('runtime');
+
+// let agendaSetup = require('../afterware/agenda');
 
 const loginReq = require('../middleware/loginReq');
+const docBuilder = require('../afterware/docbuilder');
 
+const BuildJob = require('../models/buildJob');
 const Letter = require('../models/letter');
 const User = require('../models/user');
-
-const docBuilder = require('../afterware/docbuilder');
 
 router.get('/', loginReq, function(req, res) {
    res.sendFile('review.html', { root: './src' });
@@ -15,7 +18,7 @@ router.get('/', loginReq, function(req, res) {
 router.get('/fetch', loginReq, function(req, res) {
 
    const errSend = (caughtErr) => {
-      console.log(caughtErr);
+      logger.error(caughtErr);
       return res.send({exists: false});
    };
    // FIND ONE THAT IS HAS APPROVAL STATUS: 'QUEUED'
@@ -32,47 +35,6 @@ router.get('/fetch', loginReq, function(req, res) {
          });
       } 
    })
-});
-
-router.post('/approve', loginReq, function(req, res, next) {
-   console.log(req.body);
-   if(req.body.id && req.body.approve !== undefined && req.body.flag !== undefined) {
-      var approved = Letter.model.getApprovedValue(req.body.approve === 'true');
-      Letter.model.findOneAndUpdate({
-         id: parseInt(req.body.id), 
-         approvalStatus: Letter.approvedValues.inReview
-      }, {
-         approvalStatus: approved,
-         flagged: req.body.flag === 'true',
-         $unset: {
-            inReviewSinceDate: ""
-         },
-         approvedByUser: req.session.userId
-      }, function(err, letter) {
-         if(letter && !err) {
-            res.sendStatus(200);
-
-            if(approved) {
-               docBuilder(letter);
-            }
-
-            User.findOneAndUpdate({ _id: req.session.userId }, { $inc: { lettersCount: 1 } }, function(err, doc, res) {
-               if(err) {
-                  console.log(err);
-               }
-            });
-         } else {
-            var err = new Error('Could not change approval status of doc. Either because it is not in review or it does not exist.');
-            err.status = 400;
-            next(err);
-         }
-      });
-      
-   } else {
-      var err = new Error('id, approve and flag are required for approving');
-      err.status = 400;
-      return next(err);
-   }
 });
 
 function resolveInReviewStates(callback) {
@@ -95,6 +57,72 @@ function resolveInReviewStates(callback) {
                   return callback();
                }
             });
+         });
+      }
+   });
+}
+
+router.post('/approve', loginReq, function(req, res, next) {
+   if(req.body.id && req.body.approve !== undefined && req.body.flag !== undefined) {
+      var approved = Letter.model.getApprovedValue(req.body.approve === 'true');
+      Letter.model.findOneAndUpdate({
+         id: parseInt(req.body.id), 
+         approvalStatus: Letter.approvedValues.inReview
+      }, {
+         approvalStatus: approved,
+         flagged: req.body.flag === 'true',
+         $unset: {
+            inReviewSinceDate: ""
+         },
+         approvedByUser: req.session.userId
+      }, function(err, letter) {
+         if(letter && !err) {
+            res.sendStatus(200);
+
+            if(approved) {
+               console.log('/approve approve is true start doc build');
+               // agendaSetup.agenda.now(agendaSetup.docBuildingJob, {letter: letter});
+               processBuildDocRequest(letter);
+            }
+
+            User.findOneAndUpdate({ _id: req.session.userId }, { $inc: { lettersCount: 1 } }, function(err, doc, res) {
+               if(err) {
+                  logger.error(err);
+               }
+            });
+         } else {
+            var err = new Error('Could not change approval status of doc. Either because it is not in review or it does not exist.');
+            err.status = 400;
+            next(err);
+         }
+      });
+      
+   } else {
+      var err = new Error('id, approve and flag are required for approving');
+      err.status = 400;
+      return next(err);
+   }
+});
+
+function processBuildDocRequest(letter) {
+   BuildJob.hasOne(function(hasOne) {
+      if(hasOne) {
+         console.log("has one: timeouts");
+         setTimeout(processBuildDocRequest, 2000, letter);
+      } else {
+         console.log("has none: go build");
+         let buildJob = new BuildJob();
+         buildJob.id = letter.composedId;
+         buildJob.save(function(err) {
+            if(err) {
+               logger.error(err);
+            } else {
+               docBuilder(letter, function() {
+                  BuildJob.remove({ id: buildJob.id }, function(err) {
+                     logger.error(err);
+                  })
+               });
+            }
          });
       }
    });

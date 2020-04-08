@@ -21,8 +21,8 @@ const statsRoute = require('./app/routes/stats');
 const app = express();
 
 const credentials = {
-    key: fs.readFileSync('./keys/key.pem', 'utf8'),
-    cert: fs.readFileSync('./keys/cert.pem', 'utf8')
+    key: fs.readFileSync('./keys/privkey.pem', 'utf8'),
+    cert: fs.readFileSync('./keys/fullchain.pem', 'utf8')
 };
    
 const httpServer = http.createServer(app);

@@ -1,6 +1,6 @@
 # node modules
 /node_modules
-/keys/trusted
+/keys
 /docs
 /config/api.js
 /config/db.js

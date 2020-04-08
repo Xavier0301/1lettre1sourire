@@ -31,8 +31,8 @@ const env = process.env.NODE_ENV;
 function getCredentials() {
     if(env === 'production') {
         return {
-            key: fs.readFileSync('/etc/letsencrypt/live/review1l1s.org/privkey.pem', 'utf8'),
-            cert: fs.readFileSync('/etc/letsencrypt/live/review1l1s.org/fullchain.pem', 'utf8')
+            key: fs.readFileSync('/etc/letsencrypt/live/review1l1s.com/privkey.pem', 'utf8'),
+            cert: fs.readFileSync('/etc/letsencrypt/live/review1l1s.com/fullchain.pem', 'utf8')
         };
     } else {
         return {

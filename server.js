@@ -44,7 +44,16 @@ function getCredentials() {
 const credentials = getCredentials();
 const httpsServer = https.createServer(credentials, app);
 
-const httpServer = http.createServer(app);
+function getHttpServer() {
+    if(env === 'production') {
+        const redirectApp = express();
+        redirectApp.all('*', (req, res) => res.redirect(300, 'https://localhost'));
+        return http.createServer(redirectApp);
+    } else {
+        return http.createServer(app);
+    }
+}
+const httpServer = getHttpServer();
 
 // set our ports
 const httpPort = env === 'production' ? 80 : 3000;
@@ -116,8 +125,6 @@ app.use(function(err, req, res, next) {
 
 // startup our app at https://localhost:3000
 httpsServer.listen(httpsPort, () => logger.info("https server started listening."));
-if(env !== 'production') {
-    httpServer.listen(httpPort, () => console.log("http server started listening"));
-}
+httpServer.listen(httpPort, () => logger.info("http server started listening"));
 
 module.exports = app;

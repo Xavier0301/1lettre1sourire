@@ -10,11 +10,12 @@ router.get('/', loginReq, adminReq, function(req, res, next) {
 
     var stats = {};
     var fieldsCount = 0;
+    const totalFieldsCount = 4;
 
     const tryReturnStats = () => {
         console.log(fieldsCount);
         fieldsCount++;
-        if(fieldsCount === 4) {
+        if(fieldsCount === totalFieldsCount) {
             res.end(JSON.stringify(stats));
         }
     };

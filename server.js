@@ -37,7 +37,7 @@ function getCredentials() {
     } else {
         return {
             key: fs.readFileSync('./keys/privkey.pem', 'utf8'),
-            cert: fs.readFileSync('./keys/fullchain.pem', 'utf8')
+            cert: fs.readFileSync('./keys/cert.pem', 'utf8')
         };
     }
 }

@@ -32,7 +32,7 @@ function getCredentials() {
     if(env === 'production') {
         return {
             key: fs.readFileSync('/etc/letsencrypt/live/review1l1s.com/privkey.pem', 'utf8'),
-            cert: fs.readFileSync('/etc/letsencrypt/live/review1l1s.com/fullchain.pem', 'utf8')
+            cert: fs.readFileSync('/etc/letsencrypt/live/review1l1s.com/cert.pem', 'utf8')
         };
     } else {
         return {
@@ -47,7 +47,7 @@ const httpsServer = https.createServer(credentials, app);
 function getHttpServer() {
     if(env === 'production') {
         const redirectApp = express();
-        redirectApp.all('*', (req, res) => res.redirect(300, 'https://localhost'));
+        redirectApp.all('*', (req, res) => res.redirect('https://review1l1s.com/'));
         return http.createServer(redirectApp);
     } else {
         return http.createServer(app);

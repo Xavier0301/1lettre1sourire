@@ -46,9 +46,9 @@ const httpsServer = https.createServer(credentials, app);
 
 const httpServer = http.createServer(app);
 
-// set our port
-const httpPort = 3000;
-const httpsPort = 3080;
+// set our ports
+const httpPort = env === 'production' ? 80 : 3000;
+const httpsPort = env === 'production' ? 443 : 3000;
 // configuration ===========================================
 
 // logger

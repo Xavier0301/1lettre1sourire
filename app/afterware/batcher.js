@@ -31,7 +31,7 @@ function createNewBatch(pdfPath, letter, batchIndex) {
 
     fs.renameSync(pdfPath, newBatchFilePath);
 
-    Letter.updateOne({ id: letter.id }, { batchIndex: batchIndex }, function(err, result) {
+    Letter.model.updateOne({ id: letter.id }, { batchIndex: batchIndex }, function(err, result) {
 
     });
 
@@ -57,7 +57,7 @@ function addInExistingBatch(pdfPath, letter, batchIndex) {
         fs.unlinkSync(pdfPath);
     });
 
-    Letter.updateOne({ id: letter.id }, { batchIndex: batchIndex }, function(err, result) {
+    Letter.model.updateOne({ id: letter.id }, { batchIndex: batchIndex }, function(err, result) {
         
     });
 

@@ -21,7 +21,7 @@ function funcFetch() {
         displayLetter(contentLetter,greetingLetter,signatureLetter);
         displayImage(contentImage);
       } else {
-        displayLetter(" il n'y a actuellement plus de lettre à passer en revue.", "Hey,", "Nous te remercions pour votre collaboration de " + localCounter + " lettres !")
+        displayLetter("Toi et l'équipe avec réussi a relire toutes les lettres en attente!", "Wow,", "Merci pour ta relecture de " + localCounter + " lettres :)")
       }
     });
 };

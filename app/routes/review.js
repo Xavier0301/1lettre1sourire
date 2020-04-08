@@ -1,13 +1,12 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
+const express = require('express');
+const router = express.Router();
 
-var loginReq = require('../middleware/loginReq');
+const loginReq = require('../middleware/loginReq');
 
-var Letter = require('../models/letter');
-var User = require('../models/user');
+const Letter = require('../models/letter');
+const User = require('../models/user');
 
-var docBuilder = require('../afterware/docbuilder');
+const docBuilder = require('../afterware/docbuilder');
 
 router.get('/', loginReq, function(req, res) {
    res.sendFile('review.html', { root: './src' });
@@ -20,12 +19,11 @@ router.get('/fetch', loginReq, function(req, res) {
       return res.send({exists: false});
    };
    // FIND ONE THAT IS HAS APPROVAL STATUS: 'QUEUED'
-   // Letter.findOne({approvalStatus: 'QUEUED'})
    resolveInReviewStates(function(err) {
       if(err) {
          errSend(err);
       } else {
-         Letter.findOneAndUpdate({approvalStatus: 'Queued'}, {approvalStatus: 'In Review', inReviewSinceDate: Date.now()}).exec(function(error, letter) {
+         Letter.model.findOneAndUpdate({approvalStatus: Letter.approvedValues.queued}, {approvalStatus: Letter.approvedValues.inReview, inReviewSinceDate: Date.now()}).exec(function(error, letter) {
             if(error || !letter) {
                errSend(error);
             } else {
@@ -39,10 +37,10 @@ router.get('/fetch', loginReq, function(req, res) {
 router.post('/approve', loginReq, function(req, res, next) {
    console.log(req.body);
    if(req.body.id && req.body.approve !== undefined && req.body.flag !== undefined) {
-      var approved = Letter.getApprovedValue(req.body.approve === 'true');
-      Letter.findOneAndUpdate({
+      var approved = Letter.model.getApprovedValue(req.body.approve === 'true');
+      Letter.model.findOneAndUpdate({
          id: parseInt(req.body.id), 
-         approvalStatus: 'In Review'
+         approvalStatus: Letter.approvedValues.inReview
       }, {
          approvalStatus: approved,
          flagged: req.body.flag === 'true',
@@ -53,17 +51,20 @@ router.post('/approve', loginReq, function(req, res, next) {
       }, function(err, letter) {
          if(letter && !err) {
             res.sendStatus(200);
+
             if(approved) {
                docBuilder(letter);
             }
 
-            // User.findOneAndUpdate({ _id: req.session.userId }, { $inc: { lettersCount: 1 } }, function(err, doc, res) {
-            //    if(err) {
-            //       console.log(err);
-            //    }
-            // });
+            User.findOneAndUpdate({ _id: req.session.userId }, { $inc: { lettersCount: 1 } }, function(err, doc, res) {
+               if(err) {
+                  console.log(err);
+               }
+            });
          } else {
-            res.send('Could not change approval status of doc. Either because it is not in review or it does not exist.');
+            var err = new Error('Could not change approval status of doc. Either because it is not in review or it does not exist.');
+            err.status = 400;
+            next(err);
          }
       });
       
@@ -75,8 +76,9 @@ router.post('/approve', loginReq, function(req, res, next) {
 });
 
 function resolveInReviewStates(callback) {
-   const fiveMinAgo = new Date( Date.now() - 1000 * 60 * 5 );
-   Letter.find({ approvalStatus: 'In Review', inReviewSinceDate: { $lte: fiveMinAgo } }, function(err, results) {
+   const fiveMinInMs = 1000 * 60 * 5;
+   const fiveMinAgo = new Date(Date.now() - fiveMinInMs);
+   Letter.model.find({ approvalStatus: Letter.approvedValues.inReview, inReviewSinceDate: { $lte: fiveMinAgo } }, function(err, results) {
       if(err) {
          callback(err); 
       } else if(!results || results.length === 0) {
@@ -84,7 +86,7 @@ function resolveInReviewStates(callback) {
       } else {
          var resultCount = 0;
          results.map((result) => {
-            Letter.updateOne({ _id: result._id }, { approvalStatus: 'Queued' }, function(err, raw) {
+            Letter.model.updateOne({ _id: result._id }, { approvalStatus: Letter.approvedValues.queued }, function(err, raw) {
                if(err) {
                   return callback(err);
                } 

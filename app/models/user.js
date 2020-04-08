@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var bcrypt = require('bcryptjs');
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
-var UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
@@ -14,16 +14,16 @@ var UserSchema = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         required: true
-    }/*,
+    },
     lettersCount: {
         type: Number,
-        required: true
-    }*/
+        required: true,
+        default: 0
+    }
 });
 
-
 UserSchema.statics.authenticate = function (username, password, callback) {
-    User.findOne({ username: username })
+    this.findOne({ username: username })
         .exec(function (err, user) {
         if (err) {
             return callback(err)
@@ -54,7 +54,6 @@ UserSchema.pre('save', function (next) {
       user.password = hash;
       next();
     })
-  });
+});
 
-var User = mongoose.model('User', UserSchema);
-module.exports = User;
+module.exports = mongoose.model('User', UserSchema);

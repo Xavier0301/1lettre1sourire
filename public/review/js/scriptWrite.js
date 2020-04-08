@@ -5,6 +5,12 @@ function displayLetter(letterCore,greetingCore,signatureCore){
 }
 
 function displayImage(imgsrc){
+  const elem = document.getElementById("imageLetter");
   document.getElementById("imageLetter").src = imgsrc;
+  if(imgsrc.length > 0) {
+    elem.style.visibility = 'visible';
+  } else {
+    elem.style.visibility = 'hidden';
+  }
 
 }

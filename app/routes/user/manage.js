@@ -1,10 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var loginReq = require('../../middleware/loginReq');
-var adminReq = require('../../middleware/adminReq');
+const loginReq = require('../../middleware/loginReq');
+const adminReq = require('../../middleware/adminReq');
 
-var User = require('../../models/user');
+const User = require('../../models/user');
 
 router.get('/list', loginReq, adminReq, function(req, res, next) {
     console.log("did someone ask us?");
@@ -19,7 +19,8 @@ router.get('/list', loginReq, adminReq, function(req, res, next) {
             const cleanedUsers = users.map((user) => {
                 return {
                     username: user.username,
-                    isAdmin: user.isAdmin
+                    isAdmin: user.isAdmin,
+                    lettersCount: user.lettersCount
                 }
             })
             res.setHeader("Content-Type", "application/json");
@@ -54,7 +55,8 @@ router.post('/register'/*, loginReq, adminReq*/, function(req, res, next) {
       var userData = {
         username: req.body.username,
         password: req.body.password,
-        isAdmin: req.body.admin
+        isAdmin: req.body.admin,
+        lettersCount: 0
       }
       //use schema.create to insert data into the db
       User.create(userData, function (err, user) {

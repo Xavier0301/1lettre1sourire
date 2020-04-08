@@ -1,48 +1,34 @@
+const express = require('express');
+const router = express.Router();
+const Letter = require('../models/letter');
 
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
-var Letter = require('../models/letter');
+const apikeyReq = require('../middleware/apikeyReq');
 
-// sample api route
-// grab the reviewer model we just created
-router.get('/letters/list', function(req, res) {
-   // use mongoose to get all letters in the database
-   Letter.find(function(err, letters) {
-      // if there is an error retrieving, send the error.
-      // nothing after res.send(err) will execute
+router.get('/list', apikeyReq, function(req, res) {
+   Letter.model.find(function(err, letters) {
       if (err)
          res.send(err);
       res.json(letters); // return all letters in JSON format
    });
 });
 
-router.post('/letters/add', function (req, res) {
+router.post('/add', apikeyReq, function (req, res, next) {
    var letter = getLetterFromBody(req.body);
-
-   if(letter === undefined) {
-      res.send({ message: 'could not add letter'});
-   } else {
-      letter.save(function(err) {
-         if (err)
-            res.send(err);
-         else 
-            res.json({ message: 'letter added' });
-      });
-   }
+   letter.save(function(err) {
+      if (err)
+         res.send(err);
+      else 
+         res.json({ message: 'letter added' });
+   });
  });
 
 function getLetterFromBody(body) {
-   if(body === undefined) {
-      return undefined;
-   }
-
-   var letter = new Letter();
+   var letter = new Letter.model();
 
    letter.id = parseInt(body.id);
    letter.submissionTime = body.submissionTime;
    letter.email = body.email;
-   letter.type = body.type === "Un monsieur âgé isolé" ? 'H' : 'F';
+   letter.type = body.type === Letter.expectedTypeValues.male ? Letter.typeValues.male : Letter.typeValues.female;
    letter.heading = body.heading;
    letter.content = body.content;
    letter.signature = body.signature;

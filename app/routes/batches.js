@@ -1,11 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-const fs = require('fs');
 const path = require('path');
 
-var loginReq = require('../middleware/loginReq');
-var adminReq = require('../middleware/adminReq');
+const loginReq = require('../middleware/loginReq');
+const adminReq = require('../middleware/adminReq');
 
 const Batch = require('../models/batch');
 

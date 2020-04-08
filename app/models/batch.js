@@ -1,11 +1,7 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const typeValues = require('./letter').typeValues;
 
-var typeValues = {
-    male: 'H',
-    female: 'F'
-}
-
-var BatchSchema = new mongoose.Schema({
+const BatchSchema = new mongoose.Schema({
     type: {
         type: String,
         enum: [typeValues.male, typeValues.female],

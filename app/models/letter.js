@@ -1,18 +1,23 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var typeValues = {
+const expectedTypeValues = {
+    male: 'Un monsieur âgé isolé',
+    female: 'Une dame âgée isolée'
+};
+
+const typeValues = {
     male: 'H',
     female: 'F'
-}
+};
 
-var approvedValues = {
+const approvedValues = {
     queued: 'Queued',
     inReview: 'In Review',
     accepted: 'Accepted',
     rejected: 'Rejected'
 };
 
-var LetterSchema = new mongoose.Schema({
+const LetterSchema = new mongoose.Schema({
     id: {
         type: Number,
         required: true,
@@ -67,6 +72,9 @@ var LetterSchema = new mongoose.Schema({
     },
     inReviewSinceDate: {
         type: Date
+    },
+    approvedByUser: {
+        type: mongoose.ObjectId
     }
 });
 
@@ -78,4 +86,9 @@ LetterSchema.virtual('composedId').get(function() {
     return `${this.type}${this.id}`;
 });
 
-module.exports = mongoose.model('Letter', LetterSchema);
+module.exports = {
+    model: mongoose.model('Letter', LetterSchema),
+    approvedValues: approvedValues,
+    typeValues: typeValues,
+    expectedTypeValues: expectedTypeValues
+};

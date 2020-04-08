@@ -1,12 +1,8 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
+const express = require('express');
+const router = express.Router();
 
-var loginReq = require('../middleware/loginReq');
-var adminReq = require('../middleware/adminReq');
-
-var Letter = require('../models/letter');
-var User = require('../models/user');
+const loginReq = require('../middleware/loginReq');
+const adminReq = require('../middleware/adminReq');
 
 router.get('/', loginReq, adminReq, function(req, res) {  
     res.sendFile('admin.html', { root: './src' });

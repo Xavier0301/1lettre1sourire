@@ -1,14 +1,15 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var User = require('../../models/user');
+const User = require('../../models/user');
 
 router.post('/', function(req, res, next) {
   if (req.body.username && req.body.password) {
     User.authenticate(req.body.username, req.body.password, function (error, user) {
       if (error) {
-        res.status(401);
-        return res.end('Wrong username or password.');
+        const err = new Error("Wrong username or password");
+        err.status = 401;
+        next(err);
       } else {
         req.session.userId = user._id;
         if(user.isAdmin === false) {
@@ -19,8 +20,9 @@ router.post('/', function(req, res, next) {
       }
     });
   } else {
-    res.status(401);
-    return res.end('Wrong username or password.');
+    const err = new Error("Both a username and a password should be provided");
+    err.status = 401;
+    next(err);
   }
 });
 

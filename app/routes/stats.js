@@ -1,13 +1,10 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
+const express = require('express');
+const router = express.Router();
 
-var loginReq = require('../middleware/loginReq');
-var adminReq = require('../middleware/adminReq');
+const loginReq = require('../middleware/loginReq');
+const adminReq = require('../middleware/adminReq');
 
-var Letter = require('../models/letter');
-var User = require('../models/user');
-var Batch = require('../models/batch');
+const Letter = require('../models/letter');
 
 router.get('/', loginReq, adminReq, function(req, res, next) {  
 
@@ -28,7 +25,7 @@ router.get('/', loginReq, adminReq, function(req, res, next) {
         return next(err);
     }
 
-    Letter.countDocuments({ approvalStatus: 'In Review' }, function(err, count) {
+    Letter.model.countDocuments({ approvalStatus: Letter.approvedValues.inReview }, function(err, count) {
         effectiveCount = count ? count : 0
         if(!err) {
             stats.inReviewCount = effectiveCount;
@@ -38,7 +35,7 @@ router.get('/', loginReq, adminReq, function(req, res, next) {
         }
     });
 
-    Letter.countDocuments({ approvalStatus: 'In Queue' }, function(err, count) {
+    Letter.model.countDocuments({ approvalStatus: Letter.approvedValues.queued }, function(err, count) {
         effectiveCount = count ? count : 0
         if(!err) {
             stats.queuedCount = effectiveCount;
@@ -48,7 +45,7 @@ router.get('/', loginReq, adminReq, function(req, res, next) {
         }
     });
 
-    Letter.countDocuments({ approvalStatus: 'Accepted' }, function(err, count) {
+    Letter.model.countDocuments({ approvalStatus: Letter.approvedValues.accepted }, function(err, count) {
         effectiveCount = count ? count : 0
         if(!err) {
             stats.acceptedCount = effectiveCount;
@@ -58,7 +55,7 @@ router.get('/', loginReq, adminReq, function(req, res, next) {
         }
     });
 
-    Letter.countDocuments({ approvalStatus: 'Rejected' }, function(err, count) {
+    Letter.model.countDocuments({ approvalStatus: Letter.approvedValues.rejected }, function(err, count) {
         effectiveCount = count ? count : 0
         if(!err) {
             stats.rejectedCount = effectiveCount;

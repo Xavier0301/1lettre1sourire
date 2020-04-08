@@ -1,7 +1,7 @@
 # 1lettre1sourire
-Infrastructure used by 1lettre1sourire.org to automate letter reviews.
+Server used by 1lettre1sourire.org to automate letter reviews.
 
-# How it's build
+# How it's built
  - express for the backend
  - html/css for the frontend
  - MongoDB as the database

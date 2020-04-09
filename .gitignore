@@ -6,6 +6,7 @@
 /config/api.js
 /config/db.js
 access.log
+runtime.log
 
 # OS generated files #
 ######################

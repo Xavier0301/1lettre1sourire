@@ -57,15 +57,15 @@ function getLetterFromBody(body) {
 }
 
 function getTypeValue(type) {
-   if(type === Letter.typeValues.male || type === letter.typeValues.female) {
+   if(type === Letter.typeValues.male || type === Letter.typeValues.female) {
       return type;
    } else if(type === Letter.expectedTypeValues.male) {
       return Letter.typeValues.male;
    } else if(type === Letter.expectedTypeValues.female) {
-      return letter.typeValues.female;
+      return Letter.typeValues.female;
    } else {
       logger.error("Type " + type + " does not correspond to a registered type");
-      return letter.typeValues.male;
+      return Letter.typeValues.male;
    }
 }
 

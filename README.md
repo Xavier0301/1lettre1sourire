@@ -5,12 +5,14 @@ Server used by 1lettre1sourire.org to automate letter reviews.
  - express for the backend
  - html/css for the frontend
  - MongoDB as the database
+ - Redis db to manage a queue of jobs
  
 # Installation guide
 The prerequisites for the installation (we will add better guidance later):
  - install LibreOffice 
  - install PDFtk  
- - install MongoDB and have it running on the same server 
+ - install MongoDB and have it running on the same server at default port
+ - install Redis and have it running on the same server at default port
  - npm install and npm start to run the server
  - optionally install the Eido font at https://lpc.univ-amu.fr/fr/police-caracteres-eido
  

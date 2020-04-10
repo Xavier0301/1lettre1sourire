@@ -90,12 +90,14 @@ app.use(express.static(__dirname + '/public'));
 
 const MongoStore = connectMongo(session);
 
+// Session
+
 app.use(session({ 
     secret: 'brobroskiski', 
     cookie: { maxAge: 60000 }, 
     resave: false, 
     saveUninitialized: false,
-    store: new MongoStore(mongoose.connection)
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
 app.use('/', publicRoute);

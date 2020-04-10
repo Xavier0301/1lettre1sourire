@@ -6,6 +6,7 @@ const session = require('express-session');
 const morgan = require('morgan');
 const rfs = require('rotating-file-stream')
 const log4js = require('log4js');
+const connectMongo = require('connect-mongo');
 // var Queue = require('bull');
 
 const https = require('https');
@@ -87,7 +88,15 @@ app.use(bodyParser.json())
 
 app.use(express.static(__dirname + '/public'));
 
-app.use(session({ secret: 'brobroskiski', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
+const MongoStore = connectMongo(session);
+
+app.use(session({ 
+    secret: 'brobroskiski', 
+    cookie: { maxAge: 60000 }, 
+    resave: false, 
+    saveUninitialized: false,
+    store: new MongoStore(mongoose.connection)
+}));
 
 app.use('/', publicRoute);
 app.use('/letters', lettersRoute);

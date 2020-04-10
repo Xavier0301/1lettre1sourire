@@ -2,10 +2,15 @@ const express = require('express');
 const router = express.Router();
 const logger = require('log4js').getLogger('runtime');
 
-// let agendaSetup = require('../afterware/agenda');
+const Queue = require('bull');
+const docbuildProcessor = require('../afterware/docbuilder');
+const maleDocbuildQueue = new Queue('male doc building');
+maleDocbuildQueue.process(docbuildProcessor);
+const femaleDocbuildQueue = new Queue('female doc building');
+femaleDocbuildQueue.process(docbuildProcessor)
 
 const loginReq = require('../middleware/loginReq');
-const docBuilder = require('../afterware/docbuilder');
+// const docBuilder = require('../afterware/docbuilder');
 
 const BuildJob = require('../models/buildJob');
 const Letter = require('../models/letter');
@@ -81,8 +86,11 @@ router.post('/approve', loginReq, function(req, res, next) {
 
             if(approved) {
                console.log('/approve approve is true start doc build');
-               // agendaSetup.agenda.now(agendaSetup.docBuildingJob, {letter: letter});
-               processBuildDocRequest(letter);
+               if(letter.type === Letter.typeValues.male) {
+                  maleDocbuildQueue.add({ letter: letter });
+               } else {
+                  femaleDocbuildQueue.add({ letter: letter });
+               }
             }
 
             User.findOneAndUpdate({ _id: req.session.userId }, { $inc: { lettersCount: 1 } }, function(err, doc, res) {
@@ -104,28 +112,28 @@ router.post('/approve', loginReq, function(req, res, next) {
    }
 });
 
-function processBuildDocRequest(letter) {
-   BuildJob.hasOne(function(hasOne) {
-      if(hasOne) {
-         console.log("has one: timeouts");
-         setTimeout(processBuildDocRequest, 2000, letter);
-      } else {
-         console.log("has none: go build");
-         let buildJob = new BuildJob();
-         buildJob.id = letter.composedId;
-         buildJob.save(function(err) {
-            if(err) {
-               logger.error(err);
-            } else {
-               docBuilder(letter, function() {
-                  BuildJob.remove({ id: buildJob.id }, function(err) {
-                     logger.error(err);
-                  })
-               });
-            }
-         });
-      }
-   });
-}
+// function processBuildDocRequest(letter) {
+//    BuildJob.hasOne(function(hasOne) {
+//       if(hasOne) {
+//          console.log("has one: timeouts");
+//          setTimeout(processBuildDocRequest, 2000, letter);
+//       } else {
+//          console.log("has none: go build");
+//          let buildJob = new BuildJob();
+//          buildJob.id = letter.composedId;
+//          buildJob.save(function(err) {
+//             if(err) {
+//                logger.error(err);
+//             } else {
+//                docBuilder(letter, function() {
+//                   BuildJob.remove({ id: buildJob.id }, function(err) {
+//                      logger.error(err);
+//                   })
+//                });
+//             }
+//          });
+//       }
+//    });
+// }
 
 module.exports = router;

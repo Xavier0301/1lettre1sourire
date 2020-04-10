@@ -6,7 +6,7 @@ const session = require('express-session');
 const morgan = require('morgan');
 const rfs = require('rotating-file-stream')
 const log4js = require('log4js');
-// const agenda = require('./app/afterware/agenda');
+// var Queue = require('bull');
 
 const https = require('https');
 const http = require('http');
@@ -23,9 +23,6 @@ const userRoute = require('./app/routes/user/manage');
 const statsRoute = require('./app/routes/stats');
 
 const app = express();
-
-console.log('hey');
-console.log(process.env.NODE_ENV);
 
 const env = process.env.NODE_ENV;
 function getCredentials() {
@@ -57,7 +54,7 @@ const httpServer = getHttpServer();
 
 // set our ports
 const httpPort = env === 'production' ? 80 : 3000;
-const httpsPort = env === 'production' ? 443 : 3000;
+const httpsPort = env === 'production' ? 443 : 3080;
 // configuration ===========================================
 
 // logger
@@ -71,10 +68,6 @@ const logger = log4js.getLogger('runtime');
 // mongoose
 const dbConf = require('./config/db');
 mongoose.connect(dbConf.url, dbConf.options); 
-
-// agenda
-
-// agenda.init();
 
 // create a rotating write stream
 if(env === 'production') {

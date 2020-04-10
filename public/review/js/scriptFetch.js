@@ -3,7 +3,8 @@
 var idToPost;
 var localCounter = 0;
 function funcFetch() {
-  var url = 'http://localhost:3000/review/fetch';
+  // var url = 'http://localhost:3000/review/fetch';
+  const url = '/review/fetch'
 
   fetch(url)
     .then((response) => response.json())

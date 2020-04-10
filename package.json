@@ -11,6 +11,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "bull": "^3.13.0",
     "docx": "^5.0.2",
     "express": "^4.17.1",
     "express-session": "^1.17.0",

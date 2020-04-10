@@ -11,8 +11,9 @@ const logger = require('log4js').getLogger('runtime');
 
 const batcher = require('./batcher');
 
-function handleLetterFormatting(letter, done) {
-    // const letter = job.data.letter;
+function handleLetterFormatting(job, done) {
+    const letter = job.data.letter;
+    console.log('start to build for: ' + letter.type + letter.id);
     downloadImage(letter.imageUrl, letter.composedId, function(hasImage) {
         buildDoc(letter, hasImage, function() {
             convertToPdf(letter.composedId, function(path) {
@@ -28,15 +29,16 @@ function handleLetterFormatting(letter, done) {
 
 function downloadImage(url, fileName, callback) {
     if(url) {
-        const file = fs.createWriteStream(fileName);
+        const writePath = path.resolve('images/'+fileName);
+        const file = fs.createWriteStream(writePath);
         https.get(url, function(response) {
             if (response.statusCode === 200) {
                 var stream = response.pipe(file);
                 stream.on('finish', function() {
-                    sharp(fileName).resize(600, 350, {
+                    sharp(writePath).resize(600, 350, {
                         fit: sharp.fit.inside
-                    }).toFormat('jpg').toFile(fileName + '.jpg', function(err) { 
-                        fs.unlink(fileName, () => {});
+                    }).toFormat('jpg').toFile(writePath + '.jpg', function(err) { 
+                        fs.unlink(writePath, () => {});
                         if(err) {
                             logger.error(err);
                             callback(false);
@@ -48,7 +50,7 @@ function downloadImage(url, fileName, callback) {
             } else {
                 logger.info("Could not download image at url: " + url);
                 file.close();
-                fs.unlink(fileName, () => {}); // Delete temp file
+                fs.unlink(writePath, () => {}); // Delete temp file
                 callback(false);
             }
         });
@@ -61,7 +63,7 @@ function buildDoc(letter, hasImage, callback) {
     const doc = new docx.Document();
 
     const logoImage = docx.Media.addImage(doc, fs.readFileSync(path.resolve("org_logo.png")), 80, 80);
-    const attachedImagePath = path.resolve(letter.composedId + '.jpg');
+    const attachedImagePath = path.resolve('images/' + letter.composedId + '.jpg');
 
     // That's clearly not optimal, but docx was not working when creating children as a list before this
     if(hasImage) {
@@ -190,7 +192,6 @@ function buildDoc(letter, hasImage, callback) {
 };
 
 function convertToPdf(fileName, callback) {
-    console.log('pdf');
     const inputPath = path.resolve(`docs/${fileName}.docx`);
     const outputPath = path.resolve(`docs/${fileName}.pdf`);
 

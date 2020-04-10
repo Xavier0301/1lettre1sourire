@@ -7,7 +7,8 @@ function getStats() {
     let fetchOptions = {
         method: 'GET',
         headers: headers,
-        credentials: 'include'
+        credentials: 'include',
+        mode: 'cors'
     }
 
     fetch(url, fetchOptions)

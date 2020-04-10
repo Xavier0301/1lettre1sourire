@@ -4,10 +4,10 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const morgan = require('morgan');
+const cors = require('cors');
 const rfs = require('rotating-file-stream')
 const log4js = require('log4js');
-const connectMongo = require('connect-mongo');
-// var Queue = require('bull');
+var MongoStore = require('connect-mongo')(session);
 
 const https = require('https');
 const http = require('http');
@@ -88,17 +88,23 @@ app.use(bodyParser.json())
 
 app.use(express.static(__dirname + '/public'));
 
-const MongoStore = connectMongo(session);
-
 // Session
 
 app.use(session({ 
     secret: 'brobroskiski', 
-    cookie: { maxAge: 60000 }, 
+    cookie: { maxAge: 1000 * 60 * 60 * 12 }, 
     resave: false, 
     saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
+    store: new MongoStore({ 
+        mongooseConnection: mongoose.connection,
+        ttl: 24 * 60 * 60 // Keeps session open for 1 day
+    })
 }));
+
+// Using cors with credentials
+app.use(cors({
+    credentials: true
+}))
 
 app.use('/', publicRoute);
 app.use('/letters', lettersRoute);

@@ -16,7 +16,8 @@ function postNegative() {
     method: 'POST',
     body: JSON.stringify(data),
     headers: myHeaders,
-    credentials: 'include'
+    credentials: 'include',
+    mode: 'cors'
   }
 
   fetch(url, fetchData)

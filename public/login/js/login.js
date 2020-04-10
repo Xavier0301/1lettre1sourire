@@ -14,7 +14,8 @@
       body: JSON.stringify(data),
       headers: myHeaders,
       redirect: 'follow',
-      credentials: 'include'
+      credentials: 'include',
+      mode: 'cors'
     }
 
     fetch(url, fetchData)

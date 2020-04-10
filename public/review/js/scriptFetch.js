@@ -5,7 +5,9 @@ var localCounter = 0;
 function funcFetch() {
   const url = '/review/fetch'
 
-  fetch(url, {credentials: 'include'})
+  fetch(url, 
+    {credentials: 'include',
+    mode: 'cors'})
     .then((response) => response.json())
     .then(function(data) {
       if(data.exists) {

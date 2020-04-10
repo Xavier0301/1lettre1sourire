@@ -14,7 +14,8 @@ function addUser() {
     let fetchOptions = {
         method: 'POST',
         body: JSON.stringify(data),
-        headers: headers
+        headers: headers,
+        mode: 'cors'
     }
  
     fetch(url, fetchOptions)

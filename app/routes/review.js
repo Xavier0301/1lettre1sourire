@@ -4,13 +4,10 @@ const logger = require('log4js').getLogger('runtime');
 
 const Queue = require('bull');
 const docbuildProcessor = require('../afterware/docbuilder');
-const maleDocbuildQueue = new Queue('male doc building');
-maleDocbuildQueue.process(docbuildProcessor);
-const femaleDocbuildQueue = new Queue('female doc building');
-femaleDocbuildQueue.process(docbuildProcessor)
+const docbuildQueue = new Queue('doc building');
+docbuildQueue.process(docbuildProcessor);
 
 const loginReq = require('../middleware/loginReq');
-// const docBuilder = require('../afterware/docbuilder');
 
 const BuildJob = require('../models/buildJob');
 const Letter = require('../models/letter');
@@ -86,11 +83,7 @@ router.post('/approve', loginReq, function(req, res, next) {
 
             if(approved) {
                console.log('/approve approve is true start doc build');
-               if(letter.type === Letter.typeValues.male) {
-                  maleDocbuildQueue.add({ letter: letter });
-               } else {
-                  femaleDocbuildQueue.add({ letter: letter });
-               }
+               docbuildQueue.add({letter: letter}, {attempts: 3});
             }
 
             User.findOneAndUpdate({ _id: req.session.userId }, { $inc: { lettersCount: 1 } }, function(err, doc, res) {

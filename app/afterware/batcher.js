@@ -45,8 +45,10 @@ function createNewBatch(pdfPath, letter, batchIndex, callback) {
     batch.save(function(err, result) {
         if(err) {
             logger.error(err);
-        } 
-        callback();
+            callback(new Error('could not save batch to mongodb'));
+        } else {
+            callback();
+        }
     })
 }
 
@@ -68,8 +70,10 @@ function addInExistingBatch(pdfPath, letter, batchIndex, callback) {
     Batch.updateOne({ index: batchIndex , type: letter.type }, { $inc: { letterCount : 1 }, downloaded : false }, function(err, raw) {
         if(err) {
             logger.error(err);
-        } 
-        callback();
+            callback(new Error('could not save batch to mongodb'));
+        } else {
+            callback();
+        }
     });
 }
 

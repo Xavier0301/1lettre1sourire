@@ -24,7 +24,7 @@ const BatchSchema = new mongoose.Schema({
 BatchSchema.statics.numberOfLettersInBatch = function(batchIndex, type, callback) {
     return this.findOne({ index: batchIndex, type: type }, function(error, batch) {
         if(batch) {
-            callback(batch.lettersCount);
+            callback(batch.letterCount);
         } else {
             callback(0);
         }

@@ -13,7 +13,8 @@
       method: 'POST',
       body: JSON.stringify(data),
       headers: myHeaders,
-      redirect: 'follow'
+      redirect: 'follow',
+      credentials: 'include'
     }
 
     fetch(url, fetchData)

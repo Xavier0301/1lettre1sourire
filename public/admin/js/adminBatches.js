@@ -6,7 +6,8 @@ function listBatches() {
 
     let fetchOptions = {
         method: 'GET',
-        headers: headers
+        headers: headers, 
+        credentials: 'include'
     }
 
     fetch(url, fetchOptions)
@@ -58,7 +59,8 @@ function downloadBatch(type, index) {
 
     let fetchOptions = {
         method: 'GET',
-        header: headers
+        header: headers,
+        credentials: 'include'
     }
 
     fetch(url, fetchOptions)

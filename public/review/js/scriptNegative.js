@@ -16,9 +16,8 @@ function postNegative() {
     method: 'POST',
     body: JSON.stringify(data),
     headers: myHeaders,
+    credentials: 'include'
   }
-
-  console.log(fetchData)
 
   fetch(url, fetchData)
     .then(function(resp) {

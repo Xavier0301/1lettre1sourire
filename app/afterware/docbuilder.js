@@ -13,7 +13,7 @@ const batcher = require('./batcher');
 
 function handleLetterFormatting(job, done) {
     const letter = job.data.letter;
-    console.log('start to build for: ' + letter.type + letter.id);
+    // console.log('start to build for: ' + letter.type + letter.id);
     downloadImage(letter.imageUrl, letter.composedId, function(hasImage) {
         buildDoc(letter, hasImage, function() {
             convertToPdf(letter.composedId, function(path) {

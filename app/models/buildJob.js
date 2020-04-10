@@ -10,7 +10,6 @@ const BuildJobSchema = new mongoose.Schema({
 
 BuildJobSchema.statics.hasOne = function(callback) {
     return this.countDocuments({}, function(err, count) {
-        console.log("count of docs: " + count);
         if(count && count !== null) {
             callback(count !== 0);
         } else {

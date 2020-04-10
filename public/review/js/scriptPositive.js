@@ -15,6 +15,7 @@ function postPositive() {
     method: 'POST',
     body: JSON.stringify(data),
     headers: myHeaders,
+    credentials: 'include'
   }
 
   console.log(fetchData)

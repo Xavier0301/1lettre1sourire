@@ -41,7 +41,8 @@ function removeUser() {
     let fetchOptions = {
         method: 'POST',
         body: JSON.stringify(data),
-        headers: headers
+        headers: headers,
+        credentials: 'include'
     }
  
     fetch(url, fetchOptions)
@@ -63,7 +64,8 @@ function listUsers() {
 
     let fetchOptions = {
         method: 'GET',
-        headers: headers
+        headers: headers,
+        credentials: 'include'
     }
 
     fetch(url, fetchOptions)

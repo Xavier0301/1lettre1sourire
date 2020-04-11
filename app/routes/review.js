@@ -83,10 +83,10 @@ router.post('/approve', loginReq, function(req, res, next) {
 
             if(approved) {
                console.log('/approve approve is true start doc build');
-               docbuildQueue.add({letter: letter}, {attempts: 3});
+               docbuildQueue.add({ letter: letter }, { delay: 30*1000, attempts: 3, jobId: letter.id });
             }
 
-            User.findOneAndUpdate({ _id: req.session.userId }, { $inc: { lettersCount: 1 } }, function(err, doc, res) {
+            User.findOneAndUpdate({ _id: req.session.userId }, { $inc: { letterCount: 1 } }, function(err, doc, res) {
                if(err) {
                   logger.error(err);
                }
@@ -100,6 +100,54 @@ router.post('/approve', loginReq, function(req, res, next) {
       
    } else {
       var err = new Error('id, approve and flag are required for approving');
+      err.status = 400;
+      return next(err);
+   }
+});
+
+router.post('/undo', loginReq, function(req, res, next) {
+   if(req.body.id) {
+      Letter.model.findOneAndUpdate({ id: parseInt(req.body.id) }, { 
+         approvalStatus: Letter.approvedValues.inReview, 
+         flagged: false, 
+         inReviewSinceDate: Date.now(),
+         $unset: {
+            approvedByUser: ""
+         }
+      }, function(err, letter) {
+         if(err) {
+            logger.error(err);
+            err.status = 500;
+            return next(err);
+         } else {
+            const jobPromise = docbuildQueue.getJob(letter.id);
+            jobPromise.then((job) => job.remove()).catch(function(reason) {
+               // the removal of the job was a failure, probably because the job already got done.
+               // we now have to restore this letter in its original state.
+               // The "letter" is the old one still hence we can do:
+               Letter.model.updateOne({ id: parseInt(req.body.id )}, {
+                  approvalStatus: letter.approvalStatus,
+                  flagged: letter.flagged,
+                  approvedByUser: letter.approvedByUser,
+                  $unset: {
+                     inReviewSinceDate: ""
+                  }
+               }, function(err) {
+                  if(err) {
+                     logger.error(err);
+                     err.status = 500;
+                     next(err);
+                  } else {
+                     const error = new Error('Could not undo.');
+                     error.status = 400;
+                     next(error);
+                  }
+               });
+            });
+         }
+      });
+   } else {
+      const err = new Error('You must provide the id of the letter you want to undo.');
       err.status = 400;
       return next(err);
    }

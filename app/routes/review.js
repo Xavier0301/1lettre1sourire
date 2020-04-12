@@ -28,7 +28,9 @@ router.get('/fetch', loginReq, function(req, res) {
       if(err) {
          errSend(err);
       } else {
-         Letter.model.findOneAndUpdate({approvalStatus: Letter.approvedValues.queued}, {approvalStatus: Letter.approvedValues.inReview, inReviewSinceDate: Date.now()}).exec(function(error, letter) {
+         Letter.model.findOneAndUpdate({ approvalStatus: Letter.approvedValues.queued }, {
+            approvalStatus: Letter.approvedValues.inReview, 
+            inReviewSinceDate: Date.now()}).exec(function(error, letter) {
             if(error || !letter) {
                errSend(error);
             } else {
@@ -106,8 +108,25 @@ router.post('/approve', loginReq, function(req, res, next) {
 });
 
 router.post('/undo', loginReq, function(req, res, next) {
-   if(req.body.id) {
-      Letter.model.findOneAndUpdate({ id: parseInt(req.body.id) }, { 
+   if(req.body.lastId && req.body.currentId) {
+      const lastId = parseInt(req.body.lastId);
+      const currentId = parseInt(req.body.currentId);
+
+      Letter.model.update({ 
+         id: currentId, 
+         approvalStatus: Letter.approvedValues.inReview 
+      }, { 
+         approvalStatus: Letter.approvedValues.queued, 
+         $unset: {
+            inReviewSinceDate: ""
+         }
+      }, function(err, raw) {
+         if(err) {
+            logger.error(err);
+         }
+      });
+
+      Letter.model.findOneAndUpdate({ id: lastId }, { 
          approvalStatus: Letter.approvedValues.inReview, 
          flagged: false, 
          inReviewSinceDate: Date.now(),
@@ -120,12 +139,19 @@ router.post('/undo', loginReq, function(req, res, next) {
             err.status = 500;
             return next(err);
          } else {
-            const jobPromise = docbuildQueue.getJob(letter.id);
-            jobPromise.then((job) => job.remove()).catch(function(reason) {
-               // the removal of the job was a failure, probably because the job already got done.
+            docbuildQueue.getJob(lastId)
+               .then(function(job) {
+                  console.log('fine');
+                  job.remove();
+                  res.sendStatus(200);
+               })
+               .catch(function(reason) {
+               console.log('failed to remove job');
+               console.log(reason);
+               // the removal of the job was a failure, probably because the job already got done or removed
                // we now have to restore this letter in its original state.
                // The "letter" is the old one still hence we can do:
-               Letter.model.updateOne({ id: parseInt(req.body.id )}, {
+               Letter.model.updateOne({ id: lastId }, {
                   approvalStatus: letter.approvalStatus,
                   flagged: letter.flagged,
                   approvedByUser: letter.approvedByUser,
@@ -147,7 +173,7 @@ router.post('/undo', loginReq, function(req, res, next) {
          }
       });
    } else {
-      const err = new Error('You must provide the id of the letter you want to undo.');
+      const err = new Error('You must provide the id of the letter you want to undo, as well as the id of the one you are currently reviewing');
       err.status = 400;
       return next(err);
    }

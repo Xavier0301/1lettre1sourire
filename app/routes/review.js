@@ -112,7 +112,7 @@ router.post('/undo', loginReq, function(req, res, next) {
       const lastId = parseInt(req.body.lastId);
       const currentId = parseInt(req.body.currentId);
 
-      Letter.model.update({ 
+      Letter.model.findOneAndUpdate({ 
          id: currentId, 
          approvalStatus: Letter.approvedValues.inReview 
       }, { 
@@ -120,9 +120,11 @@ router.post('/undo', loginReq, function(req, res, next) {
          $unset: {
             inReviewSinceDate: ""
          }
-      }, function(err, raw) {
+      }, function(err, letter) {
          if(err) {
             logger.error(err);
+         } else {
+            res.send({id: letter.id, type: letter.type, greeting: letter.heading, content: letter.content, signature: letter.signature, imageUrl: letter.imageUrl, exists: true});
          }
       });
 

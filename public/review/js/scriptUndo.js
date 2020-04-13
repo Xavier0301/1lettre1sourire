@@ -7,8 +7,8 @@ function postUndo() {
     myHeaders.append('Content-Type', 'application/json');
 
     let data = {
-      lastId: lastId,
-      currentId: currentId
+      lastId: approvalContext.lastId,
+      currentId: approvalContext.currentId
     }
 
     let fetchOptions = {
@@ -22,9 +22,19 @@ function postUndo() {
     console.log(fetchOptions)
 
     fetch(url, fetchData)
-      .then(function(resp) {
-        console.log(resp);
+      .then((response) => response.json())
+      .then(function(data) {
+        if(data.exists) {
+          approvalContext.lastId = undefined;
+          approvalContext.currentId = data.id;
+
+          populatePage(data);
+        }
       })
+      .catch(function(reason) {
+        alert("Cannot undo. You have 30 seconds to undo a letter.");
+        alert(reason);
+      });
   } else {
     alert("Nothing to undo.");
   }

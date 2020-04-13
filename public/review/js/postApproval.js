@@ -7,7 +7,7 @@ function postApproval(approved, flagged) {
     myHeaders.append('Content-Type', 'application/json');
 
     let data = {
-      id: currentId,
+      id: approvalContext.currentId,
       flag: flagged,
       approve: approved
     }
@@ -21,9 +21,13 @@ function postApproval(approved, flagged) {
     }
 
     fetch(url, fetchOptions)
-      .then(function(resp) {
-        console.log(resp);
+      .then((response) => response.json())
+      .then(function(data) {
+        approvalContext.localCounter += 1;
       })
+      .catch(function(reason) {
+        alert("Cannot fetch letter.");
+      });
   } else {
     alert("Nothing to approve.");
   }

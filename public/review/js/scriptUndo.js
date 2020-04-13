@@ -6,9 +6,8 @@ function postUndo() {
   myHeaders.append('Content-Type', 'application/json');
 
   let data = {
-    id: idToPost,
-    flag: "false",
-    approve: "false"//what info does he wants ?
+    lastId: idToPost,
+    currentId: "TO REPLACE"
   }
 
   let fetchData = {

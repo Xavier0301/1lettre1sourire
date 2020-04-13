@@ -1,13 +1,15 @@
 
 //var content; //[id,type,greeting,content,signature,imageUrl,exists]
-var idToPost;
+var lastId;
+var currentId;
 var localCounter = 0;
+
 function funcFetch() {
   const url = '/review/fetch'
 
-  fetch(url, 
-    {credentials: 'include',
-    mode: 'cors'})
+  const fetchOptions = {credentials: 'include', mode: 'cors'};
+
+  fetch(url, fetchOptions)
     .then((response) => response.json())
     .then(function(data) {
       if(data.exists) {
@@ -16,7 +18,10 @@ function funcFetch() {
         let contentImage = data.imageUrl;
         let greetingLetter = data.greeting;
         let signatureLetter = data.signature;
-        idToPost = data.id;
+
+        lastId = currentId;
+        currentId = data.id;
+
         console.log(contentLetter);
         console.log(contentImage);
         console.log(data);

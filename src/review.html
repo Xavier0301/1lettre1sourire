@@ -8,17 +8,14 @@
   <meta charset="utf-8"/>
   <script src = "/review/js/scriptFetch.js"></script>
   <script src = "/review/js/scriptWrite.js"></script>
-  <script src = "/review/js/scriptNegative.js"></script>
-  <script src = "/review/js/scriptPositive.js"></script>
-  <script src = "/review/js/scriptPositivePlus.js"></script>
+  <script src = "/review/js/postApproval.js"></script>
   <script src = "/review/js/scriptUndo.js"></script>
   <script>funcFetch()</script>
   <script>
-   function postThenFetch(postFunction){
+   function postThenFetch(postFunction, approve, flag){
         displayImage("");
-        postFunction();
+        postFunction(approve, flag);
         funcFetch();
-    // setTimeout(funcFetch, 2000);
    }
   </script>
  </head>
@@ -41,10 +38,10 @@
    </span>
   </div>
   <div id = "buttonDisplay">
-   <button id="noButton" onclick = "postThenFetch(postNegative)" >Refuser</button>
-   <button id = "yesButton" onclick = "postThenFetch(postPositive);">Accepter</button>
-   <button id = "greatButton" onclick = "postThenFetch(postPositivePlus);">Coup de coeur</button>
-   <button id="undoButton" onclick = "postThenFetch(postUndo);">Undo</button>
+   <button id="noButton" onclick = "postThenFetch(postApproval, 'false', 'false')" >Refuser</button>
+   <button id = "yesButton" onclick = "postThenFetch(postApproval, 'true', 'false');">Accepter</button>
+   <button id = "greatButton" onclick = "postThenFetch(postApproval, 'true', 'true');">Coup de coeur</button>
+   <button id= "undoButton" onclick = "postUndo();">Undo</button>
   </div>
  </body>
 </html>

@@ -42,6 +42,12 @@ button {
  background-color: #997300;
 }
 
+#undoButton {
+ background-color: darkgray;
+}
+#undoButton:hover {
+ background-color: #606060;
+}
 #contentDisplay {
  display: flex;
  align-items: center;

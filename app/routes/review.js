@@ -68,13 +68,13 @@ function resolveInReviewStates(callback) {
 
 router.post('/approve', loginReq, function(req, res, next) {
    if(req.body.id && req.body.approve !== undefined && req.body.flag !== undefined) {
-      var approved = Letter.model.getApprovedValue(req.body.approve === 'true');
+      const approved = Letter.getApprovedValue(req.body.approve);
       Letter.model.findOneAndUpdate({
          id: parseInt(req.body.id), 
          approvalStatus: Letter.approvedValues.inReview
       }, {
          approvalStatus: approved,
-         flagged: req.body.flag === 'true',
+         flagged: req.body.flag,
          $unset: {
             inReviewSinceDate: ""
          },
@@ -83,9 +83,15 @@ router.post('/approve', loginReq, function(req, res, next) {
          if(letter && !err) {
             res.sendStatus(200);
 
-            if(approved) {
+            if(req.body.approve) {
                console.log('/approve approve is true start doc build');
-               docbuildQueue.add({ letter: letter }, { delay: 30*1000, attempts: 3, jobId: letter.id });
+               docbuildQueue.add({ letter: letter }, { 
+                  delay: 30*1000, 
+                  attempts: 5, 
+                  jobId: letter.id,
+                  removeOnComplete: true,
+                  removeOnFail: true
+               });
             }
 
             User.findOneAndUpdate({ _id: req.session.userId }, { $inc: { letterCount: 1 } }, function(err, doc, res) {
@@ -108,72 +114,95 @@ router.post('/approve', loginReq, function(req, res, next) {
 });
 
 router.post('/undo', loginReq, function(req, res, next) {
-   if(req.body.lastId && req.body.currentId) {
+   if(req.body.lastId) {
       const lastId = parseInt(req.body.lastId);
-      const currentId = parseInt(req.body.currentId);
 
-      Letter.model.findOneAndUpdate({ 
-         id: currentId, 
-         approvalStatus: Letter.approvedValues.inReview 
-      }, { 
-         approvalStatus: Letter.approvedValues.queued, 
-         $unset: {
-            inReviewSinceDate: ""
-         }
-      }, function(err, letter) {
-         if(err) {
-            logger.error(err);
-         } else {
-            res.send({id: letter.id, type: letter.type, greeting: letter.heading, content: letter.content, signature: letter.signature, imageUrl: letter.imageUrl, exists: true});
-         }
-      });
+      // req.body.currentId is not defined ONLY WHEN the user
+      //    - just rated a letter
+      //    - fetched the next one from server. 
+      //    - server said "Sorry no letter left"
+      //    - frontend then sets currentId = undefined
+      //    - user decided to undo.
+      if(req.body.currentId) {
+         const currentId = parseInt(req.body.currentId);
+         Letter.model.updateOne({ 
+            id: currentId, 
+            approvalStatus: Letter.approvedValues.inReview 
+         }, { 
+            approvalStatus: Letter.approvedValues.queued, 
+            $unset: {
+               inReviewSinceDate: ""
+            }
+         }, function(err, result) {
+            if(err) {
+               logger.error(err);
+            }
+         });
+      } 
 
-      Letter.model.findOneAndUpdate({ id: lastId }, { 
-         approvalStatus: Letter.approvedValues.inReview, 
-         flagged: false, 
-         inReviewSinceDate: Date.now(),
-         $unset: {
-            approvedByUser: ""
-         }
-      }, function(err, letter) {
-         if(err) {
-            logger.error(err);
-            err.status = 500;
-            return next(err);
-         } else {
-            docbuildQueue.getJob(lastId)
-               .then(function(job) {
-                  console.log('fine');
-                  job.remove();
-                  res.sendStatus(200);
-               })
-               .catch(function(reason) {
-               console.log('failed to remove job');
-               console.log(reason);
-               // the removal of the job was a failure, probably because the job already got done or removed
-               // we now have to restore this letter in its original state.
-               // The "letter" is the old one still hence we can do:
-               Letter.model.updateOne({ id: lastId }, {
-                  approvalStatus: letter.approvalStatus,
-                  flagged: letter.flagged,
-                  approvedByUser: letter.approvedByUser,
-                  $unset: {
-                     inReviewSinceDate: ""
-                  }
-               }, function(err) {
-                  if(err) {
-                     logger.error(err);
-                     err.status = 500;
-                     next(err);
+      docbuildQueue.getJob(lastId)
+         .then(function(job) {
+            job.isDelayed()
+               .then(function(inDelayedState) {
+                  if(inDelayedState) {
+                     return job.remove();
                   } else {
                      const error = new Error('Could not undo.');
                      error.status = 400;
-                     next(error);
+                     throw error;
+                  }
+               })
+               .then(function() {
+                  console.log('fine');
+
+                  Letter.model.findOneAndUpdate({ id: lastId }, { 
+                     approvalStatus: Letter.approvedValues.inReview, 
+                     flagged: false, 
+                     inReviewSinceDate: Date.now(),
+                     $unset: {
+                        approvedByUser: ""
+                     }
+                  }, function(err, letter) {
+                     if(err) {
+                        logger.log(err);
+                        err.status = 400;
+                        next(err);
+                     } else {
+                        res.send({id: letter.id, type: letter.type, greeting: letter.heading, content: letter.content, signature: letter.signature, imageUrl: letter.imageUrl, exists: true});
+                     }
+                  })
+               })
+               .catch(function(reason) {
+                  if(reason instanceof Error) {
+                     next(reason);
+                  } else {
+                     let err = new Error('Could not get job');
+                     err.status = 500;
+                     return next(err);
                   }
                });
-            });
-         }
-      });
+         })
+         .catch(function(reason) {
+            Letter.model.findOneAndUpdate({ 
+               id: lastId, 
+               approvalStatus: Letter.approvedValues.rejected
+            }, { 
+               approvalStatus: Letter.approvedValues.inReview, 
+               flagged: false, 
+               inReviewSinceDate: Date.now(),
+               $unset: {
+                  approvedByUser: ""
+               }
+            }, function(err, letter) {
+               if(err) {
+                  const err = new Error('Either cannot undo or cannot find the letter.');
+                  err.status = 400;
+                  next(err);
+               } else {
+                  res.send({id: letter.id, type: letter.type, greeting: letter.heading, content: letter.content, signature: letter.signature, imageUrl: letter.imageUrl, exists: true});
+               }
+            })
+         });
    } else {
       const err = new Error('You must provide the id of the letter you want to undo, as well as the id of the one you are currently reviewing');
       err.status = 400;

@@ -7,13 +7,13 @@ const sharp = require('sharp');
 const path = require('path');
 const sizeOf = require('image-size');
 const libre = require('libreoffice-convert');
-const logger = require('log4js').getLogger('runtime');
+const logger = require('log4js').getLogger('docbuild');
 
 const batcher = require('./batcher');
 
 function handleLetterFormatting(job, done) {
     const letter = job.data.letter;
-    // console.log('start to build for: ' + letter.type + letter.id);
+    console.log('start to build for: ' + letter.type + letter.id);
     downloadImage(letter.imageUrl, composedId(letter), function(hasImage) {
         buildDoc(letter, hasImage, function(error) {
             if(error) {

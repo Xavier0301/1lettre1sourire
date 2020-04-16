@@ -1,10 +1,8 @@
 // Sends the id and 2 booleans as a POST request
 
 function postApproval(approved, flagged) {
-  if(currentId) {
+  if(approvalContext.currentId) {
     var url = '/review/approve';
-    var myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
 
     let data = {
       id: approvalContext.currentId,
@@ -12,17 +10,21 @@ function postApproval(approved, flagged) {
       approve: approved
     }
 
+    console.log("Payload that will be sent to approve");
+    console.log(data);
+
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
     let fetchOptions = {
       method: 'POST',
       body: JSON.stringify(data),
-      headers: myHeaders,
+      headers: headers,
       credentials: 'include',
       mode: 'cors'
     }
 
     fetch(url, fetchOptions)
-      .then((response) => response.json())
-      .then(function(data) {
+      .then(function(response) {
         approvalContext.localCounter += 1;
       })
       .catch(function(reason) {

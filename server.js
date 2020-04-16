@@ -8,6 +8,9 @@ const cors = require('cors');
 const rfs = require('rotating-file-stream')
 const log4js = require('log4js');
 var MongoStore = require('connect-mongo')(session);
+const Queue = require('bull');
+const { setQueues, UI } = require('bull-board');
+
 
 const https = require('https');
 const http = require('http');
@@ -22,6 +25,8 @@ const adminRoute = require('./app/routes/admin.js')
 const batchesRoute = require('./app/routes/batches.js');
 const userRoute = require('./app/routes/user/manage');
 const statsRoute = require('./app/routes/stats');
+
+const apikeyReq = require('./app/middleware/apikeyReq');
 
 const app = express();
 
@@ -57,6 +62,10 @@ const httpServer = getHttpServer();
 const httpPort = env === 'production' ? 80 : 3000;
 const httpsPort = env === 'production' ? 443 : 3080;
 // configuration ===========================================
+
+// Setting up bull UI
+
+setQueues(Queue('doc building'));
 
 // logger
 
@@ -114,6 +123,8 @@ app.use('/admin', adminRoute);
 app.use('/batches', batchesRoute);
 app.use('/user', userRoute);
 app.use('/stats', statsRoute);
+
+app.use('/bull', apikeyReq, UI);
 
 // app.use(express.static(__dirname + '/public'));
 

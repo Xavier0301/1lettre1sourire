@@ -78,7 +78,10 @@ const LetterSchema = new mongoose.Schema({
     }
 });
 
-LetterSchema.statics.getApprovedValue = function(isApproved) {
+LetterSchema.statics.getApprovedValue = function getApprovedValue(isApproved) {
+    if(isApproved instanceof String) {
+        return getApprovedValue(isApproved === "true");
+    }
     return isApproved ? approvedValues.accepted : approvedValues.rejected;
 }
 
@@ -90,5 +93,6 @@ module.exports = {
     model: mongoose.model('Letter', LetterSchema),
     approvedValues: approvedValues,
     typeValues: typeValues,
-    expectedTypeValues: expectedTypeValues
+    expectedTypeValues: expectedTypeValues,
+    getApprovedValue: ((isApproved) => isApproved ? approvedValues.accepted : approvedValues.rejected)
 };
